@@ -1,0 +1,57 @@
+:root {
+  --mall-bg: #f6f3ee;
+  --mall-surface: #ffffff;
+  --mall-ink: #1c1917;
+  --mall-muted: #78716c;
+  --mall-accent: #c45c26;
+  --mall-accent-dark: #9a4519;
+  --mall-line: #e7e5e4;
+  --mall-max: 1200px;
+  --mall-radius: 10px;
+  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  color: var(--mall-ink);
+  background: var(--mall-bg);
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  min-height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.price {
+  color: var(--mall-accent);
+  font-weight: 600;
+}
+
+.page-container {
+  width: min(100% - 32px, var(--mall-max));
+  margin: 0 auto;
+}
+
+.el-button--primary {
+  --el-button-bg-color: var(--mall-accent);
+  --el-button-border-color: var(--mall-accent);
+  --el-button-hover-bg-color: var(--mall-accent-dark);
+  --el-button-hover-border-color: var(--mall-accent-dark);
+}
