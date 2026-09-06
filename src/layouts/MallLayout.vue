@@ -21,13 +21,16 @@
 
         <nav class="nav-actions">
           <router-link to="/category">分类</router-link>
+          <router-link to="/coupon">领券</router-link>
           <router-link to="/order">订单</router-link>
           <router-link to="/cart" class="cart-link">
             购物车
             <el-badge v-if="cartStore.totalCount > 0" :value="cartStore.totalCount" />
           </router-link>
           <template v-if="userStore.isLogin">
-            <span class="user-name">{{ userStore.userInfo?.nickname || '会员' }}</span>
+            <router-link to="/user" class="user-name">
+              {{ userStore.userInfo?.nickname || '会员' }}
+            </router-link>
             <el-button link type="primary" @click="onLogout">退出</el-button>
           </template>
           <router-link v-else to="/login">登录</router-link>
@@ -159,6 +162,10 @@ async function onLogout() {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.user-name:hover {
+  color: var(--mall-accent);
 }
 
 .mall-main {
