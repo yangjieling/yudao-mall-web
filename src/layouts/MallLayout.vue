@@ -23,7 +23,7 @@
     <header class="mall-header">
       <div class="page-container header-inner">
         <router-link to="/" class="brand">
-          <span class="brand-mark">芋</span>
+          <span class="brand-mark">{{ brandMark }}</span>
           <span class="brand-name">{{ title }}</span>
         </router-link>
 
@@ -97,7 +97,7 @@
     </main>
 
     <footer class="mall-footer">
-      <div class="page-container">芋道商城 PC 端 · 对接 /app-api</div>
+      <div class="page-container">{{ title }} · PC 商城</div>
     </footer>
   </div>
 </template>
@@ -110,6 +110,7 @@ import { useUserStore } from '@/stores/user'
 import { useCartStore } from '@/stores/cart'
 
 const title = import.meta.env.VITE_APP_TITLE
+const brandMark = computed(() => (title || '商').slice(0, 1))
 const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()

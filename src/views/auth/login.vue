@@ -2,7 +2,7 @@
   <div class="login-page">
     <div class="login-card">
       <div class="brand">
-        <span class="mark">芋</span>
+        <span class="mark">{{ brandMark }}</span>
         <h1>{{ title }}</h1>
         <p>登录后可购物、下单与查看订单</p>
       </div>
@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { AuthApi } from '@/api/member/auth'
@@ -61,6 +61,7 @@ import { useUserStore } from '@/stores/user'
 import { useCartStore } from '@/stores/cart'
 
 const title = import.meta.env.VITE_APP_TITLE
+const brandMark = computed(() => (title || '商').slice(0, 1))
 const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()

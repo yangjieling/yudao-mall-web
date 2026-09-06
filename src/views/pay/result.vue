@@ -32,7 +32,7 @@ const loading = ref(false)
 const payOrder = ref<PayOrderInfo | null>(null)
 let timer: number | undefined
 
-/** 支付成功状态一般为 10，关闭 20，与芋道 pay 模块约定一致 */
+/** 支付成功状态一般为 10，关闭 20 */
 const success = computed(() => payOrder.value?.status === 10)
 const failed = computed(() => payOrder.value?.status === 20)
 

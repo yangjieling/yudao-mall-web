@@ -1,10 +1,10 @@
-# yudao-mall-web
+# mall-web
 
-芋道商城 PC 网页端（Vue3 + Vite + TypeScript），对接 `yudao-cloud` 的 `/app-api`。
+商城 PC 网页端（Vue3 + Vite + TypeScript），对接后端网关的 `/app-api`。
 
 ## 功能范围
 
-- PC 首页（对齐淘宝/京东门户）：左侧分类、中部 Banner、右侧会员/活动快捷入口，下方推荐商品流（非 uniapp DIY 首页）
+- PC 首页（对齐淘宝/京东门户）：左侧分类、中部 Banner、右侧会员/活动快捷入口，下方推荐商品流
 - 顶栏大搜索 + 分类下拉；`/category` 商品列表（排序 / 关键词 / 类目）
 - 商品详情与评价、收藏 / 足迹
 - 购物车（含失效商品）、结算（地址 / 优惠券 / 积分）、收银台（扫码 / 跳转 / 钱包 / mock）
@@ -13,7 +13,7 @@
 - 领券中心；秒杀 / 拼团 / 积分商城
 - 密码登录、短信登录
 
-与 [`yudao-mall-uniapp`](../yudao-mall-uniapp) 共用后端，请求头携带 `Authorization`、`tenant-id`、`terminal=20`、`platform=PC`。
+请求头携带 `Authorization`、`tenant-id`、`terminal=20`、`platform=PC`。
 
 ## 本地启动
 
@@ -32,6 +32,7 @@ npm run dev
 
 | 变量 | 说明 |
 |------|------|
+| `VITE_APP_TITLE` | 站点名称 |
 | `VITE_BASE_URL` | 后端网关地址（开发代理目标） |
 | `VITE_API_PATH` | API 前缀，默认 `/app-api` |
 | `VITE_TENANT_ID` | 租户编号 |
