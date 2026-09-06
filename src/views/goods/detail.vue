@@ -54,6 +54,9 @@
             加入购物车
           </el-button>
           <el-button size="large" :disabled="!selectedSku" @click="buyNow">立即购买</el-button>
+          <el-button size="large" @click="toggleFavorite">
+            {{ favorited ? '已收藏' : '收藏' }}
+          </el-button>
         </div>
       </div>
     </template>
@@ -63,8 +66,12 @@
       <div class="rich" v-html="spu.description || '暂无详情'" />
     </section>
 
-    <section v-if="comments.length" class="detail-section">
-      <h2>用户评价</h2>
+    <section class="detail-section">
+      <div class="section-head">
+        <h2>用户评价</h2>
+        <router-link v-if="spu" :to="`/goods/${spu.id}/comments`">查看更多</router-link>
+      </div>
+      <el-empty v-if="!comments.length" description="暂无评价" :image-size="64" />
       <div v-for="c in comments" :key="c.id" class="comment">
         <div class="comment-head">
           <span>{{ c.userNickname || '用户' }}</span>
@@ -81,6 +88,7 @@ import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { CommentApi, SpuApi, type ProductComment, type ProductSku, type ProductSpu } from '@/api/product'
+import { FavoriteApi } from '@/api/product/favorite'
 import { useCartStore } from '@/stores/cart'
 import { useUserStore } from '@/stores/user'
 import { formatPrice } from '@/utils/price'
@@ -95,6 +103,7 @@ const spu = ref<ProductSpu | null>(null)
 const comments = ref<ProductComment[]>([])
 const count = ref(1)
 const activePic = ref('')
+const favorited = ref(false)
 const selectedProps = reactive<Record<string, string>>({})
 
 const pics = computed(() => {
@@ -149,8 +158,31 @@ async function loadDetail() {
         selectedProps[p.propertyName] = p.valueName
       }
     }
+    if (userStore.isLogin) {
+      try {
+        const fav = await FavoriteApi.isFavoriteExists(id)
+        favorited.value = !!fav.data
+      } catch {
+        favorited.value = false
+      }
+    } else {
+      favorited.value = false
+    }
   } finally {
     loading.value = false
+  }
+}
+
+async function toggleFavorite() {
+  if (!ensureLogin() || !spu.value) return
+  if (favorited.value) {
+    await FavoriteApi.deleteFavorite(spu.value.id)
+    favorited.value = false
+    ElMessage.success('已取消收藏')
+  } else {
+    await FavoriteApi.createFavorite(spu.value.id)
+    favorited.value = true
+    ElMessage.success('收藏成功')
   }
 }
 
@@ -320,9 +352,21 @@ watch(() => route.params.id, loadDetail)
   border: 1px solid var(--mall-line);
 }
 
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
 .detail-section h2 {
-  margin: 0 0 16px;
+  margin: 0;
   font-size: 18px;
+}
+
+.section-head a {
+  color: var(--mall-muted);
+  font-size: 14px;
 }
 
 .rich :deep(img) {

@@ -8,21 +8,38 @@
       >
         全部
       </button>
-      <button
-        v-for="cat in categories"
-        :key="cat.id"
-        class="cat-item"
-        :class="{ active: activeCategoryId === cat.id }"
-        @click="selectCategory(cat.id)"
-      >
-        {{ cat.name }}
-      </button>
+      <div v-for="cat in rootCategories" :key="cat.id" class="cat-group">
+        <button
+          class="cat-item"
+          :class="{ active: activeCategoryId === cat.id }"
+          @click="selectCategory(cat.id)"
+        >
+          {{ cat.name }}
+        </button>
+        <button
+          v-for="child in childrenOf(cat.id)"
+          :key="child.id"
+          class="cat-item child"
+          :class="{ active: activeCategoryId === child.id }"
+          @click="selectCategory(child.id)"
+        >
+          {{ child.name }}
+        </button>
+      </div>
     </aside>
 
     <section class="content">
       <div class="toolbar">
         <h2>{{ currentTitle }}</h2>
         <span class="muted">共 {{ total }} 件</span>
+        <div class="sorts">
+          <el-radio-group v-model="sortKey" size="small" @change="onSortChange">
+            <el-radio-button value="default">综合</el-radio-button>
+            <el-radio-button value="salesCount">销量</el-radio-button>
+            <el-radio-button value="priceAsc">价格升</el-radio-button>
+            <el-radio-button value="priceDesc">价格降</el-radio-button>
+          </el-radio-group>
+        </div>
       </div>
 
       <el-skeleton v-if="loading" :rows="6" animated />
@@ -54,12 +71,13 @@ import ProductCard from '@/components/ProductCard.vue'
 const route = useRoute()
 const router = useRouter()
 
-const categories = ref<ProductCategory[]>([])
+const allCategories = ref<ProductCategory[]>([])
 const list = ref<ProductSpu[]>([])
 const loading = ref(false)
 const total = ref(0)
 const pageNo = ref(1)
 const pageSize = 12
+const sortKey = ref('default')
 
 const activeCategoryId = computed(() => {
   const id = route.query.categoryId
@@ -68,16 +86,30 @@ const activeCategoryId = computed(() => {
 
 const keyword = computed(() => (route.query.keyword as string) || '')
 
+const rootCategories = computed(() =>
+  allCategories.value.filter((c) => !c.parentId || c.parentId === 0)
+)
+
+function childrenOf(parentId: number) {
+  return allCategories.value.filter((c) => c.parentId === parentId)
+}
+
 const currentTitle = computed(() => {
   if (keyword.value) return `搜索：${keyword.value}`
-  const cat = categories.value.find((c) => c.id === activeCategoryId.value)
+  const cat = allCategories.value.find((c) => c.id === activeCategoryId.value)
   return cat?.name || '全部商品'
 })
 
+function sortParams(): { sortField?: string; sortAsc?: boolean } {
+  if (sortKey.value === 'salesCount') return { sortField: 'salesCount', sortAsc: false }
+  if (sortKey.value === 'priceAsc') return { sortField: 'price', sortAsc: true }
+  if (sortKey.value === 'priceDesc') return { sortField: 'price', sortAsc: false }
+  return {}
+}
+
 async function loadCategories() {
   const res = await CategoryApi.getCategoryList()
-  // 只展示一级分类，避免过深
-  categories.value = (res.data || []).filter((c) => !c.parentId || c.parentId === 0)
+  allCategories.value = res.data || []
 }
 
 async function loadProducts() {
@@ -87,7 +119,8 @@ async function loadProducts() {
       pageNo: pageNo.value,
       pageSize,
       categoryId: activeCategoryId.value,
-      keyword: keyword.value || undefined
+      keyword: keyword.value || undefined,
+      ...sortParams()
     })
     list.value = res.data?.list || []
     total.value = res.data?.total || 0
@@ -109,6 +142,11 @@ function selectCategory(id?: number) {
 
 function onPageChange(page: number) {
   pageNo.value = page
+  loadProducts()
+}
+
+function onSortChange() {
+  pageNo.value = 1
   loadProducts()
 }
 
@@ -141,6 +179,8 @@ onMounted(async () => {
   border: 1px solid var(--mall-line);
   position: sticky;
   top: 96px;
+  max-height: calc(100vh - 120px);
+  overflow: auto;
 }
 
 .cat-item {
@@ -156,6 +196,11 @@ onMounted(async () => {
   font-size: 14px;
 }
 
+.cat-item.child {
+  padding-left: 24px;
+  font-size: 13px;
+}
+
 .cat-item:hover,
 .cat-item.active {
   background: #faf4ef;
@@ -169,9 +214,10 @@ onMounted(async () => {
 
 .toolbar {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
   margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
 .toolbar h2 {
@@ -182,6 +228,10 @@ onMounted(async () => {
 .muted {
   color: var(--mall-muted);
   font-size: 13px;
+}
+
+.sorts {
+  margin-left: auto;
 }
 
 .product-grid {
