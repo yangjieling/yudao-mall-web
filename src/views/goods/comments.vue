@@ -50,7 +50,7 @@ async function load() {
   if (!spuId) return
   loading.value = true
   try {
-    const res = await CommentApi.getCommentPage(spuId, pageNo.value, pageSize)
+    const res = await CommentApi.getCommentPage(spuId, pageNo.value, pageSize, 0)
     list.value = res.data?.list || []
     total.value = res.data?.total || 0
   } finally {

@@ -144,12 +144,8 @@ async function loadDetail() {
   if (!id) return
   loading.value = true
   try {
-    const [detailRes, commentRes] = await Promise.all([
-      SpuApi.getSpuDetail(id),
-      CommentApi.getCommentPage(id, 1, 5)
-    ])
+    const detailRes = await SpuApi.getSpuDetail(id)
     spu.value = detailRes.data
-    comments.value = commentRes.data?.list || []
     activePic.value = pics.value[0] || ''
     // 默认选中第一个 SKU 的属性
     const first = spu.value?.skus?.[0]
@@ -157,6 +153,13 @@ async function loadDetail() {
       if (p.propertyName && p.valueName) {
         selectedProps[p.propertyName] = p.valueName
       }
+    }
+    // 评价失败不阻塞详情（type=0 表示全部）
+    try {
+      const commentRes = await CommentApi.getCommentPage(id, 1, 5, 0)
+      comments.value = commentRes.data?.list || []
+    } catch {
+      comments.value = []
     }
     if (userStore.isLogin) {
       try {

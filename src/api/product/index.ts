@@ -70,7 +70,8 @@ export const SpuApi = {
 }
 
 export const CommentApi = {
-  getCommentPage: (spuId: number, pageNo = 1, pageSize = 10, type?: number) =>
+  /** type: 0 全部、1 好评、2 中评、3 差评（后端必填） */
+  getCommentPage: (spuId: number, pageNo = 1, pageSize = 10, type = 0) =>
     request<PageResult<ProductComment>>({
       url: '/product/comment/page',
       method: 'GET',
