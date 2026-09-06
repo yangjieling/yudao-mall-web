@@ -6,6 +6,7 @@
       <div class="panel-head">
         <h2>收货地址</h2>
         <div>
+          <el-button link type="primary" @click="$router.push('/user/address')">管理地址</el-button>
           <el-button link type="primary" @click="openAddressDialog">新增地址</el-button>
           <el-button link type="primary" @click="loadAddresses">刷新</el-button>
         </div>
@@ -34,13 +35,47 @@
         <img :src="item.picUrl" :alt="item.spuName" />
         <div class="goods-info">
           <div>{{ item.spuName }}</div>
-          <div class="muted">{{ item.skuName }} × {{ item.count }}</div>
+          <div class="muted">
+            <span v-for="(p, i) in item.properties || []" :key="i">
+              {{ p.propertyName }}:{{ p.valueName }}
+            </span>
+            × {{ item.count }}
+          </div>
         </div>
         <div class="price">{{ formatPrice(item.price) }}</div>
       </div>
     </section>
 
     <section class="panel">
+      <h2>优惠券</h2>
+      <el-radio-group v-model="couponId" class="coupon-list" @change="calcSettlement">
+        <el-radio :value="0" border class="coupon-item">不使用优惠券</el-radio>
+        <el-radio
+          v-for="c in availableCoupons"
+          :key="c.id"
+          :value="c.id"
+          border
+          class="coupon-item"
+        >
+          {{ c.name }}
+          <span class="muted">
+            （
+            <template v-if="c.discountType === 1">减{{ formatPrice(c.discountPrice) }}</template>
+            <template v-else>{{ (c.discountPercent || 0) / 10 }}折</template>
+            ）
+          </span>
+        </el-radio>
+      </el-radio-group>
+      <div v-if="unavailableCoupons.length" class="muted tip">
+        {{ unavailableCoupons.length }} 张优惠券暂不可用
+      </div>
+    </section>
+
+    <section class="panel">
+      <el-form-item label="积分抵扣" v-if="(settlement?.totalPoint || 0) > 0">
+        <el-switch v-model="pointStatus" @change="calcSettlement" />
+        <span class="muted">可用积分 {{ settlement?.totalPoint }}</span>
+      </el-form-item>
       <el-input
         v-model="remark"
         type="textarea"
@@ -53,6 +88,18 @@
         <div>商品合计：{{ formatPrice(settlement?.price?.totalPrice) }}</div>
         <div v-if="settlement?.price?.deliveryPrice">
           运费：{{ formatPrice(settlement.price.deliveryPrice) }}
+        </div>
+        <div v-if="settlement?.price?.couponPrice">
+          优惠券：-{{ formatPrice(settlement.price.couponPrice) }}
+        </div>
+        <div v-if="settlement?.price?.discountPrice">
+          活动优惠：-{{ formatPrice(settlement.price.discountPrice) }}
+        </div>
+        <div v-if="settlement?.price?.pointPrice">
+          积分抵扣：-{{ formatPrice(settlement.price.pointPrice) }}
+        </div>
+        <div v-if="settlement?.price?.vipPrice">
+          会员优惠：-{{ formatPrice(settlement.price.vipPrice) }}
         </div>
         <div class="pay">
           应付：<span class="price">{{ formatPrice(settlement?.price?.payPrice) }}</span>
@@ -118,6 +165,8 @@ const loading = ref(false)
 const submitting = ref(false)
 const addresses = ref<MemberAddress[]>([])
 const addressId = ref<number>()
+const couponId = ref(0)
+const pointStatus = ref(false)
 const remark = ref('')
 const settlement = ref<SettlementResp | null>(null)
 const items = ref<OrderItemPayload[]>([])
@@ -134,9 +183,10 @@ const addressForm = reactive({
 })
 
 const canSubmit = computed(() => !!addressId.value && items.value.length > 0 && !!settlement.value)
+const availableCoupons = computed(() => (settlement.value?.coupons || []).filter((c) => c.match))
+const unavailableCoupons = computed(() => (settlement.value?.coupons || []).filter((c) => !c.match))
 
 function parseItemsFromQuery(): OrderItemPayload[] {
-  // 购物车：items=skuId:count:cartId,skuId:count:cartId
   if (route.query.items) {
     return String(route.query.items)
       .split(',')
@@ -150,7 +200,6 @@ function parseItemsFromQuery(): OrderItemPayload[] {
       })
       .filter((i) => i.skuId)
   }
-  // 立即购买：skuId + count
   if (route.query.skuId) {
     return [
       {
@@ -213,7 +262,9 @@ async function calcSettlement() {
     const res = await OrderApi.settlementOrder({
       items: items.value,
       addressId: addressId.value,
-      deliveryType: 1
+      deliveryType: 1,
+      couponId: couponId.value || undefined,
+      pointStatus: pointStatus.value
     })
     settlement.value = res.data
     if (res.data.address?.id) {
@@ -235,7 +286,9 @@ async function submit() {
       items: items.value,
       addressId: addressId.value,
       deliveryType: 1,
-      remark: remark.value || undefined
+      remark: remark.value || undefined,
+      couponId: couponId.value || undefined,
+      pointStatus: pointStatus.value
     })
     if (items.value.some((i) => i.cartId)) {
       await cartStore.getList()
@@ -291,14 +344,16 @@ h1 {
   font-size: 16px;
 }
 
-.address-list {
+.address-list,
+.coupon-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
 }
 
-.address-item {
+.address-item,
+.coupon-item {
   height: auto !important;
   margin: 0 !important;
   padding: 12px 16px !important;
@@ -316,6 +371,11 @@ h1 {
   color: var(--mall-muted);
   font-size: 13px;
   white-space: normal;
+}
+
+.tip {
+  margin-top: 8px;
+  font-size: 13px;
 }
 
 .goods-row {
