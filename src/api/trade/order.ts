@@ -26,7 +26,22 @@ export interface OrderPrice {
   payPrice: number
 }
 
+export interface SettlementCoupon {
+  id: number
+  name: string
+  usePrice?: number
+  validStartTime?: string
+  validEndTime?: string
+  discountType?: number
+  discountPercent?: number
+  discountPrice?: number
+  discountLimitPrice?: number
+  match?: boolean
+  mismatchReason?: string
+}
+
 export interface SettlementResp {
+  type?: number
   items: Array<{
     skuId: number
     spuId?: number
@@ -35,7 +50,9 @@ export interface SettlementResp {
     picUrl?: string
     count: number
     price: number
+    properties?: Array<{ propertyName?: string; valueName?: string }>
   }>
+  coupons?: SettlementCoupon[]
   price: OrderPrice
   address?: {
     id: number
@@ -44,28 +61,74 @@ export interface SettlementResp {
     areaName?: string
     detailAddress?: string
   }
+  usePoint?: number
+  totalPoint?: number
+}
+
+export interface TradeOrderItem {
+  id: number
+  orderId?: number
+  spuId?: number
+  spuName: string
+  skuId?: number
+  picUrl?: string
+  count: number
+  price: number
+  payPrice?: number
+  afterSaleStatus?: number
+  commentStatus?: boolean
+  properties?: Array<{ propertyName?: string; valueName?: string }>
 }
 
 export interface TradeOrder {
   id: number
   no: string
   status: number
+  type?: number
   productCount?: number
   payPrice: number
+  totalPrice?: number
+  discountPrice?: number
+  deliveryPrice?: number
+  couponPrice?: number
+  pointPrice?: number
+  vipPrice?: number
   createTime?: string
-  items?: Array<{
-    id: number
-    spuName: string
-    picUrl?: string
-    count: number
-    price: number
-  }>
+  payTime?: string
+  payChannelName?: string
   payOrderId?: number
+  userRemark?: string
+  commentStatus?: boolean
+  deliveryType?: number
+  logisticsId?: number
+  logisticsName?: string
+  logisticsNo?: string
+  deliveryTime?: string
+  receiveTime?: string
+  receiverName?: string
+  receiverMobile?: string
+  receiverAreaName?: string
+  receiverDetailAddress?: string
+  items?: TradeOrderItem[]
 }
 
 export interface CreateOrderResp {
   id: number
   payOrderId?: number
+}
+
+export interface ExpressTrack {
+  time?: string
+  content?: string
+}
+
+export interface OrderCount {
+  allCount?: number
+  unpaidCount?: number
+  undeliveredCount?: number
+  deliveredCount?: number
+  uncommentedCount?: number
+  afterSaleCount?: number
 }
 
 function buildSettlementQuery(data: SettlementReq): string {
@@ -113,11 +176,18 @@ export const OrderApi = {
       requireAuth: true
     }),
 
-  getOrderPage: (params: PageParam & { status?: number }) =>
+  getOrderPage: (params: PageParam & { status?: number; commentStatus?: boolean }) =>
     request<PageResult<TradeOrder>>({
       url: '/trade/order/page',
       method: 'GET',
       params,
+      requireAuth: true
+    }),
+
+  getOrderCount: () =>
+    request<OrderCount>({
+      url: '/trade/order/get-count',
+      method: 'GET',
       requireAuth: true
     }),
 
@@ -134,6 +204,37 @@ export const OrderApi = {
       url: '/trade/order/receive',
       method: 'PUT',
       params: { id },
+      requireAuth: true
+    }),
+
+  deleteOrder: (id: number) =>
+    request<boolean>({
+      url: '/trade/order/delete',
+      method: 'DELETE',
+      params: { id },
+      requireAuth: true
+    }),
+
+  getExpressTrackList: (id: number) =>
+    request<ExpressTrack[]>({
+      url: '/trade/order/get-express-track-list',
+      method: 'GET',
+      params: { id },
+      requireAuth: true
+    }),
+
+  createOrderItemComment: (data: {
+    orderItemId: number
+    descriptionScores: number
+    benefitScores: number
+    content: string
+    picUrls?: string[]
+    anonymous: boolean
+  }) =>
+    request<number>({
+      url: '/trade/order/item/create-comment',
+      method: 'POST',
+      data,
       requireAuth: true
     })
 }

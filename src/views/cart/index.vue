@@ -2,11 +2,11 @@
   <div class="page-container cart-page" v-loading="cartStore.loading">
     <h1>购物车</h1>
 
-    <el-empty v-if="!cartStore.validList.length" description="购物车是空的">
+    <el-empty v-if="!cartStore.validList.length && !cartStore.invalidList.length" description="购物车是空的">
       <el-button type="primary" @click="$router.push('/category')">去选购</el-button>
     </el-empty>
 
-    <template v-else>
+    <template v-if="cartStore.validList.length">
       <div class="cart-table">
         <div class="head row">
           <el-checkbox
@@ -61,6 +61,29 @@
         </el-button>
       </div>
     </template>
+
+    <section v-if="cartStore.invalidList.length" class="invalid-section">
+      <div class="invalid-head">
+        <h2>失效商品</h2>
+        <el-button link type="danger" @click="clearInvalid">清空失效</el-button>
+      </div>
+      <div class="cart-table invalid">
+        <div v-for="item in cartStore.invalidList" :key="item.id" class="body row">
+          <span class="invalid-tag">失效</span>
+          <div class="goods">
+            <img :src="item.sku.picUrl || item.spu.picUrl" :alt="item.spu.name" />
+            <div>
+              <div class="name muted-name">{{ item.spu.name }}</div>
+              <div class="sku-props">商品已下架或库存不足</div>
+            </div>
+          </div>
+          <div class="price">{{ formatPrice(item.sku.price) }}</div>
+          <span>{{ item.count }}</span>
+          <span>—</span>
+          <el-button link type="danger" @click="onRemove(item.id)">删除</el-button>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -97,6 +120,11 @@ async function onCount(id: number, count: number) {
 
 async function onRemove(id: number) {
   await cartStore.remove([id])
+}
+
+async function clearInvalid() {
+  const ids = cartStore.invalidList.map((i) => i.id)
+  if (ids.length) await cartStore.remove(ids)
 }
 
 function checkout() {
@@ -156,6 +184,10 @@ h1 {
   font-weight: 500;
 }
 
+.muted-name {
+  color: var(--mall-muted);
+}
+
 .sku-props {
   margin-top: 4px;
   color: var(--mall-muted);
@@ -179,5 +211,31 @@ h1 {
 .total {
   font-size: 24px;
   margin-left: 8px;
+}
+
+.invalid-section {
+  margin-top: 28px;
+}
+
+.invalid-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.invalid-head h2 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--mall-muted);
+}
+
+.invalid .body {
+  opacity: 0.75;
+}
+
+.invalid-tag {
+  color: var(--mall-muted);
+  font-size: 12px;
 }
 </style>

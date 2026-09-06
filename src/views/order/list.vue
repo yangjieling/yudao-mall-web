@@ -8,6 +8,7 @@
       <el-tab-pane label="待发货" name="10" />
       <el-tab-pane label="已发货" name="20" />
       <el-tab-pane label="已完成" name="30" />
+      <el-tab-pane label="已取消" name="40" />
     </el-tabs>
 
     <el-empty v-if="!list.length" description="暂无订单" />
@@ -55,19 +56,26 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { OrderApi, ORDER_STATUS_MAP, type TradeOrder } from '@/api/trade/order'
 import { formatPrice } from '@/utils/price'
 
+const route = useRoute()
 const router = useRouter()
 const loading = ref(false)
 const list = ref<TradeOrder[]>([])
 const total = ref(0)
 const pageNo = ref(1)
 const pageSize = 10
-const statusTab = ref('all')
+const statusTab = ref(normalizeStatus(route.query.status))
+
+function normalizeStatus(raw: unknown): string {
+  const val = Array.isArray(raw) ? raw[0] : raw
+  if (val === undefined || val === null || val === '' || val === 'all') return 'all'
+  return String(val)
+}
 
 async function load() {
   loading.value = true
@@ -86,8 +94,24 @@ async function load() {
 
 function onTabChange() {
   pageNo.value = 1
+  router.replace({
+    path: '/order',
+    query: statusTab.value === 'all' ? {} : { status: statusTab.value }
+  })
   load()
 }
+
+watch(
+  () => route.query.status,
+  (val) => {
+    const next = normalizeStatus(val)
+    if (next !== statusTab.value) {
+      statusTab.value = next
+      pageNo.value = 1
+      load()
+    }
+  }
+)
 
 function onPage(page: number) {
   pageNo.value = page
