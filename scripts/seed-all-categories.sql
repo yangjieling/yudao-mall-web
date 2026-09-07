@@ -1,4 +1,4 @@
-USE `ruoyi-vue-pro`;
+USE `ruoyi_vue_pro`;
 SET NAMES utf8mb4;
 START TRANSACTION;
 -- 补充服装尺码属性值（若不存在）
@@ -29,8 +29,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '云锦儿童汉服套装（演示）', '汉服 儿童', '轻薄透气，节日出游更有仪式感', '<div><h3>云锦儿童汉服套装（演示）</h3><ul><li>仿古剪裁，活动更自在</li><li>面料亲肤，适合春夏</li><li>含上衣与下裙/裤</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80" alt="云锦儿童汉服套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80" alt="云锦儿童汉服套装（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  19, NULL, 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80"]',
+  '云锦儿童汉服套装（演示）', '汉服 儿童', '轻薄透气，节日出游更有仪式感', '<div><h3>云锦儿童汉服套装（演示）</h3><ul><li>仿古剪裁，活动更自在</li><li>面料亲肤，适合春夏</li><li>含上衣与下裙/裤</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80" alt="云锦儿童汉服套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=800&q=80" alt="云锦儿童汉服套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1558171813-4c088753381f?auto=format&fit=crop&w=800&q=80" alt="云锦儿童汉服套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80" alt="云锦儿童汉服套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80" alt="云锦儿童汉服套装（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  19, NULL, 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1558171813-4c088753381f?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80"]',
   10, 1, b'1', 15900, 19900, 7800, 80,
   '1', 1, 15, b'0',
   0, 57, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -47,14 +47,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 16400, 19900, 7800, CONCAT('SC', @spu_id, '-', 16400), 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 16400, 19900, 7800, CONCAT('SC', @spu_id, '-', 16400), 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=800&q=80',
   26, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 16900, 19900, 7800, CONCAT('SC', @spu_id, '-', 16900), 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 16900, 19900, 7800, CONCAT('SC', @spu_id, '-', 16900), 'https://images.unsplash.com/photo-1558171813-4c088753381f?auto=format&fit=crop&w=800&q=80',
   26, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=15900, stock=78 WHERE id=@spu_id;
@@ -65,8 +65,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '轻氧儿童纯棉 T 恤（演示）', 'T恤 纯棉', '柔软纯棉，多色可选', '<div><h3>轻氧儿童纯棉 T 恤（演示）</h3><ul><li>100% 棉感面料</li><li>圆领基础款</li><li>适合日常校园穿搭</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80" alt="轻氧儿童纯棉 T 恤（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80" alt="轻氧儿童纯棉 T 恤（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  28, NULL, 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"]',
+  '轻氧儿童纯棉 T 恤（演示）', 'T恤 纯棉', '柔软纯棉，多色可选', '<div><h3>轻氧儿童纯棉 T 恤（演示）</h3><ul><li>100% 棉感面料</li><li>圆领基础款</li><li>适合日常校园穿搭</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80" alt="轻氧儿童纯棉 T 恤（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80" alt="轻氧儿童纯棉 T 恤（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=800&q=80" alt="轻氧儿童纯棉 T 恤（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=800&q=80" alt="轻氧儿童纯棉 T 恤（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=800&q=80" alt="轻氧儿童纯棉 T 恤（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  28, NULL, 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=800&q=80"]',
   20, 1, b'1', 5900, 7900, 2800, 200,
   '1', 1, 5, b'0',
   0, 64, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -97,42 +97,42 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_s,',"valueName":"S"}]'), 6200, 7900, 2800, CONCAT('SC', @spu_id, '-', 6200), 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_s,',"valueName":"S"}]'), 6200, 7900, 2800, CONCAT('SC', @spu_id, '-', 6200), 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80',
   22, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_m,',"valueName":"M"}]'), 6400, 7900, 2800, CONCAT('SC', @spu_id, '-', 6400), 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_m,',"valueName":"M"}]'), 6400, 7900, 2800, CONCAT('SC', @spu_id, '-', 6400), 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80',
   22, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_l,',"valueName":"L"}]'), 6600, 7900, 2800, CONCAT('SC', @spu_id, '-', 6600), 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_l,',"valueName":"L"}]'), 6600, 7900, 2800, CONCAT('SC', @spu_id, '-', 6600), 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80',
   22, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_s,',"valueName":"S"}]'), 6500, 7900, 2800, CONCAT('SC', @spu_id, '-', 6500), 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_s,',"valueName":"S"}]'), 6500, 7900, 2800, CONCAT('SC', @spu_id, '-', 6500), 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=800&q=80',
   22, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_m,',"valueName":"M"}]'), 6700, 7900, 2800, CONCAT('SC', @spu_id, '-', 6700), 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_m,',"valueName":"M"}]'), 6700, 7900, 2800, CONCAT('SC', @spu_id, '-', 6700), 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=800&q=80',
   22, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_l,',"valueName":"L"}]'), 6900, 7900, 2800, CONCAT('SC', @spu_id, '-', 6900), 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_l,',"valueName":"L"}]'), 6900, 7900, 2800, CONCAT('SC', @spu_id, '-', 6900), 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=800&q=80',
   22, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=5900, stock=198 WHERE id=@spu_id;
@@ -143,8 +143,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '夏日碎花儿童连衣裙（演示）', '裙子 连衣裙', '轻盈裙摆，周末出游好看', '<div><h3>夏日碎花儿童连衣裙（演示）</h3><ul><li>碎花印花</li><li>宽松版型</li><li>可机洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80" alt="夏日碎花儿童连衣裙（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80" alt="夏日碎花儿童连衣裙（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  29, NULL, 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80"]',
+  '夏日碎花儿童连衣裙（演示）', '裙子 连衣裙', '轻盈裙摆，周末出游好看', '<div><h3>夏日碎花儿童连衣裙（演示）</h3><ul><li>碎花印花</li><li>宽松版型</li><li>可机洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80" alt="夏日碎花儿童连衣裙（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=80" alt="夏日碎花儿童连衣裙（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80" alt="夏日碎花儿童连衣裙（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1572804013309-59a48b1fa61b?auto=format&fit=crop&w=800&q=80" alt="夏日碎花儿童连衣裙（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=800&q=80" alt="夏日碎花儿童连衣裙（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  29, NULL, 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1572804013309-59a48b1fa61b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=800&q=80"]',
   30, 1, b'1', 8900, 11900, 4200, 120,
   '1', 1, 8, b'0',
   0, 71, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -161,14 +161,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 9400, 11900, 4200, CONCAT('SC', @spu_id, '-', 9400), 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 9400, 11900, 4200, CONCAT('SC', @spu_id, '-', 9400), 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=80',
   40, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 9900, 11900, 4200, CONCAT('SC', @spu_id, '-', 9900), 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 9900, 11900, 4200, CONCAT('SC', @spu_id, '-', 9900), 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80',
   40, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=8900, stock=120 WHERE id=@spu_id;
@@ -179,8 +179,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '舞台亮片演出服（演示）', '演出服', '活动演出亮片装饰', '<div><h3>舞台亮片演出服（演示）</h3><ul><li>亮片点缀</li><li>弹性面料</li><li>适合校园文艺活动</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" alt="舞台亮片演出服（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" alt="舞台亮片演出服（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  60, NULL, 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80"]',
+  '舞台亮片演出服（演示）', '演出服', '活动演出亮片装饰', '<div><h3>舞台亮片演出服（演示）</h3><ul><li>亮片点缀</li><li>弹性面料</li><li>适合校园文艺活动</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" alt="舞台亮片演出服（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80" alt="舞台亮片演出服（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80" alt="舞台亮片演出服（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=800&q=80" alt="舞台亮片演出服（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80" alt="舞台亮片演出服（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  60, NULL, 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80"]',
   40, 1, b'0', 12900, 16900, 6000, 60,
   '1', 1, 12, b'0',
   0, 78, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -201,8 +201,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '防风儿童连帽外套（演示）', '外套 防风', '春秋防风，轻便好穿', '<div><h3>防风儿童连帽外套（演示）</h3><ul><li>连帽设计</li><li>防泼水面料</li><li>两侧口袋</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80" alt="防风儿童连帽外套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80" alt="防风儿童连帽外套（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  61, NULL, 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80"]',
+  '防风儿童连帽外套（演示）', '外套 防风', '春秋防风，轻便好穿', '<div><h3>防风儿童连帽外套（演示）</h3><ul><li>连帽设计</li><li>防泼水面料</li><li>两侧口袋</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80" alt="防风儿童连帽外套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80" alt="防风儿童连帽外套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1591043037720-404d7a5a0c0a?auto=format&fit=crop&w=800&q=80" alt="防风儿童连帽外套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1539533018447-63fcce2678e3?auto=format&fit=crop&w=800&q=80" alt="防风儿童连帽外套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=800&q=80" alt="防风儿童连帽外套（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  61, NULL, 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1591043037720-404d7a5a0c0a?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=800&q=80"]',
   50, 1, b'1', 13900, 17900, 6500, 90,
   '1', 1, 13, b'0',
   0, 85, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -219,7 +219,7 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 14400, 17900, 6500, CONCAT('SC', @spu_id, '-', 14400), 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 14400, 17900, 6500, CONCAT('SC', @spu_id, '-', 14400), 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80',
   45, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=13900, stock=90 WHERE id=@spu_id;
@@ -230,8 +230,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '弹力儿童运动裤（演示）', '裤子 运动', '松紧腰头，跑跳更自在', '<div><h3>弹力儿童运动裤（演示）</h3><ul><li>弹力面料</li><li>抽绳腰头</li><li>日常运动皆可</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80" alt="弹力儿童运动裤（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80" alt="弹力儿童运动裤（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  62, NULL, 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80"]',
+  '弹力儿童运动裤（演示）', '裤子 运动', '松紧腰头，跑跳更自在', '<div><h3>弹力儿童运动裤（演示）</h3><ul><li>弹力面料</li><li>抽绳腰头</li><li>日常运动皆可</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80" alt="弹力儿童运动裤（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=80" alt="弹力儿童运动裤（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=800&q=80" alt="弹力儿童运动裤（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1506629082955-511b1aa782c0?auto=format&fit=crop&w=800&q=80" alt="弹力儿童运动裤（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80" alt="弹力儿童运动裤（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  62, NULL, 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1506629082955-511b1aa782c0?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80"]',
   60, 1, b'1', 6900, 8900, 3200, 150,
   '1', 1, 6, b'0',
   0, 92, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -262,21 +262,21 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_s,',"valueName":"S"}]'), 7200, 8900, 3200, CONCAT('SC', @spu_id, '-', 7200), 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_s,',"valueName":"S"}]'), 7200, 8900, 3200, CONCAT('SC', @spu_id, '-', 7200), 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=80',
   25, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_m,',"valueName":"M"}]'), 7400, 8900, 3200, CONCAT('SC', @spu_id, '-', 7400), 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_m,',"valueName":"M"}]'), 7400, 8900, 3200, CONCAT('SC', @spu_id, '-', 7400), 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=80',
   25, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_l,',"valueName":"L"}]'), 7600, 8900, 3200, CONCAT('SC', @spu_id, '-', 7600), 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_l,',"valueName":"L"}]'), 7600, 8900, 3200, CONCAT('SC', @spu_id, '-', 7600), 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=80',
   25, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=6900, stock=150 WHERE id=@spu_id;
@@ -287,8 +287,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '软底儿童凉鞋（演示）', '凉鞋', '夏季透气软底', '<div><h3>软底儿童凉鞋（演示）</h3><ul><li>透气鞋面</li><li>防滑鞋底</li><li>魔术贴调节</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80" alt="软底儿童凉鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80" alt="软底儿童凉鞋（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  63, NULL, 'https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80"]',
+  '软底儿童凉鞋（演示）', '凉鞋', '夏季透气软底', '<div><h3>软底儿童凉鞋（演示）</h3><ul><li>透气鞋面</li><li>防滑鞋底</li><li>魔术贴调节</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80" alt="软底儿童凉鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1603808033192-082d59583536?auto=format&fit=crop&w=800&q=80" alt="软底儿童凉鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=800&q=80" alt="软底儿童凉鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1535041730312-aa899ff441ce?auto=format&fit=crop&w=800&q=80" alt="软底儿童凉鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80" alt="软底儿童凉鞋（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  63, NULL, 'https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1603808033192-082d59583536?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1535041730312-aa899ff441ce?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=800&q=80"]',
   70, 1, b'1', 7900, 9900, 3600, 100,
   '1', 1, 7, b'0',
   0, 99, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -305,14 +305,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 8400, 9900, 3600, CONCAT('SC', @spu_id, '-', 8400), 'https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 8400, 9900, 3600, CONCAT('SC', @spu_id, '-', 8400), 'https://images.unsplash.com/photo-1603808033192-082d59583536?auto=format&fit=crop&w=800&q=80',
   33, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 8900, 9900, 3600, CONCAT('SC', @spu_id, '-', 8900), 'https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 8900, 9900, 3600, CONCAT('SC', @spu_id, '-', 8900), 'https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=800&q=80',
   33, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=7900, stock=99 WHERE id=@spu_id;
@@ -323,8 +323,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '经典儿童皮鞋（演示）', '皮鞋', '开学季正装小皮鞋', '<div><h3>经典儿童皮鞋（演示）</h3><ul><li>仿皮鞋面</li><li>橡胶底防滑</li><li>适合校园活动</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=800&q=80" alt="经典儿童皮鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=800&q=80" alt="经典儿童皮鞋（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  64, NULL, 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=800&q=80"]',
+  '经典儿童皮鞋（演示）', '皮鞋', '开学季正装小皮鞋', '<div><h3>经典儿童皮鞋（演示）</h3><ul><li>仿皮鞋面</li><li>橡胶底防滑</li><li>适合校园活动</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=800&q=80" alt="经典儿童皮鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?auto=format&fit=crop&w=800&q=80" alt="经典儿童皮鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1614252363701-ba4300ce60d6?auto=format&fit=crop&w=800&q=80" alt="经典儿童皮鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=800&q=80" alt="经典儿童皮鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80" alt="经典儿童皮鞋（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  64, NULL, 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1614252363701-ba4300ce60d6?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80"]',
   80, 1, b'0', 9900, 12900, 4800, 70,
   '1', 1, 9, b'0',
   0, 106, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -345,8 +345,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '轻跑儿童运动鞋（演示）', '运动鞋', '缓震鞋底，多色可选', '<div><h3>轻跑儿童运动鞋（演示）</h3><ul><li>缓震中底</li><li>透气网面</li><li>耐磨外底</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80" alt="轻跑儿童运动鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80" alt="轻跑儿童运动鞋（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  65, NULL, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"]',
+  '轻跑儿童运动鞋（演示）', '运动鞋', '缓震鞋底，多色可选', '<div><h3>轻跑儿童运动鞋（演示）</h3><ul><li>缓震中底</li><li>透气网面</li><li>耐磨外底</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80" alt="轻跑儿童运动鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=800&q=80" alt="轻跑儿童运动鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80" alt="轻跑儿童运动鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=800&q=80" alt="轻跑儿童运动鞋（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=800&q=80" alt="轻跑儿童运动鞋（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  65, NULL, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=800&q=80"]',
   90, 1, b'1', 12900, 16900, 6200, 160,
   '1', 1, 12, b'0',
   0, 113, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -363,14 +363,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 13400, 16900, 6200, CONCAT('SC', @spu_id, '-', 13400), 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 13400, 16900, 6200, CONCAT('SC', @spu_id, '-', 13400), 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=800&q=80',
   53, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 13900, 16900, 6200, CONCAT('SC', @spu_id, '-', 13900), 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 13900, 16900, 6200, CONCAT('SC', @spu_id, '-', 13900), 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80',
   53, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=12900, stock=159 WHERE id=@spu_id;
@@ -381,8 +381,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '清画 55 吋智能电视（演示）', '电视 智能', '4K 画质，语音遥控', '<div><h3>清画 55 吋智能电视（演示）</h3><ul><li>4K 分辨率</li><li>内置语音助手</li><li>HDMI/USB 接口齐全</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=80" alt="清画 55 吋智能电视（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=80" alt="清画 55 吋智能电视（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  31, NULL, 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=80"]',
+  '清画 55 吋智能电视（演示）', '电视 智能', '4K 画质，语音遥控', '<div><h3>清画 55 吋智能电视（演示）</h3><ul><li>4K 分辨率</li><li>内置语音助手</li><li>HDMI/USB 接口齐全</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=80" alt="清画 55 吋智能电视（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=800&q=80" alt="清画 55 吋智能电视（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1461151304267-38535e780c79?auto=format&fit=crop&w=800&q=80" alt="清画 55 吋智能电视（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571415060716-baff5f717c37?auto=format&fit=crop&w=800&q=80" alt="清画 55 吋智能电视（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  31, NULL, 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1461151304267-38535e780c79?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571415060716-baff5f717c37?auto=format&fit=crop&w=800&q=80"]',
   100, 1, b'0', 229900, 269900, 180000, 40,
   '1', 1, 229, b'0',
   0, 120, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -403,8 +403,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '净滚筒 10kg 洗衣机（演示）', '洗衣机', '大容量滚筒，静音洗涤', '<div><h3>净滚筒 10kg 洗衣机（演示）</h3><ul><li>10kg 容量</li><li>多档洗涤程序</li><li>节能静音</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80" alt="净滚筒 10kg 洗衣机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80" alt="净滚筒 10kg 洗衣机（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  32, NULL, 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80"]',
+  '净滚筒 10kg 洗衣机（演示）', '洗衣机', '大容量滚筒，静音洗涤', '<div><h3>净滚筒 10kg 洗衣机（演示）</h3><ul><li>10kg 容量</li><li>多档洗涤程序</li><li>节能静音</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80" alt="净滚筒 10kg 洗衣机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&w=800&q=80" alt="净滚筒 10kg 洗衣机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&w=800&q=80" alt="净滚筒 10kg 洗衣机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=800&q=80" alt="净滚筒 10kg 洗衣机（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  32, NULL, 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=800&q=80"]',
   110, 1, b'0', 189900, 219900, 150000, 35,
   '1', 1, 189, b'0',
   0, 127, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -425,8 +425,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '双门节能冰箱（演示）', '冰箱', '冷藏冷冻分区，家用刚刚好', '<div><h3>双门节能冰箱（演示）</h3><ul><li>风冷无霜</li><li>独立温控</li><li>节能等级友好</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80" alt="双门节能冰箱（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80" alt="双门节能冰箱（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  34, NULL, 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80"]',
+  '双门节能冰箱（演示）', '冰箱', '冷藏冷冻分区，家用刚刚好', '<div><h3>双门节能冰箱（演示）</h3><ul><li>风冷无霜</li><li>独立温控</li><li>节能等级友好</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80" alt="双门节能冰箱（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?auto=format&fit=crop&w=800&q=80" alt="双门节能冰箱（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1506617420156-8e453697f0c9?auto=format&fit=crop&w=800&q=80" alt="双门节能冰箱（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80" alt="双门节能冰箱（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  34, NULL, 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1506617420156-8e453697f0c9?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80"]',
   120, 1, b'0', 259900, 299900, 200000, 28,
   '1', 1, 259, b'0',
   0, 134, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -447,8 +447,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '厚釜电饭煲 4L（演示）', '电饭煲', '厚釜加热，米饭更香', '<div><h3>厚釜电饭煲 4L（演示）</h3><ul><li>4L 容量</li><li>预约煮饭</li><li>易洁内胆</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1585515320310-259814833e71?auto=format&fit=crop&w=800&q=80" alt="厚釜电饭煲 4L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1585515320310-259814833e71?auto=format&fit=crop&w=800&q=80" alt="厚釜电饭煲 4L（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  35, NULL, 'https://images.unsplash.com/photo-1585515320310-259814833e71?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1585515320310-259814833e71?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1585515320310-259814833e71?auto=format&fit=crop&w=800&q=80"]',
+  '厚釜电饭煲 4L（演示）', '电饭煲', '厚釜加热，米饭更香', '<div><h3>厚釜电饭煲 4L（演示）</h3><ul><li>4L 容量</li><li>预约煮饭</li><li>易洁内胆</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1585515320310-259814833e71?auto=format&fit=crop&w=800&q=80" alt="厚釜电饭煲 4L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=80" alt="厚釜电饭煲 4L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80" alt="厚釜电饭煲 4L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=800&q=80" alt="厚釜电饭煲 4L（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  35, NULL, 'https://images.unsplash.com/photo-1585515320310-259814833e71?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1585515320310-259814833e71?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=800&q=80"]',
   130, 1, b'0', 29900, 39900, 16000, 90,
   '1', 1, 29, b'0',
   0, 141, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -469,8 +469,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '恒温养生壶 1.5L（演示）', '养生壶', '多段温控，煮茶煮粥', '<div><h3>恒温养生壶 1.5L（演示）</h3><ul><li>1.5L 玻璃壶身</li><li>多功能菜单</li><li>防干烧保护</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80" alt="恒温养生壶 1.5L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80" alt="恒温养生壶 1.5L（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  36, NULL, 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80"]',
+  '恒温养生壶 1.5L（演示）', '养生壶', '多段温控，煮茶煮粥', '<div><h3>恒温养生壶 1.5L（演示）</h3><ul><li>1.5L 玻璃壶身</li><li>多功能菜单</li><li>防干烧保护</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80" alt="恒温养生壶 1.5L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=80" alt="恒温养生壶 1.5L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=800&q=80" alt="恒温养生壶 1.5L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=800&q=80" alt="恒温养生壶 1.5L（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  36, NULL, 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=800&q=80"]',
   140, 1, b'0', 15900, 19900, 8000, 110,
   '1', 1, 15, b'0',
   0, 148, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -491,8 +491,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '无线手持吸尘器（演示）', '吸尘器', '轻便无线，一键清空尘杯', '<div><h3>无线手持吸尘器（演示）</h3><ul><li>无线续航约 40 分钟</li><li>多吸头组合</li><li>HEPA 滤芯</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80" alt="无线手持吸尘器（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80" alt="无线手持吸尘器（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  37, NULL, 'https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80"]',
+  '无线手持吸尘器（演示）', '吸尘器', '轻便无线，一键清空尘杯', '<div><h3>无线手持吸尘器（演示）</h3><ul><li>无线续航约 40 分钟</li><li>多吸头组合</li><li>HEPA 滤芯</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80" alt="无线手持吸尘器（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="无线手持吸尘器（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" alt="无线手持吸尘器（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80" alt="无线手持吸尘器（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  37, NULL, 'https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80"]',
   150, 1, b'1', 69900, 89900, 42000, 55,
   '1', 1, 69, b'0',
   0, 155, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -509,7 +509,7 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 70400, 89900, 42000, CONCAT('SC', @spu_id, '-', 70400), 'https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 70400, 89900, 42000, CONCAT('SC', @spu_id, '-', 70400), 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80',
   27, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=69900, stock=54 WHERE id=@spu_id;
@@ -520,8 +520,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '静音破壁机（演示）', '破壁机', '家用破壁，豆浆果汁一次搞定', '<div><h3>静音破壁机（演示）</h3><ul><li>高速破壁刀头</li><li>预约保温</li><li>易清洗杯体</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=800&q=80" alt="静音破壁机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=800&q=80" alt="静音破壁机（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  66, NULL, 'https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=800&q=80"]',
+  '静音破壁机（演示）', '破壁机', '家用破壁，豆浆果汁一次搞定', '<div><h3>静音破壁机（演示）</h3><ul><li>高速破壁刀头</li><li>预约保温</li><li>易清洗杯体</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=800&q=80" alt="静音破壁机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?auto=format&fit=crop&w=800&q=80" alt="静音破壁机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1625948515291-69613efd103f?auto=format&fit=crop&w=800&q=80" alt="静音破壁机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=80" alt="静音破壁机（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  66, NULL, 'https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1625948515291-69613efd103f?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=80"]',
   160, 1, b'0', 49900, 69900, 28000, 70,
   '1', 1, 49, b'0',
   0, 162, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -542,8 +542,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '紫外除螨仪（演示）', '除螨仪', '床褥除螨，吸尘+紫外', '<div><h3>紫外除螨仪（演示）</h3><ul><li>紫外灯辅助</li><li>大吸力尘杯</li><li>适合床垫沙发</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="紫外除螨仪（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="紫外除螨仪（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  67, NULL, 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"]',
+  '紫外除螨仪（演示）', '除螨仪', '床褥除螨，吸尘+紫外', '<div><h3>紫外除螨仪（演示）</h3><ul><li>紫外灯辅助</li><li>大吸力尘杯</li><li>适合床垫沙发</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="紫外除螨仪（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80" alt="紫外除螨仪（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" alt="紫外除螨仪（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" alt="紫外除螨仪（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  67, NULL, 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80"]',
   170, 1, b'0', 24900, 32900, 13000, 85,
   '1', 1, 24, b'0',
   0, 169, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -564,8 +564,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '速热电热水器 60L（演示）', '电热水器', '家用储水式，洗澡更从容', '<div><h3>速热电热水器 60L（演示）</h3><ul><li>60L 容量</li><li>防电墙设计</li><li>数显温控</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80" alt="速热电热水器 60L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80" alt="速热电热水器 60L（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  68, NULL, 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80"]',
+  '速热电热水器 60L（演示）', '电热水器', '家用储水式，洗澡更从容', '<div><h3>速热电热水器 60L（演示）</h3><ul><li>60L 容量</li><li>防电墙设计</li><li>数显温控</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80" alt="速热电热水器 60L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80" alt="速热电热水器 60L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" alt="速热电热水器 60L（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80" alt="速热电热水器 60L（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  68, NULL, 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80"]',
   180, 1, b'0', 129900, 159900, 95000, 30,
   '1', 1, 129, b'0',
   0, 176, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -586,8 +586,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '旅行微单数码相机（演示）', '相机 微单', '轻便机身，旅行记录更轻松', '<div><h3>旅行微单数码相机（演示）</h3><ul><li>约 2400 万像素</li><li>4K 视频</li><li>可换镜头卡口</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80" alt="旅行微单数码相机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80" alt="旅行微单数码相机（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  39, NULL, 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80"]',
+  '旅行微单数码相机（演示）', '相机 微单', '轻便机身，旅行记录更轻松', '<div><h3>旅行微单数码相机（演示）</h3><ul><li>约 2400 万像素</li><li>4K 视频</li><li>可换镜头卡口</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80" alt="旅行微单数码相机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=800&q=80" alt="旅行微单数码相机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?auto=format&fit=crop&w=800&q=80" alt="旅行微单数码相机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1495707902641-75cac588d2e9?auto=format&fit=crop&w=800&q=80" alt="旅行微单数码相机（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  39, NULL, 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1495707902641-75cac588d2e9?auto=format&fit=crop&w=800&q=80"]',
   190, 1, b'1', 399900, 459900, 320000, 25,
   '1', 1, 399, b'0',
   0, 183, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -604,7 +604,7 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 400400, 459900, 320000, CONCAT('SC', @spu_id, '-', 400400), 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 400400, 459900, 320000, CONCAT('SC', @spu_id, '-', 400400), 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=800&q=80',
   12, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=399900, stock=24 WHERE id=@spu_id;
@@ -615,8 +615,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '轻薄办公笔记本电脑（演示）', '笔记本', '办公学习主力，多内存规格', '<div><h3>轻薄办公笔记本电脑（演示）</h3><ul><li>14 吋高清屏</li><li>全尺寸键盘</li><li>全天续航表现</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80" alt="轻薄办公笔记本电脑（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80" alt="轻薄办公笔记本电脑（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  40, NULL, 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80"]',
+  '轻薄办公笔记本电脑（演示）', '笔记本', '办公学习主力，多内存规格', '<div><h3>轻薄办公笔记本电脑（演示）</h3><ul><li>14 吋高清屏</li><li>全尺寸键盘</li><li>全天续航表现</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80" alt="轻薄办公笔记本电脑（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80" alt="轻薄办公笔记本电脑（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1525547719571-a2d4ac882e4d?auto=format&fit=crop&w=800&q=80" alt="轻薄办公笔记本电脑（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80" alt="轻薄办公笔记本电脑（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  40, NULL, 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1525547719571-a2d4ac882e4d?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80"]',
   200, 1, b'1', 449900, 499900, 360000, 40,
   '1', 1, 449, b'0',
   0, 190, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -633,7 +633,7 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 14, "propertyName": "内存", "valueId": 35, "valueName": "256G"}]', 479900, 529900, 380000, CONCAT('SC', @spu_id, '-', 479900), 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 14, "propertyName": "内存", "valueId": 35, "valueName": "256G"}]', 479900, 529900, 380000, CONCAT('SC', @spu_id, '-', 479900), 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80',
   20, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=449900, stock=40 WHERE id=@spu_id;
@@ -644,8 +644,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '学习娱乐平板电脑（演示）', '平板', '影音阅读，分内存可选', '<div><h3>学习娱乐平板电脑（演示）</h3><ul><li>10.9 吋屏幕</li><li>四扬声器</li><li>支持手写笔（选配）</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80" alt="学习娱乐平板电脑（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80" alt="学习娱乐平板电脑（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  69, NULL, 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80"]',
+  '学习娱乐平板电脑（演示）', '平板', '影音阅读，分内存可选', '<div><h3>学习娱乐平板电脑（演示）</h3><ul><li>10.9 吋屏幕</li><li>四扬声器</li><li>支持手写笔（选配）</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80" alt="学习娱乐平板电脑（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?auto=format&fit=crop&w=800&q=80" alt="学习娱乐平板电脑（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="学习娱乐平板电脑（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?auto=format&fit=crop&w=800&q=80" alt="学习娱乐平板电脑（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  69, NULL, 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1561154464-82e9adf32764?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?auto=format&fit=crop&w=800&q=80"]',
   210, 1, b'1', 189900, 219900, 150000, 60,
   '1', 1, 189, b'0',
   0, 197, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -662,14 +662,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 14, "propertyName": "内存", "valueId": 34, "valueName": "128G"}]', 219900, 249900, 170000, CONCAT('SC', @spu_id, '-', 219900), 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 14, "propertyName": "内存", "valueId": 34, "valueName": "128G"}]', 219900, 249900, 170000, CONCAT('SC', @spu_id, '-', 219900), 'https://images.unsplash.com/photo-1561154464-82e9adf32764?auto=format&fit=crop&w=800&q=80',
   20, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 14, "propertyName": "内存", "valueId": 35, "valueName": "256G"}]', 249900, 279900, 190000, CONCAT('SC', @spu_id, '-', 249900), 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 14, "propertyName": "内存", "valueId": 35, "valueName": "256G"}]', 249900, 279900, 190000, CONCAT('SC', @spu_id, '-', 249900), 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80',
   20, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=189900, stock=60 WHERE id=@spu_id;
@@ -680,8 +680,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '降噪头戴耳机（演示）', '耳机', '主动降噪，多色可选', '<div><h3>降噪头戴耳机（演示）</h3><ul><li>主动降噪</li><li>长续航</li><li>触控操作</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="降噪头戴耳机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="降噪头戴耳机（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  70, NULL, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"]',
+  '降噪头戴耳机（演示）', '耳机', '主动降噪，多色可选', '<div><h3>降噪头戴耳机（演示）</h3><ul><li>主动降噪</li><li>长续航</li><li>触控操作</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="降噪头戴耳机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=800&q=80" alt="降噪头戴耳机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80" alt="降噪头戴耳机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=800&q=80" alt="降噪头戴耳机（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  70, NULL, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=800&q=80"]',
   220, 1, b'1', 89900, 109900, 52000, 100,
   '1', 1, 89, b'0',
   0, 204, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -698,14 +698,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 90400, 109900, 52000, CONCAT('SC', @spu_id, '-', 90400), 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 90400, 109900, 52000, CONCAT('SC', @spu_id, '-', 90400), 'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=800&q=80',
   33, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 90900, 109900, 52000, CONCAT('SC', @spu_id, '-', 90900), 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 90900, 109900, 52000, CONCAT('SC', @spu_id, '-', 90900), 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80',
   33, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=89900, stock=99 WHERE id=@spu_id;
@@ -716,8 +716,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '桌面蓝牙音箱（演示）', '音箱', '桌面音质升级', '<div><h3>桌面蓝牙音箱（演示）</h3><ul><li>蓝牙 5.1</li><li>低音增强</li><li>Type-C 充电</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80" alt="桌面蓝牙音箱（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80" alt="桌面蓝牙音箱（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  71, NULL, 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80"]',
+  '桌面蓝牙音箱（演示）', '音箱', '桌面音质升级', '<div><h3>桌面蓝牙音箱（演示）</h3><ul><li>蓝牙 5.1</li><li>低音增强</li><li>Type-C 充电</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80" alt="桌面蓝牙音箱（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80" alt="桌面蓝牙音箱（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80" alt="桌面蓝牙音箱（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80" alt="桌面蓝牙音箱（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  71, NULL, 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80"]',
   230, 1, b'1', 29900, 39900, 15000, 90,
   '1', 1, 29, b'0',
   0, 211, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -734,7 +734,7 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 30400, 39900, 15000, CONCAT('SC', @spu_id, '-', 30400), 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 30400, 39900, 15000, CONCAT('SC', @spu_id, '-', 30400), 'https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80',
   45, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=29900, stock=90 WHERE id=@spu_id;
@@ -745,8 +745,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '直播电容麦克风（演示）', '麦克风', '直播录音清晰收音', '<div><h3>直播电容麦克风（演示）</h3><ul><li>心形指向</li><li>即插即用</li><li>带防喷罩</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80" alt="直播电容麦克风（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80" alt="直播电容麦克风（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  72, NULL, 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80"]',
+  '直播电容麦克风（演示）', '麦克风', '直播录音清晰收音', '<div><h3>直播电容麦克风（演示）</h3><ul><li>心形指向</li><li>即插即用</li><li>带防喷罩</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80" alt="直播电容麦克风（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=800&q=80" alt="直播电容麦克风（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80" alt="直播电容麦克风（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80" alt="直播电容麦克风（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  72, NULL, 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80"]',
   240, 1, b'0', 25900, 32900, 12000, 75,
   '1', 1, 25, b'0',
   0, 218, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -767,8 +767,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '次世代游戏主机套装（演示）', '游戏机', '主机+手柄演示套装', '<div><h3>次世代游戏主机套装（演示）</h3><ul><li>4K 游戏输出</li><li>无线手柄</li><li>高速固态存储</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80" alt="次世代游戏主机套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80" alt="次世代游戏主机套装（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  73, NULL, 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80"]',
+  '次世代游戏主机套装（演示）', '游戏机', '主机+手柄演示套装', '<div><h3>次世代游戏主机套装（演示）</h3><ul><li>4K 游戏输出</li><li>无线手柄</li><li>高速固态存储</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80" alt="次世代游戏主机套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=800&q=80" alt="次世代游戏主机套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1592840496694-26d035b52b48?auto=format&fit=crop&w=800&q=80" alt="次世代游戏主机套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1605901309584-818e259dc5f0?auto=format&fit=crop&w=800&q=80" alt="次世代游戏主机套装（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  73, NULL, 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1592840496694-26d035b52b48?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1605901309584-818e259dc5f0?auto=format&fit=crop&w=800&q=80"]',
   250, 1, b'0', 299900, 329900, 250000, 20,
   '1', 1, 299, b'0',
   0, 225, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -789,8 +789,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '家用智能投影仪（演示）', '投影仪', '客厅影院入门选择', '<div><h3>家用智能投影仪（演示）</h3><ul><li>自动对焦</li><li>内置系统</li><li>低噪音风扇</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80" alt="家用智能投影仪（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80" alt="家用智能投影仪（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  74, NULL, 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80"]',
+  '家用智能投影仪（演示）', '投影仪', '客厅影院入门选择', '<div><h3>家用智能投影仪（演示）</h3><ul><li>自动对焦</li><li>内置系统</li><li>低噪音风扇</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80" alt="家用智能投影仪（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80" alt="家用智能投影仪（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=800&q=80" alt="家用智能投影仪（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=800&q=80" alt="家用智能投影仪（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  74, NULL, 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=800&q=80"]',
   260, 1, b'0', 199900, 239900, 150000, 35,
   '1', 1, 199, b'0',
   0, 232, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -811,8 +811,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '航拍入门无人机（演示）', '无人机', '折叠机身，新手友好', '<div><h3>航拍入门无人机（演示）</h3><ul><li>折叠便携</li><li>一键返航</li><li>高清图传</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80" alt="航拍入门无人机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80" alt="航拍入门无人机（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  75, NULL, 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80"]',
+  '航拍入门无人机（演示）', '无人机', '折叠机身，新手友好', '<div><h3>航拍入门无人机（演示）</h3><ul><li>折叠便携</li><li>一键返航</li><li>高清图传</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80" alt="航拍入门无人机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1507582020474-9a35acdabcc4?auto=format&fit=crop&w=800&q=80" alt="航拍入门无人机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1579829366248-204b4815034c?auto=format&fit=crop&w=800&q=80" alt="航拍入门无人机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80" alt="航拍入门无人机（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  75, NULL, 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1507582020474-9a35acdabcc4?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1579829366248-204b4815034c?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80"]',
   270, 1, b'0', 249900, 289900, 190000, 22,
   '1', 1, 249, b'0',
   0, 239, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -833,8 +833,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '水感护肤三件套（演示）', '护肤套装', '洁面+水+乳基础套组', '<div><h3>水感护肤三件套（演示）</h3><ul><li>基础护肤流程</li><li>清爽质地</li><li>适合日常维稳</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80" alt="水感护肤三件套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80" alt="水感护肤三件套（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  42, NULL, 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80"]',
+  '水感护肤三件套（演示）', '护肤套装', '洁面+水+乳基础套组', '<div><h3>水感护肤三件套（演示）</h3><ul><li>基础护肤流程</li><li>清爽质地</li><li>适合日常维稳</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80" alt="水感护肤三件套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?auto=format&fit=crop&w=800&q=80" alt="水感护肤三件套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=800&q=80" alt="水感护肤三件套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80" alt="水感护肤三件套（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  42, NULL, 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80"]',
   280, 1, b'0', 19900, 26900, 9000, 130,
   '1', 1, 19, b'0',
   0, 246, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -855,8 +855,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '氨基酸温和洁面乳（演示）', '洁面', '温和清洁不紧绷', '<div><h3>氨基酸温和洁面乳（演示）</h3><ul><li>氨基酸表活</li><li>泡沫细腻</li><li>晨晚可用</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80" alt="氨基酸温和洁面乳（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80" alt="氨基酸温和洁面乳（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  43, NULL, 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80"]',
+  '氨基酸温和洁面乳（演示）', '洁面', '温和清洁不紧绷', '<div><h3>氨基酸温和洁面乳（演示）</h3><ul><li>氨基酸表活</li><li>泡沫细腻</li><li>晨晚可用</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80" alt="氨基酸温和洁面乳（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80" alt="氨基酸温和洁面乳（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80" alt="氨基酸温和洁面乳（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=800&q=80" alt="氨基酸温和洁面乳（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  43, NULL, 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=800&q=80"]',
   290, 1, b'0', 6900, 8900, 3000, 180,
   '1', 1, 6, b'0',
   0, 253, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -877,8 +877,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '晨露淡香水 50ml（演示）', '香水', '清新花果调', '<div><h3>晨露淡香水 50ml（演示）</h3><ul><li>50ml 正装</li><li>持久清香</li><li>便携瓶身</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80" alt="晨露淡香水 50ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80" alt="晨露淡香水 50ml（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  44, NULL, 'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80"]',
+  '晨露淡香水 50ml（演示）', '香水', '清新花果调', '<div><h3>晨露淡香水 50ml（演示）</h3><ul><li>50ml 正装</li><li>持久清香</li><li>便携瓶身</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80" alt="晨露淡香水 50ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=800&q=80" alt="晨露淡香水 50ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?auto=format&fit=crop&w=800&q=80" alt="晨露淡香水 50ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80" alt="晨露淡香水 50ml（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  44, NULL, 'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1587017539504-67cfbddac569?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80"]',
   300, 1, b'0', 15900, 19900, 7000, 95,
   '1', 1, 15, b'0',
   0, 260, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -899,8 +899,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '日常彩妆入门盘（演示）', '彩妆', '眼影腮红组合', '<div><h3>日常彩妆入门盘（演示）</h3><ul><li>多色组合</li><li>易上手</li><li>附双头刷</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80" alt="日常彩妆入门盘（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80" alt="日常彩妆入门盘（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  45, NULL, 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80"]',
+  '日常彩妆入门盘（演示）', '彩妆', '眼影腮红组合', '<div><h3>日常彩妆入门盘（演示）</h3><ul><li>多色组合</li><li>易上手</li><li>附双头刷</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80" alt="日常彩妆入门盘（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80" alt="日常彩妆入门盘（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1522335789203-aabd76c50552?auto=format&fit=crop&w=800&q=80" alt="日常彩妆入门盘（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80" alt="日常彩妆入门盘（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  45, NULL, 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1522335789203-aabd76c50552?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80"]',
   310, 1, b'0', 12900, 16900, 5500, 110,
   '1', 1, 12, b'0',
   0, 267, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -921,8 +921,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '轻薄粉底液（演示）', '粉底', '自然妆感，多色号', '<div><h3>轻薄粉底液（演示）</h3><ul><li>轻薄遮瑕</li><li>持妆配方</li><li>泵头设计</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80" alt="轻薄粉底液（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80" alt="轻薄粉底液（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  46, NULL, 'https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80"]',
+  '轻薄粉底液（演示）', '粉底', '自然妆感，多色号', '<div><h3>轻薄粉底液（演示）</h3><ul><li>轻薄遮瑕</li><li>持妆配方</li><li>泵头设计</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80" alt="轻薄粉底液（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80" alt="轻薄粉底液（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80" alt="轻薄粉底液（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1522335789203-aabd76c50552?auto=format&fit=crop&w=800&q=80" alt="轻薄粉底液（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  46, NULL, 'https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1522335789203-aabd76c50552?auto=format&fit=crop&w=800&q=80"]',
   320, 1, b'1', 9900, 12900, 4200, 140,
   '1', 1, 9, b'0',
   0, 274, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -939,14 +939,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 10400, 12900, 4200, CONCAT('SC', @spu_id, '-', 10400), 'https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 10400, 12900, 4200, CONCAT('SC', @spu_id, '-', 10400), 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',
   46, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 10900, 12900, 4200, CONCAT('SC', @spu_id, '-', 10900), 'https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 10900, 12900, 4200, CONCAT('SC', @spu_id, '-', 10900), 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80',
   46, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=9900, stock=138 WHERE id=@spu_id;
@@ -957,8 +957,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '妆前隔离乳（演示）', '隔离', '提亮修色妆前乳', '<div><h3>妆前隔离乳（演示）</h3><ul><li>妆前打底</li><li>轻薄服帖</li><li>多色修色</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80" alt="妆前隔离乳（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80" alt="妆前隔离乳（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  76, NULL, 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80"]',
+  '妆前隔离乳（演示）', '隔离', '提亮修色妆前乳', '<div><h3>妆前隔离乳（演示）</h3><ul><li>妆前打底</li><li>轻薄服帖</li><li>多色修色</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80" alt="妆前隔离乳（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80" alt="妆前隔离乳（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80" alt="妆前隔离乳（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80" alt="妆前隔离乳（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  76, NULL, 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80"]',
   330, 1, b'1', 7900, 9900, 3500, 120,
   '1', 1, 7, b'0',
   0, 281, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -975,14 +975,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 8400, 9900, 3500, CONCAT('SC', @spu_id, '-', 8400), 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 8400, 9900, 3500, CONCAT('SC', @spu_id, '-', 8400), 'https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80',
   40, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 8900, 9900, 3500, CONCAT('SC', @spu_id, '-', 8900), 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 8900, 9900, 3500, CONCAT('SC', @spu_id, '-', 8900), 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80',
   40, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=7900, stock=120 WHERE id=@spu_id;
@@ -993,8 +993,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '柔顺洗发水 500ml（演示）', '洗发水', '清爽去油，柔顺发丝', '<div><h3>柔顺洗发水 500ml（演示）</h3><ul><li>500ml 家庭装</li><li>温和配方</li><li>易冲洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80" alt="柔顺洗发水 500ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80" alt="柔顺洗发水 500ml（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  77, NULL, 'https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80"]',
+  '柔顺洗发水 500ml（演示）', '洗发水', '清爽去油，柔顺发丝', '<div><h3>柔顺洗发水 500ml（演示）</h3><ul><li>500ml 家庭装</li><li>温和配方</li><li>易冲洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80" alt="柔顺洗发水 500ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=800&q=80" alt="柔顺洗发水 500ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80" alt="柔顺洗发水 500ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80" alt="柔顺洗发水 500ml（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  77, NULL, 'https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80"]',
   340, 1, b'0', 5900, 7900, 2500, 200,
   '1', 1, 5, b'0',
   0, 288, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1015,8 +1015,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '清香沐浴露 400ml（演示）', '沐浴露', '绵密泡沫，洗后清爽', '<div><h3>清香沐浴露 400ml（演示）</h3><ul><li>400ml</li><li>清香调</li><li>温和洁净</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=800&q=80" alt="清香沐浴露 400ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=800&q=80" alt="清香沐浴露 400ml（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  78, NULL, 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=800&q=80"]',
+  '清香沐浴露 400ml（演示）', '沐浴露', '绵密泡沫，洗后清爽', '<div><h3>清香沐浴露 400ml（演示）</h3><ul><li>400ml</li><li>清香调</li><li>温和洁净</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=800&q=80" alt="清香沐浴露 400ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80" alt="清香沐浴露 400ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80" alt="清香沐浴露 400ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80" alt="清香沐浴露 400ml（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  78, NULL, 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80"]',
   350, 1, b'0', 4900, 6900, 2000, 210,
   '1', 1, 4, b'0',
   0, 295, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1037,8 +1037,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '护龈牙膏套装（演示）', '口腔 牙膏', '早晚分护，清新口气', '<div><h3>护龈牙膏套装（演示）</h3><ul><li>两支装</li><li>清新薄荷</li><li>日常护龈</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80" alt="护龈牙膏套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80" alt="护龈牙膏套装（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  79, NULL, 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80"]',
+  '护龈牙膏套装（演示）', '口腔 牙膏', '早晚分护，清新口气', '<div><h3>护龈牙膏套装（演示）</h3><ul><li>两支装</li><li>清新薄荷</li><li>日常护龈</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80" alt="护龈牙膏套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80" alt="护龈牙膏套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80" alt="护龈牙膏套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80" alt="护龈牙膏套装（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  79, NULL, 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80"]',
   360, 1, b'0', 3900, 5900, 1600, 240,
   '1', 1, 3, b'0',
   0, 302, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1059,8 +1059,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '纯棉婴儿连体衣（演示）', '婴儿装', '柔软纯棉，爬行更舒服', '<div><h3>纯棉婴儿连体衣（演示）</h3><ul><li>A 类棉感</li><li>按扣换穿方便</li><li>四季打底</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80" alt="纯棉婴儿连体衣（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80" alt="纯棉婴儿连体衣（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  48, NULL, 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80"]',
+  '纯棉婴儿连体衣（演示）', '婴儿装', '柔软纯棉，爬行更舒服', '<div><h3>纯棉婴儿连体衣（演示）</h3><ul><li>A 类棉感</li><li>按扣换穿方便</li><li>四季打底</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80" alt="纯棉婴儿连体衣（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80" alt="纯棉婴儿连体衣（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80" alt="纯棉婴儿连体衣（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80" alt="纯棉婴儿连体衣（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  48, NULL, 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80"]',
   370, 1, b'1', 6900, 8900, 3000, 160,
   '1', 1, 6, b'0',
   0, 309, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1091,42 +1091,42 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_s,',"valueName":"S"}]'), 7200, 8900, 3000, CONCAT('SC', @spu_id, '-', 7200), 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_s,',"valueName":"S"}]'), 7200, 8900, 3000, CONCAT('SC', @spu_id, '-', 7200), 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
   17, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_m,',"valueName":"M"}]'), 7400, 8900, 3000, CONCAT('SC', @spu_id, '-', 7400), 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_m,',"valueName":"M"}]'), 7400, 8900, 3000, CONCAT('SC', @spu_id, '-', 7400), 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
   17, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_l,',"valueName":"L"}]'), 7600, 8900, 3000, CONCAT('SC', @spu_id, '-', 7600), 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_l,',"valueName":"L"}]'), 7600, 8900, 3000, CONCAT('SC', @spu_id, '-', 7600), 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
   17, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_s,',"valueName":"S"}]'), 7500, 8900, 3000, CONCAT('SC', @spu_id, '-', 7500), 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_s,',"valueName":"S"}]'), 7500, 8900, 3000, CONCAT('SC', @spu_id, '-', 7500), 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80',
   17, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_m,',"valueName":"M"}]'), 7700, 8900, 3000, CONCAT('SC', @spu_id, '-', 7700), 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_m,',"valueName":"M"}]'), 7700, 8900, 3000, CONCAT('SC', @spu_id, '-', 7700), 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80',
   17, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_l,',"valueName":"L"}]'), 7900, 8900, 3000, CONCAT('SC', @spu_id, '-', 7900), 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80',
+  @spu_id, CONCAT('[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"},{"propertyId":2,"propertyName":"尺寸","valueId":',@size_l,',"valueName":"L"}]'), 7900, 8900, 3000, CONCAT('SC', @spu_id, '-', 7900), 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80',
   17, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=6900, stock=153 WHERE id=@spu_id;
@@ -1137,8 +1137,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '触屏早教机（演示）', '早教机', '启蒙绘本与儿歌', '<div><h3>触屏早教机（演示）</h3><ul><li>护眼屏幕</li><li>海量内容卡</li><li>家长管控</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80" alt="触屏早教机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80" alt="触屏早教机（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  49, NULL, 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80"]',
+  '触屏早教机（演示）', '早教机', '启蒙绘本与儿歌', '<div><h3>触屏早教机（演示）</h3><ul><li>护眼屏幕</li><li>海量内容卡</li><li>家长管控</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80" alt="触屏早教机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1587654780291-39c9404d745b?auto=format&fit=crop&w=800&q=80" alt="触屏早教机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80" alt="触屏早教机（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80" alt="触屏早教机（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  49, NULL, 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1587654780291-39c9404d745b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80"]',
   380, 1, b'0', 29900, 39900, 15000, 70,
   '1', 1, 29, b'0',
   0, 316, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1159,8 +1159,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '柔顺长发洋娃娃（演示）', '洋娃娃', '可梳妆角色扮演', '<div><h3>柔顺长发洋娃娃（演示）</h3><ul><li>可换装</li><li>柔顺假发</li><li>含小配饰</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80" alt="柔顺长发洋娃娃（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80" alt="柔顺长发洋娃娃（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  50, NULL, 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80"]',
+  '柔顺长发洋娃娃（演示）', '洋娃娃', '可梳妆角色扮演', '<div><h3>柔顺长发洋娃娃（演示）</h3><ul><li>可换装</li><li>柔顺假发</li><li>含小配饰</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80" alt="柔顺长发洋娃娃（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=800&q=80" alt="柔顺长发洋娃娃（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=80" alt="柔顺长发洋娃娃（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80" alt="柔顺长发洋娃娃（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  50, NULL, 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80"]',
   390, 1, b'0', 8900, 11900, 4000, 100,
   '1', 1, 8, b'0',
   0, 323, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1181,8 +1181,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '云朵安抚毛绒玩具（演示）', '毛绒玩具', '柔软安抚，陪伴入睡', '<div><h3>云朵安抚毛绒玩具（演示）</h3><ul><li>短绒面料</li><li>填充均匀</li><li>可手洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80" alt="云朵安抚毛绒玩具（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80" alt="云朵安抚毛绒玩具（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  51, NULL, 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80"]',
+  '云朵安抚毛绒玩具（演示）', '毛绒玩具', '柔软安抚，陪伴入睡', '<div><h3>云朵安抚毛绒玩具（演示）</h3><ul><li>短绒面料</li><li>填充均匀</li><li>可手洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80" alt="云朵安抚毛绒玩具（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=800&q=80" alt="云朵安抚毛绒玩具（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=80" alt="云朵安抚毛绒玩具（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80" alt="云朵安抚毛绒玩具（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  51, NULL, 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80"]',
   400, 1, b'1', 5900, 7900, 2500, 180,
   '1', 1, 5, b'0',
   0, 330, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1199,14 +1199,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 6400, 7900, 2500, CONCAT('SC', @spu_id, '-', 6400), 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 6400, 7900, 2500, CONCAT('SC', @spu_id, '-', 6400), 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=800&q=80',
   60, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 6900, 7900, 2500, CONCAT('SC', @spu_id, '-', 6900), 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 6900, 7900, 2500, CONCAT('SC', @spu_id, '-', 6900), 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=80',
   60, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=5900, stock=180 WHERE id=@spu_id;
@@ -1217,8 +1217,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '婴儿洗澡座椅套装（演示）', '洗澡用具', '防滑座椅，洗澡更省心', '<div><h3>婴儿洗澡座椅套装（演示）</h3><ul><li>防滑底座</li><li>可调节靠背</li><li>易晾干</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" alt="婴儿洗澡座椅套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" alt="婴儿洗澡座椅套装（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  52, NULL, 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80"]',
+  '婴儿洗澡座椅套装（演示）', '洗澡用具', '防滑座椅，洗澡更省心', '<div><h3>婴儿洗澡座椅套装（演示）</h3><ul><li>防滑底座</li><li>可调节靠背</li><li>易晾干</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" alt="婴儿洗澡座椅套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80" alt="婴儿洗澡座椅套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80" alt="婴儿洗澡座椅套装（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80" alt="婴儿洗澡座椅套装（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  52, NULL, 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80"]',
   410, 1, b'0', 7900, 9900, 3500, 90,
   '1', 1, 7, b'0',
   0, 337, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1239,8 +1239,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '宝宝润肤乳 200ml（演示）', '宝宝个护', '温和保湿，日常护理', '<div><h3>宝宝润肤乳 200ml（演示）</h3><ul><li>温和配方</li><li>易吸收</li><li>全家可用</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80" alt="宝宝润肤乳 200ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80" alt="宝宝润肤乳 200ml（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  80, NULL, 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80"]',
+  '宝宝润肤乳 200ml（演示）', '宝宝个护', '温和保湿，日常护理', '<div><h3>宝宝润肤乳 200ml（演示）</h3><ul><li>温和配方</li><li>易吸收</li><li>全家可用</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80" alt="宝宝润肤乳 200ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80" alt="宝宝润肤乳 200ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80" alt="宝宝润肤乳 200ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80" alt="宝宝润肤乳 200ml（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  80, NULL, 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80"]',
   420, 1, b'0', 6900, 8900, 3000, 150,
   '1', 1, 6, b'0',
   0, 344, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1261,8 +1261,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '儿童餐具五件套（演示）', '儿童餐具', '碗勺叉盘组合', '<div><h3>儿童餐具五件套（演示）</h3><ul><li>食品级材质</li><li>防摔设计</li><li>易清洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80" alt="儿童餐具五件套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80" alt="儿童餐具五件套（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  81, NULL, 'https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80"]',
+  '儿童餐具五件套（演示）', '儿童餐具', '碗勺叉盘组合', '<div><h3>儿童餐具五件套（演示）</h3><ul><li>食品级材质</li><li>防摔设计</li><li>易清洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80" alt="儿童餐具五件套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1603199506016-b9a694b53600?auto=format&fit=crop&w=800&q=80" alt="儿童餐具五件套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80" alt="儿童餐具五件套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" alt="儿童餐具五件套（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  81, NULL, 'https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1603199506016-b9a694b53600?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80"]',
   430, 1, b'1', 5900, 7900, 2500, 130,
   '1', 1, 5, b'0',
   0, 351, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1279,14 +1279,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 6400, 7900, 2500, CONCAT('SC', @spu_id, '-', 6400), 'https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 6400, 7900, 2500, CONCAT('SC', @spu_id, '-', 6400), 'https://images.unsplash.com/photo-1603199506016-b9a694b53600?auto=format&fit=crop&w=800&q=80',
   43, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 6900, 7900, 2500, CONCAT('SC', @spu_id, '-', 6900), 'https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 6900, 7900, 2500, CONCAT('SC', @spu_id, '-', 6900), 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80',
   43, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=5900, stock=129 WHERE id=@spu_id;
@@ -1297,8 +1297,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '儿童吸管水杯 400ml（演示）', '儿童水杯', '防漏吸管，出行方便', '<div><h3>儿童吸管水杯 400ml（演示）</h3><ul><li>400ml</li><li>一键开合</li><li>耐摔杯身</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80" alt="儿童吸管水杯 400ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80" alt="儿童吸管水杯 400ml（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  82, NULL, 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80"]',
+  '儿童吸管水杯 400ml（演示）', '儿童水杯', '防漏吸管，出行方便', '<div><h3>儿童吸管水杯 400ml（演示）</h3><ul><li>400ml</li><li>一键开合</li><li>耐摔杯身</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80" alt="儿童吸管水杯 400ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=800&q=80" alt="儿童吸管水杯 400ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=800&q=80" alt="儿童吸管水杯 400ml（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=800&q=80" alt="儿童吸管水杯 400ml（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  82, NULL, 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=800&q=80"]',
   440, 1, b'1', 4900, 6900, 2000, 170,
   '1', 1, 4, b'0',
   0, 358, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1315,14 +1315,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 5400, 6900, 2000, CONCAT('SC', @spu_id, '-', 5400), 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 5400, 6900, 2000, CONCAT('SC', @spu_id, '-', 5400), 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=800&q=80',
   56, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 5900, 6900, 2000, CONCAT('SC', @spu_id, '-', 5900), 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 5900, 6900, 2000, CONCAT('SC', @spu_id, '-', 5900), 'https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=800&q=80',
   56, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=4900, stock=168 WHERE id=@spu_id;
@@ -1333,8 +1333,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '轻便可折叠婴儿推车（演示）', '婴儿推车', '单手折叠，城市出行', '<div><h3>轻便可折叠婴儿推车（演示）</h3><ul><li>一键折叠</li><li>避震轮组</li><li>可坐可躺</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80" alt="轻便可折叠婴儿推车（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80" alt="轻便可折叠婴儿推车（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  83, NULL, 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80"]',
+  '轻便可折叠婴儿推车（演示）', '婴儿推车', '单手折叠，城市出行', '<div><h3>轻便可折叠婴儿推车（演示）</h3><ul><li>一键折叠</li><li>避震轮组</li><li>可坐可躺</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80" alt="轻便可折叠婴儿推车（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80" alt="轻便可折叠婴儿推车（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80" alt="轻便可折叠婴儿推车（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80" alt="轻便可折叠婴儿推车（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  83, NULL, 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80"]',
   450, 1, b'1', 69900, 89900, 42000, 40,
   '1', 1, 69, b'0',
   0, 365, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1351,14 +1351,14 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 70400, 89900, 42000, CONCAT('SC', @spu_id, '-', 70400), 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 70400, 89900, 42000, CONCAT('SC', @spu_id, '-', 70400), 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80',
   13, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 70900, 89900, 42000, CONCAT('SC', @spu_id, '-', 70900), 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 70900, 89900, 42000, CONCAT('SC', @spu_id, '-', 70900), 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80',
   13, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=69900, stock=39 WHERE id=@spu_id;

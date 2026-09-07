@@ -11,60 +11,321 @@ TENANT = 1
 CREATOR = "seed-cat"
 DELIVERY_TEMPLATE = 1
 
-# Unsplash images (Unsplash License) — themed to look like the product type
-IMG = {
-    "hanfu": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80",
-    "tshirt": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80",
-    "dress": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80",
-    "costume": "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80",
-    "coat": "https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80",
-    "pants": "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80",
-    "sandal": "https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80",
-    "leather": "https://images.unsplash.com/photo-1614252235646-0b9b8c0c0c0c?auto=format&fit=crop&w=800&q=80",
-    "sneaker": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
-    "tv": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=80",
-    "washer": "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80",
-    "fridge": "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80",
-    "ricecooker": "https://images.unsplash.com/photo-1585515320310-259814833e71?auto=format&fit=crop&w=800&q=80",
-    "kettle": "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80",
-    "vacuum": "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80",
-    "blender": "https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=800&q=80",
-    "mite": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80",
-    "heater": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
-    "camera": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
-    "laptop": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
-    "tablet": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80",
-    "headphone": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
-    "speaker": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80",
-    "mic": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80",
-    "game": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=800&q=80",
-    "projector": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80",
-    "drone": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80",
-    "skincare": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
-    "cleanser": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80",
-    "perfume": "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80",
-    "makeup": "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80",
-    "foundation": "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=80",
-    "primer": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80",
-    "shampoo": "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80",
-    "bodywash": "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=800&q=80",
-    "oral": "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80",
-    "babywear": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80",
-    "earlyedu": "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
-    "doll": "https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80",
-    "plush": "https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80",
-    "bath": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
-    "babycare": "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80",
-    "tableware": "https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80",
-    "cup": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80",
-    "stroller": "https://images.unsplash.com/photo-1596464115822-d0c0c0c0c0c0?auto=format&fit=crop&w=800&q=80",
+# Unsplash images (Unsplash License) — 每个品类 4 张，便于详情页多图展示
+U = "https://images.unsplash.com"
+Q = "auto=format&fit=crop&w=800&q=80"
+
+
+def u(photo: str) -> str:
+    return f"{U}/{photo}?{Q}"
+
+
+IMG_SETS: dict[str, list[str]] = {
+    "hanfu": [
+        u("photo-1594938298603-c8148c4dae35"),
+        u("photo-1585487000160-6ebcfceb0d03"),
+        u("photo-1558171813-4c088753381f"),
+        u("photo-1490481651871-ab68de25d43d"),
+        u("photo-1483985988355-763728e1935b"),
+    ],
+    "tshirt": [
+        u("photo-1521572163474-6864f9cf17ab"),
+        u("photo-1583743814966-8936f5b7be1a"),
+        u("photo-1576566588028-4147f3842f27"),
+        u("photo-1562157873-818bc0726f68"),
+        u("photo-1503341504253-dff4815485f1"),
+    ],
+    "dress": [
+        u("photo-1595777457583-95e059d581b8"),
+        u("photo-1515372039744-b8f02a3ae446"),
+        u("photo-1496747611176-843222e1e57c"),
+        u("photo-1572804013309-59a48b1fa61b"),
+        u("photo-1539008835657-9e8e9680c956"),
+    ],
+    "costume": [
+        u("photo-1509631179647-0177331693ae"),
+        u("photo-1469334031218-e382a71b716b"),
+        u("photo-1483985988355-763728e1935b"),
+        u("photo-1539008835657-9e8e9680c956"),
+        u("photo-1490481651871-ab68de25d43d"),
+    ],
+    "coat": [
+        u("photo-1544022613-e87ca75a784a"),
+        u("photo-1551028719-00167b16eac5"),
+        u("photo-1591043037720-404d7a5a0c0a"),
+        u("photo-1539533018447-63fcce2678e3"),
+        u("photo-1487222477894-8943e31ef7b2"),
+    ],
+    "pants": [
+        u("photo-1624378439575-d8705ad7ae80"),
+        u("photo-1542272604-787c3835535d"),
+        u("photo-1473966968600-fa801b869a1a"),
+        u("photo-1506629082955-511b1aa782c0"),
+        u("photo-1541099649105-f69ad21f3246"),
+    ],
+    "sandal": [
+        u("photo-1603487742131-4160ec999306"),
+        u("photo-1603808033192-082d59583536"),
+        u("photo-1562273138-f46be4ebdf33"),
+        u("photo-1535041730312-aa899ff441ce"),
+        u("photo-1560769629-975ec94e6a86"),
+    ],
+    "leather": [
+        u("photo-1533867617858-e7b97e060509"),
+        u("photo-1449505278894-297fdb3edbc1"),
+        u("photo-1614252363701-ba4300ce60d6"),
+        u("photo-1460353581641-37baddab0fa2"),
+        u("photo-1549298916-b41d501d3772"),
+    ],
+    "sneaker": [
+        u("photo-1542291026-7eec264c27ff"),
+        u("photo-1606107557195-0e29a4b5b4aa"),
+        u("photo-1595950653106-6c9ebd614d3a"),
+        u("photo-1460353581641-37baddab0fa2"),
+        u("photo-1551107696-a4b0c5a0d9a2"),
+    ],
+    "tv": [
+        u("photo-1593359677879-a4bb92f829d1"),
+        u("photo-1593784991095-a205069470b6"),
+        u("photo-1461151304267-38535e780c79"),
+        u("photo-1571415060716-baff5f717c37"),
+        u("photo-1593359677879-a4bb92f829d1"),
+    ],
+    "washer": [
+        u("photo-1626806787461-102c1bfaaea1"),
+        u("photo-1610557892470-55d9e80c0bce"),
+        u("photo-1604335399105-a0c585fd81a1"),
+        u("photo-1582735689369-4fe89db7114c"),
+        u("photo-1626806787461-102c1bfaaea1"),
+    ],
+    "fridge": [
+        u("photo-1571175443880-49e1d25b2bc5"),
+        u("photo-1584568694244-14fbdf83bd30"),
+        u("photo-1506617420156-8e453697f0c9"),
+        u("photo-1571175443880-49e1d25b2bc5"),
+    ],
+    "ricecooker": [
+        u("photo-1585515320310-259814833e71"),
+        u("photo-1556911220-bff31c812dba"),
+        u("photo-1556909114-f6e7ad7d3136"),
+        u("photo-1586190848861-99aa4a171e90"),
+    ],
+    "kettle": [
+        u("photo-1594212699903-ec8a3eca50f5"),
+        u("photo-1565193566173-7a0ee3dbe261"),
+        u("photo-1571934811356-5cc061b6821f"),
+        u("photo-1514228742587-6b1558fcca3d"),
+    ],
+    "vacuum": [
+        u("photo-1558317374-067fb5f30001"),
+        u("photo-1581578731548-c64695cc6952"),
+        u("photo-1527515637462-cff94eecc1ac"),
+        u("photo-1558317374-067fb5f30001"),
+    ],
+    "blender": [
+        u("photo-1570222094114-d054a817e56b"),
+        u("photo-1574482620811-1aa16ffe3c82"),
+        u("photo-1625948515291-69613efd103f"),
+        u("photo-1556911220-bff31c812dba"),
+    ],
+    "mite": [
+        u("photo-1581578731548-c64695cc6952"),
+        u("photo-1558317374-067fb5f30001"),
+        u("photo-1527515637462-cff94eecc1ac"),
+        u("photo-1584622650111-993a426fbf0a"),
+    ],
+    "heater": [
+        u("photo-1584622781564-1d987f7333c1"),
+        u("photo-1507652313519-d4e9174996dd"),
+        u("photo-1584622650111-993a426fbf0a"),
+        u("photo-1584622781564-1d987f7333c1"),
+    ],
+    "camera": [
+        u("photo-1516035069371-29a1b244cc32"),
+        u("photo-1502920917128-1aa500764cbd"),
+        u("photo-1606983340126-99ab4feaa64a"),
+        u("photo-1495707902641-75cac588d2e9"),
+    ],
+    "laptop": [
+        u("photo-1496181133206-80ce9b88a853"),
+        u("photo-1517336714731-489689fd1ca8"),
+        u("photo-1525547719571-a2d4ac882e4d"),
+        u("photo-1588872657578-7efd1f1555ed"),
+    ],
+    "tablet": [
+        u("photo-1544244015-0df4b3ffc6b0"),
+        u("photo-1561154464-82e9adf32764"),
+        u("photo-1542751371-adc38448a05e"),
+        u("photo-1585790050230-5dd28404ccb9"),
+    ],
+    "headphone": [
+        u("photo-1505740420928-5e560c06d30e"),
+        u("photo-1484704849700-f032a568e944"),
+        u("photo-1546435770-a3e426bf472b"),
+        u("photo-1618366712010-f4ae9c647dcb"),
+    ],
+    "speaker": [
+        u("photo-1608043152269-423dbba4e7e1"),
+        u("photo-1545454675-3531b543be5d"),
+        u("photo-1493225457124-a3eb161ffa5f"),
+        u("photo-1608043152269-423dbba4e7e1"),
+    ],
+    "mic": [
+        u("photo-1590602847861-f357a9332bbc"),
+        u("photo-1478737270239-2f02b77fc618"),
+        u("photo-1511379938547-c1f69419868d"),
+        u("photo-1590602847861-f357a9332bbc"),
+    ],
+    "game": [
+        u("photo-1606144042614-b2417e99c4e3"),
+        u("photo-1612287230202-1ff1d85d1bdf"),
+        u("photo-1592840496694-26d035b52b48"),
+        u("photo-1605901309584-818e259dc5f0"),
+    ],
+    "projector": [
+        u("photo-1478720568477-152d9b164e26"),
+        u("photo-1485846234645-a62644f84728"),
+        u("photo-1598899134739-24c46f58b8c0"),
+        u("photo-1517604931442-7e0c8ed2963c"),
+    ],
+    "drone": [
+        u("photo-1473968512647-3e447244af8f"),
+        u("photo-1507582020474-9a35acdabcc4"),
+        u("photo-1579829366248-204b4815034c"),
+        u("photo-1473968512647-3e447244af8f"),
+    ],
+    "skincare": [
+        u("photo-1556228720-195a672e8a03"),
+        u("photo-1570194065650-d99fb4b38b17"),
+        u("photo-1611930022073-b7a4ba5fcccd"),
+        u("photo-1571781926291-c477ebfd024b"),
+    ],
+    "cleanser": [
+        u("photo-1556228578-0d85b1a4d571"),
+        u("photo-1556228720-195a672e8a03"),
+        u("photo-1571781926291-c477ebfd024b"),
+        u("photo-1611930022073-b7a4ba5fcccd"),
+    ],
+    "perfume": [
+        u("photo-1541643600914-78b084683601"),
+        u("photo-1594035910387-fea47794261f"),
+        u("photo-1587017539504-67cfbddac569"),
+        u("photo-1592945403244-b3fbafd7f539"),
+    ],
+    "makeup": [
+        u("photo-1512496015851-a90fb38ba796"),
+        u("photo-1596462502278-27bfdc403348"),
+        u("photo-1522335789203-aabd76c50552"),
+        u("photo-1631214524020-7e18db9a8f92"),
+    ],
+    "foundation": [
+        u("photo-1631214524020-7e18db9a8f92"),
+        u("photo-1596462502278-27bfdc403348"),
+        u("photo-1512496015851-a90fb38ba796"),
+        u("photo-1522335789203-aabd76c50552"),
+    ],
+    "primer": [
+        u("photo-1596462502278-27bfdc403348"),
+        u("photo-1631214524020-7e18db9a8f92"),
+        u("photo-1571781926291-c477ebfd024b"),
+        u("photo-1556228720-195a672e8a03"),
+    ],
+    "shampoo": [
+        u("photo-1535585209827-a15fcdbc4c2d"),
+        u("photo-1556228453-efd6c1ff04f6"),
+        u("photo-1571781926291-c477ebfd024b"),
+        u("photo-1608571423902-eed4a5ad8108"),
+    ],
+    "bodywash": [
+        u("photo-1556228453-efd6c1ff04f6"),
+        u("photo-1535585209827-a15fcdbc4c2d"),
+        u("photo-1608571423902-eed4a5ad8108"),
+        u("photo-1571781926291-c477ebfd024b"),
+    ],
+    "oral": [
+        u("photo-1607613009820-a29f7bb81c04"),
+        u("photo-1556228578-0d85b1a4d571"),
+        u("photo-1571781926291-c477ebfd024b"),
+        u("photo-1607613009820-a29f7bb81c04"),
+    ],
+    "babywear": [
+        u("photo-1515488042361-ee00e0ddd4e4"),
+        u("photo-1522771739844-6a9f6d5f14af"),
+        u("photo-1519689680058-324335c77eba"),
+        u("photo-1503454537195-1dcabb73ffb9"),
+    ],
+    "earlyedu": [
+        u("photo-1503454537195-1dcabb73ffb9"),
+        u("photo-1587654780291-39c9404d745b"),
+        u("photo-1515488042361-ee00e0ddd4e4"),
+        u("photo-1522771739844-6a9f6d5f14af"),
+    ],
+    "doll": [
+        u("photo-1558060370-d644479cb6f7"),
+        u("photo-1566576912321-d58ddd7a6088"),
+        u("photo-1596461404969-9ae70f2830c1"),
+        u("photo-1515488042361-ee00e0ddd4e4"),
+    ],
+    "plush": [
+        u("photo-1558060370-d644479cb6f7"),
+        u("photo-1566576912321-d58ddd7a6088"),
+        u("photo-1596461404969-9ae70f2830c1"),
+        u("photo-1515488042361-ee00e0ddd4e4"),
+    ],
+    "bath": [
+        u("photo-1584622650111-993a426fbf0a"),
+        u("photo-1515488042361-ee00e0ddd4e4"),
+        u("photo-1503454537195-1dcabb73ffb9"),
+        u("photo-1584622781564-1d987f7333c1"),
+    ],
+    "babycare": [
+        u("photo-1519689680058-324335c77eba"),
+        u("photo-1556228578-0d85b1a4d571"),
+        u("photo-1571781926291-c477ebfd024b"),
+        u("photo-1556228720-195a672e8a03"),
+    ],
+    "tableware": [
+        u("photo-1493770348161-369560ae357d"),
+        u("photo-1603199506016-b9a694b53600"),
+        u("photo-1578662996442-48f60103fc96"),
+        u("photo-1584622650111-993a426fbf0a"),
+    ],
+    "cup": [
+        u("photo-1602143407151-7111542de6e8"),
+        u("photo-1571934811356-5cc061b6821f"),
+        u("photo-1523362628745-0c100150b504"),
+        u("photo-1514228742587-6b1558fcca3d"),
+    ],
+    "stroller": [
+        u("photo-1544367567-0f2fcb009e0b"),
+        u("photo-1515488042361-ee00e0ddd4e4"),
+        u("photo-1503454537195-1dcabb73ffb9"),
+        u("photo-1522771739844-6a9f6d5f14af"),
+    ],
 }
 
-# Fix bad/placeholder URLs with better known ones
-IMG["leather"] = "https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=800&q=80"
-IMG["stroller"] = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80"
-IMG["heater"] = "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=800&q=80"
-IMG["sandal"] = "https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=800&q=80"
+# 兼容旧代码：单图映射取封面
+IMG = {k: v[0] for k, v in IMG_SETS.items()}
+
+
+def gallery_for(key: str) -> list[str]:
+    pics = list(IMG_SETS.get(key) or [IMG.get(key, u("photo-1523275335684-37898b6baf30"))])
+    uniq: list[str] = []
+    for p in pics:
+        if p not in uniq:
+            uniq.append(p)
+    # 详情页至少 4 张；不足时用同组循环补齐（尽量不重复相邻）
+    if not uniq:
+        uniq = [u("photo-1523275335684-37898b6baf30")]
+    base = list(uniq)
+    while len(uniq) < 4:
+        uniq.append(base[len(uniq) % len(base)])
+    return uniq[:5]
+
+
+def sku_pic_for(gallery: list[str], index: int) -> str:
+    return gallery[index % len(gallery)] if gallery else u("photo-1523275335684-37898b6baf30")
+
 
 # category_id -> product definition
 # multi: list of property combos using existing IDs
@@ -75,7 +336,7 @@ IMG["sandal"] = "https://images.unsplash.com/photo-1603487742131-4160ec999306?au
 def detail_html(title: str, points: list[str], images: list[str]) -> str:
     lis = "".join(f"<li>{p}</li>" for p in points)
     imgs = "".join(
-        f'<p><img src="{u}" alt="{title}" style="max-width:100%;height:auto;"/></p>' for u in images
+        f'<p><img src="{src}" alt="{title}" style="max-width:100%;height:auto;"/></p>' for src in images
     )
     return (
         f"<div><h3>{title}</h3><ul>{lis}</ul>"
@@ -709,7 +970,7 @@ def main() -> None:
     size_ids = {"S": None, "M": None, "L": None}  # filled after insert query via variables in SQL
 
     lines: list[str] = []
-    lines.append("USE `ruoyi-vue-pro`;")
+    lines.append("USE `ruoyi_vue_pro`;")
     lines.append("SET NAMES utf8mb4;")
     lines.append("START TRANSACTION;")
     lines.append(
@@ -751,16 +1012,8 @@ def main() -> None:
     )
 
     for i, p in enumerate(PRODUCTS, start=1):
-        cover = IMG[p["img"]]
-        gallery = [cover, cover + "&sat=-20"] if "?" in cover else [cover]
-        # second image: append another related if same key with -2 not available, reuse cover with crop
-        gallery = [cover]
-        if p["img"] + "2" in IMG:
-            gallery.append(IMG[p["img"] + "2"])
-        else:
-            # slight variant via different unsplash same category - just duplicate is ok for demo
-            gallery.append(cover)
-
+        gallery = gallery_for(p["img"])
+        cover = gallery[0]
         desc = detail_html(p["name"], p["points"], gallery)
         slider = json.dumps(gallery, ensure_ascii=False)
         multi = p.get("multi")
@@ -784,7 +1037,7 @@ def main() -> None:
         )
         lines.append("SET @spu_id := LAST_INSERT_ID();")
 
-        skus: list[tuple[str, int, int, int, int, str]] = []
+        skus: list[tuple] = []
         # properties_json, price, market, cost, stock, pic
         if multi is None:
             props = json.dumps(
@@ -801,7 +1054,7 @@ def main() -> None:
                 )
                 price = p["price"] + idx * 500
                 stock = max(10, p["stock"] // n)
-                skus.append((props, price, p["market"], p["cost"], stock, cover))
+                skus.append((props, price, p["market"], p["cost"], stock, sku_pic_for(gallery, idx)))
         elif multi == "color_size":
             sizes = [("S", "@size_s"), ("M", "@size_m"), ("L", "@size_l")]
             n = len(p["colors"]) * 3
@@ -828,7 +1081,7 @@ def main() -> None:
                     )
                     price = p["price"] + ci * 300 + si * 200
                     stock = max(8, p["stock"] // n)
-                    skus.append((props_sql, price, p["market"], p["cost"], stock, cover, True))
+                    skus.append((props_sql, price, p["market"], p["cost"], stock, sku_pic_for(gallery, ci), True))
         elif multi == "memory":
             n = len(p["mems"])
             for idx, (mid, mname) in enumerate(p["mems"]):
@@ -838,7 +1091,16 @@ def main() -> None:
                 )
                 price = p["price"] + idx * 30000
                 stock = max(5, p["stock"] // n)
-                skus.append((props, price, p["market"] + idx * 30000, p["cost"] + idx * 20000, stock, cover))
+                skus.append(
+                    (
+                        props,
+                        price,
+                        p["market"] + idx * 30000,
+                        p["cost"] + idx * 20000,
+                        stock,
+                        sku_pic_for(gallery, idx),
+                    )
+                )
 
         min_price = min(s[1] for s in skus)
         total_stock = sum(s[4] for s in skus)
@@ -891,13 +1153,21 @@ def main() -> None:
     )
 
     sql = "\n".join(lines) + "\n"
-    out = "/Users/jielingyang/CursorProjects/yudao/yudao-mall-web/scripts/seed-all-categories.sql"
+    out = "/Users/ext.yangjieling3/CursorProjects/yudao/yudao-mall-web/scripts/seed-all-categories.sql"
     with open(out, "w", encoding="utf-8") as f:
         f.write(sql)
     print(f"wrote {out} ({len(PRODUCTS)} products)")
 
-    # execute
-    proc = subprocess.run(
+    # Prefer local mysql; fall back to docker mysql8 if present
+    db_candidates = ["ruoyi_vue_pro", "ruoyi-vue-pro"]
+    attempts = [
+        [
+            "mysql",
+            "-uroot",
+            "-p123456",
+            "-h127.0.0.1",
+            "--default-character-set=utf8mb4",
+        ],
         [
             "docker",
             "exec",
@@ -908,19 +1178,26 @@ def main() -> None:
             "-p123456",
             "--default-character-set=utf8mb4",
         ],
-        input=sql.encode("utf-8"),
-        capture_output=True,
-    )
-    err = proc.stderr.decode("utf-8", errors="replace")
-    out_txt = proc.stdout.decode("utf-8", errors="replace")
-    print(out_txt)
-    if proc.returncode != 0:
-        print(err)
-        raise SystemExit(proc.returncode)
-    # filter warning
-    for line in err.splitlines():
-        if "Warning" not in line and line.strip():
-            print(line)
+    ]
+    last_err = ""
+    for cmd in attempts:
+        for db_name in db_candidates:
+            payload = sql.replace("USE `ruoyi_vue_pro`;", f"USE `{db_name}`;")
+            proc = subprocess.run(cmd, input=payload.encode("utf-8"), capture_output=True)
+            err = proc.stderr.decode("utf-8", errors="replace")
+            out_txt = proc.stdout.decode("utf-8", errors="replace")
+            if proc.returncode == 0:
+                print(f"imported into `{db_name}` via {cmd[0]}")
+                print(out_txt)
+                for line in err.splitlines():
+                    if "Warning" not in line and line.strip():
+                        print(line)
+                return
+            last_err = err or out_txt
+        print(f"seed via {' '.join(cmd[:2])} failed, try next…")
+    print(last_err)
+    print("SQL file written; please import manually if DB is offline.")
+    raise SystemExit(0)
 
 
 if __name__ == "__main__":
