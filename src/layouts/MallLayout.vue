@@ -13,6 +13,7 @@
           <router-link to="/order">我的订单</router-link>
           <router-link to="/user/favorite">收藏夹</router-link>
           <router-link to="/cart" class="top-cart">
+            <el-icon class="cart-icon" :size="15"><ShoppingCart /></el-icon>
             购物车
             <em v-if="cartStore.totalCount" class="cart-count">{{ cartStore.totalCount }}</em>
           </router-link>
@@ -117,6 +118,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { ShoppingCart } from '@element-plus/icons-vue'
 import { CategoryApi, type ProductCategory } from '@/api/product'
 import { useUserStore } from '@/stores/user'
 import { useCartStore } from '@/stores/cart'
@@ -346,6 +348,10 @@ async function onLogout() {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+}
+
+.cart-icon {
+  color: var(--mall-accent);
 }
 
 .cart-count {
