@@ -13,180 +13,184 @@
         <span class="current">{{ spu.name }}</span>
       </nav>
 
-      <div class="buy-panel">
-        <div class="gallery-card">
-          <div class="gallery">
-            <div v-if="pics.length" class="thumbs">
-              <button
-                v-for="(pic, idx) in pics"
-                :key="idx"
-                type="button"
-                class="thumb"
-                :class="{ active: activePic === pic }"
-                @click="activePic = pic"
-              >
-                <img :src="pic" alt="" />
-              </button>
-            </div>
-            <div class="main-wrap">
-              <img :src="activePic" :alt="spu.name" class="main-pic" />
-            </div>
-          </div>
-        </div>
-
-        <div class="info-card">
-          <div class="title-row">
-            <div class="title-main">
-              <span class="tag-own">OM自营</span>
-              <h1>{{ spu.name }}</h1>
-            </div>
-            <button type="button" class="btn-fav" :class="{ on: favorited }" @click="toggleFavorite">
-              <el-icon :size="18"><StarFilled v-if="favorited" /><Star v-else /></el-icon>
-              <span>{{ favorited ? '已收藏' : '收藏' }}</span>
-            </button>
-          </div>
-          <p v-if="spu.introduction" class="intro">{{ spu.introduction }}</p>
-
-          <div class="price-strip">
-            <div class="price-left">
-              <span class="price">{{ formatPrice(selectedSku?.price ?? spu.price) }}</span>
-              <span v-if="discountLabel" class="price-tag">{{ discountLabel }}</span>
-              <span v-if="showMarket" class="market">
-                {{ formatPrice(selectedSku?.marketPrice ?? spu.marketPrice!) }}
-              </span>
-            </div>
-            <button type="button" class="comment-link" @click="activeTab = 'comment'">
-              累计评价
-              <em>{{ commentTotalText }}</em>
-            </button>
-          </div>
-
-          <div class="info-rows">
-            <div class="info-row">
-              <span class="row-label">配送</span>
-              <div class="row-body">
-                <span>快递发货 · 预计 1–3 天送达</span>
-                <span class="muted">库存 {{ selectedSku?.stock ?? spu.stock ?? 0 }}</span>
-                <span v-if="spu.salesCount != null" class="muted">销量 {{ spu.salesCount }}</span>
-              </div>
-            </div>
-
-            <div class="info-row">
-              <span class="row-label">服务</span>
-              <div class="row-body service-body">
-                <span v-for="s in services" :key="s">{{ s }}</span>
-              </div>
-            </div>
-
-            <div v-for="prop in propertyOptions" :key="prop.name" class="info-row">
-              <span class="row-label">{{ prop.name }}</span>
-              <div class="row-body sku-values">
+      <div class="detail-layout">
+        <div class="left-col">
+          <div class="gallery-card">
+            <div class="gallery">
+              <div v-if="pics.length" class="thumbs">
                 <button
-                  v-for="item in prop.values"
-                  :key="item.value"
+                  v-for="(pic, idx) in pics"
+                  :key="idx"
                   type="button"
-                  class="sku-value"
-                  :class="{ active: selectedProps[prop.name] === item.value, 'has-pic': !!item.picUrl }"
-                  @click="selectedProps[prop.name] = item.value"
+                  class="thumb"
+                  :class="{ active: activePic === pic }"
+                  @click="activePic = pic"
                 >
-                  <img v-if="item.picUrl" :src="item.picUrl" alt="" class="sku-pic" />
-                  <span>{{ item.value }}</span>
+                  <img :src="pic" alt="" />
                 </button>
               </div>
-            </div>
-          </div>
-
-          <div class="action-bar">
-            <el-input-number
-              v-model="count"
-              class="qty"
-              :min="1"
-              :max="Math.max(selectedSku?.stock || 1, 1)"
-            />
-            <button type="button" class="btn-cart" :disabled="!selectedSku" @click="addToCart">
-              加入购物车
-            </button>
-            <button type="button" class="btn-buy" :disabled="!selectedSku" @click="buyNow">
-              立即购买
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="detail-tabs">
-        <div class="tab-bar">
-          <button
-            type="button"
-            class="tab"
-            :class="{ active: activeTab === 'comment' }"
-            @click="activeTab = 'comment'"
-          >
-            商品评价
-          </button>
-          <button
-            type="button"
-            class="tab"
-            :class="{ active: activeTab === 'detail' }"
-            @click="activeTab = 'detail'"
-          >
-            商品详情
-          </button>
-          <button
-            type="button"
-            class="tab"
-            :class="{ active: activeTab === 'aftersale' }"
-            @click="activeTab = 'aftersale'"
-          >
-            售后保障
-          </button>
-        </div>
-
-        <div v-show="activeTab === 'comment'" class="tab-panel">
-          <div class="comment-summary">
-            <h3>
-              买家评价
-              <span class="total">({{ commentTotalText }})</span>
-            </h3>
-            <router-link :to="`/goods/${spu.id}/comments`">查看全部评价</router-link>
-          </div>
-          <el-empty v-if="!comments.length" description="暂无评价" :image-size="64" />
-          <div v-for="c in comments" :key="c.id" class="comment">
-            <div class="avatar">{{ (c.userNickname || '用')[0] }}</div>
-            <div class="comment-body">
-              <div class="comment-head">
-                <span class="name">{{ c.userNickname || '用户' }}</span>
-                <el-rate :model-value="c.scores" disabled />
+              <div class="main-wrap">
+                <img :src="activePic" :alt="spu.name" class="main-pic" />
               </div>
-              <p>{{ c.content }}</p>
+            </div>
+          </div>
+
+          <div ref="tabsRef" class="detail-tabs">
+            <div class="tab-bar">
+              <button
+                type="button"
+                class="tab"
+                :class="{ active: activeTab === 'comment' }"
+                @click="selectTab('comment')"
+              >
+                商品评价
+              </button>
+              <button
+                type="button"
+                class="tab"
+                :class="{ active: activeTab === 'detail' }"
+                @click="selectTab('detail')"
+              >
+                商品详情
+              </button>
+              <button
+                type="button"
+                class="tab"
+                :class="{ active: activeTab === 'aftersale' }"
+                @click="selectTab('aftersale')"
+              >
+                售后保障
+              </button>
+            </div>
+
+            <div v-show="activeTab === 'comment'" class="tab-panel">
+              <div class="comment-summary">
+                <h3>
+                  买家评价
+                  <span class="total">({{ commentTotalText }})</span>
+                </h3>
+                <router-link :to="`/goods/${spu.id}/comments`">查看全部评价</router-link>
+              </div>
+              <el-empty v-if="!comments.length" description="暂无评价" :image-size="64" />
+              <div v-for="c in comments" :key="c.id" class="comment">
+                <div class="avatar">{{ (c.userNickname || '用')[0] }}</div>
+                <div class="comment-body">
+                  <div class="comment-head">
+                    <span class="name">{{ c.userNickname || '用户' }}</span>
+                    <el-rate :model-value="c.scores" disabled />
+                  </div>
+                  <p>{{ c.content }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div v-show="activeTab === 'detail'" class="tab-panel">
+              <div v-if="specRows.length" class="spec-block">
+                <h3>规格参数</h3>
+                <dl class="spec-table">
+                  <template v-for="row in specRows" :key="row.name">
+                    <dt>{{ row.name }}</dt>
+                    <dd>{{ row.value }}</dd>
+                  </template>
+                </dl>
+              </div>
+              <div class="rich" v-html="spu.description || '暂无详情'" />
+            </div>
+
+            <div v-show="activeTab === 'aftersale'" class="tab-panel aftersale-panel">
+              <ul>
+                <li v-for="s in aftersaleTips" :key="s">{{ s }}</li>
+              </ul>
             </div>
           </div>
         </div>
 
-        <div v-show="activeTab === 'detail'" class="tab-panel">
-          <div v-if="specRows.length" class="spec-block">
-            <h3>规格参数</h3>
-            <dl class="spec-table">
-              <template v-for="row in specRows" :key="row.name">
-                <dt>{{ row.name }}</dt>
-                <dd>{{ row.value }}</dd>
-              </template>
-            </dl>
-          </div>
-          <div class="rich" v-html="spu.description || '暂无详情'" />
-        </div>
+        <aside class="right-col">
+          <div class="info-card">
+            <div class="title-row">
+              <div class="title-main">
+                <span class="tag-own">OM自营</span>
+                <h1>{{ spu.name }}</h1>
+              </div>
+              <button type="button" class="btn-fav" :class="{ on: favorited }" @click="toggleFavorite">
+                <el-icon :size="18"><StarFilled v-if="favorited" /><Star v-else /></el-icon>
+                <span>{{ favorited ? '已收藏' : '收藏' }}</span>
+              </button>
+            </div>
+            <p v-if="spu.introduction" class="intro">{{ spu.introduction }}</p>
 
-        <div v-show="activeTab === 'aftersale'" class="tab-panel aftersale-panel">
-          <ul>
-            <li v-for="s in aftersaleTips" :key="s">{{ s }}</li>
-          </ul>
-        </div>
+            <div class="price-strip">
+              <div class="price-left">
+                <span class="price">{{ formatPrice(selectedSku?.price ?? spu.price) }}</span>
+                <span v-if="discountLabel" class="price-tag">{{ discountLabel }}</span>
+                <span v-if="showMarket" class="market">
+                  {{ formatPrice(selectedSku?.marketPrice ?? spu.marketPrice!) }}
+                </span>
+              </div>
+              <button type="button" class="comment-link" @click="selectTab('comment')">
+                累计评价
+                <em>{{ commentTotalText }}</em>
+              </button>
+            </div>
+
+            <div class="info-rows">
+              <div class="info-row">
+                <span class="row-label">配送</span>
+                <div class="row-body">
+                  <span>快递发货 · 预计 1–3 天送达</span>
+                  <span class="muted">库存 {{ selectedSku?.stock ?? spu.stock ?? 0 }}</span>
+                  <span v-if="spu.salesCount != null" class="muted">销量 {{ spu.salesCount }}</span>
+                </div>
+              </div>
+
+              <div class="info-row">
+                <span class="row-label">服务</span>
+                <div class="row-body service-body">
+                  <span v-for="s in services" :key="s">{{ s }}</span>
+                </div>
+              </div>
+
+              <div v-for="prop in propertyOptions" :key="prop.name" class="info-row">
+                <span class="row-label">{{ prop.name }}</span>
+                <div class="row-body sku-values">
+                  <button
+                    v-for="item in prop.values"
+                    :key="item.value"
+                    type="button"
+                    class="sku-value"
+                    :class="{ active: selectedProps[prop.name] === item.value, 'has-pic': !!item.picUrl }"
+                    @click="selectedProps[prop.name] = item.value"
+                  >
+                    <img v-if="item.picUrl" :src="item.picUrl" alt="" class="sku-pic" />
+                    <span>{{ item.value }}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="action-bar">
+              <el-input-number
+                v-model="count"
+                class="qty"
+                :min="1"
+                :max="Math.max(selectedSku?.stock || 1, 1)"
+              />
+              <button type="button" class="btn-cart" :disabled="!selectedSku" @click="addToCart">
+                加入购物车
+              </button>
+              <button type="button" class="btn-buy" :disabled="!selectedSku" @click="buyNow">
+                立即购买
+              </button>
+            </div>
+          </div>
+        </aside>
       </div>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { Star, StarFilled } from '@element-plus/icons-vue'
@@ -217,6 +221,7 @@ const commentTotal = ref(0)
 const count = ref(1)
 const activePic = ref('')
 const activeTab = ref<'detail' | 'comment' | 'aftersale'>('comment')
+const tabsRef = ref<HTMLElement | null>(null)
 const favorited = ref(false)
 const selectedProps = reactive<Record<string, string>>({})
 
@@ -304,6 +309,13 @@ const specRows = computed(() => {
 watch(selectedSku, (sku) => {
   if (sku?.picUrl) activePic.value = sku.picUrl
 })
+
+function selectTab(tab: 'detail' | 'comment' | 'aftersale') {
+  activeTab.value = tab
+  nextTick(() => {
+    tabsRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+}
 
 async function loadCategories() {
   try {
@@ -399,6 +411,10 @@ watch(() => route.params.id, loadDetail)
 
 <style scoped lang="scss">
 .goods-detail {
+  /* 详情页比首页更窄，两侧多留白，接近京东/淘宝主内容宽 */
+  width: min(100% - 64px, 1180px);
+  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 40px;
 }
 
@@ -428,44 +444,61 @@ watch(() => route.params.id, loadDetail)
   white-space: nowrap;
 }
 
-.buy-panel {
+.detail-layout {
+  display: grid;
+  /* 左图略宽，右购买区收窄到约 420–460 */
+  grid-template-columns: minmax(0, 1fr) minmax(400px, 460px);
+  gap: 16px;
+  align-items: start;
+}
+
+.left-col {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 12px;
+  min-width: 0;
+}
+
+.right-col {
+  min-width: 0;
 }
 
 .gallery-card,
-.info-card {
+.info-card,
+.detail-tabs {
   background: #fff;
   border: 1px solid var(--mall-line);
+  border-radius: 12px;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
 .gallery-card {
-  width: 452px;
-  flex-shrink: 0;
   padding: 12px;
+  overflow: hidden;
 }
 
 .info-card {
-  width: min(560px, 100%);
-  flex: 0 1 560px;
-  min-width: 0;
-  padding: 14px 16px 16px;
+  position: sticky;
+  top: 52px;
+  padding: 14px 16px 18px;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
 }
 
 .gallery {
   display: flex;
   gap: 10px;
   min-width: 0;
-  align-items: flex-start;
+  /* 固定高度：笔记本/外接屏一致，首屏能完整看到 Tab 文字 */
+  height: 360px;
+  align-items: stretch;
 }
 
 .thumbs {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: 418px;
+  height: 100%;
   overflow-y: auto;
   flex-shrink: 0;
   padding: 1px;
@@ -496,14 +529,17 @@ watch(() => route.params.id, loadDetail)
 .main-wrap {
   flex: 1;
   min-width: 0;
+  height: 100%;
   border: 1px solid var(--mall-line);
+  border-radius: 8px;
   background: #fafafa;
+  overflow: hidden;
 }
 
 .main-pic {
   width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
 }
 
 .title-row {
@@ -530,7 +566,7 @@ watch(() => route.params.id, loadDetail)
   font-weight: 600;
 }
 
-.info h1 {
+.info-card h1 {
   display: inline;
   margin: 0;
   font-size: 16px;
@@ -751,11 +787,12 @@ watch(() => route.params.id, loadDetail)
 
 .btn-cart,
 .btn-buy {
-  min-width: 148px;
-  height: 46px;
+  flex: 1;
+  min-width: 0;
+  height: 44px;
   border-radius: 2px;
   border: 1px solid var(--mall-accent);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
 }
@@ -785,18 +822,20 @@ watch(() => route.params.id, loadDetail)
 }
 
 .detail-tabs {
-  margin-top: 12px;
-  background: #fff;
-  border: 1px solid var(--mall-line);
+  scroll-margin-top: 48px;
 }
 
 .tab-bar {
+  position: sticky;
+  top: 40px;
+  z-index: 4;
   display: flex;
   align-items: stretch;
   gap: 0;
   border-bottom: 1px solid var(--mall-line);
   background: #f7f8fa;
   padding: 0 8px;
+  border-radius: 12px 12px 0 0;
 }
 
 .tab {
@@ -954,26 +993,46 @@ watch(() => route.params.id, loadDetail)
   line-height: 2;
 }
 
-@media (max-width: 1040px) {
-  .buy-panel {
-    flex-direction: column;
+@media (max-width: 1100px) {
+  .goods-detail {
+    width: min(100% - 32px, 1180px);
   }
 
-  .gallery-card,
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+
   .info-card {
-    width: 100%;
-    flex: none;
+    position: static;
+    max-height: none;
   }
 
   .gallery {
     flex-direction: column-reverse;
+    height: auto;
   }
 
   .thumbs {
     flex-direction: row;
+    height: auto;
     max-height: none;
     overflow-x: auto;
     width: 100%;
+  }
+
+  .main-wrap {
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .main-pic {
+    aspect-ratio: 1;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .tab-bar {
+    top: 0;
   }
 
   .action-bar {
