@@ -110,6 +110,16 @@
       </el-button>
     </section>
 
+    <section v-if="recommends.length" class="recommend">
+      <div class="recommend-head">
+        <h2>猜你喜欢</h2>
+        <router-link to="/category">更多商品</router-link>
+      </div>
+      <div class="recommend-grid">
+        <ProductCard v-for="item in recommends" :key="item.id" :spu="item" />
+      </div>
+    </section>
+
     <el-dialog v-model="addressDialogVisible" title="新增收货地址" width="480px" destroy-on-close>
       <el-form label-width="80px">
         <el-form-item label="收货人" required>
@@ -149,11 +159,13 @@ import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { AddressApi, type MemberAddress } from '@/api/member/address'
 import { AreaApi, type AreaNode } from '@/api/system/area'
+import { SpuApi, type ProductSpu } from '@/api/product'
 import {
   OrderApi,
   type OrderItemPayload,
   type SettlementResp
 } from '@/api/trade/order'
+import ProductCard from '@/components/ProductCard.vue'
 import { useCartStore } from '@/stores/cart'
 import { formatPrice } from '@/utils/price'
 
@@ -170,6 +182,7 @@ const pointStatus = ref(false)
 const remark = ref('')
 const settlement = ref<SettlementResp | null>(null)
 const items = ref<OrderItemPayload[]>([])
+const recommends = ref<ProductSpu[]>([])
 
 const addressDialogVisible = ref(false)
 const addressSaving = ref(false)
@@ -185,6 +198,30 @@ const addressForm = reactive({
 const canSubmit = computed(() => !!addressId.value && items.value.length > 0 && !!settlement.value)
 const availableCoupons = computed(() => (settlement.value?.coupons || []).filter((c) => c.match))
 const unavailableCoupons = computed(() => (settlement.value?.coupons || []).filter((c) => !c.match))
+const checkoutSpuIds = computed(() => {
+  const ids = new Set<number>()
+  for (const item of settlement.value?.items || []) {
+    if (item.spuId) ids.add(item.spuId)
+  }
+  return ids
+})
+
+async function loadRecommends() {
+  try {
+    const res = await SpuApi.getSpuPage({
+      pageNo: 1,
+      pageSize: 12,
+      sortField: 'salesCount',
+      sortAsc: false
+    })
+    const exclude = checkoutSpuIds.value
+    recommends.value = (res.data?.list || [])
+      .filter((item) => !exclude.has(item.id))
+      .slice(0, 8)
+  } catch {
+    recommends.value = []
+  }
+}
 
 function parseItemsFromQuery(): OrderItemPayload[] {
   if (route.query.items) {
@@ -307,6 +344,10 @@ watch(addressId, () => {
   if (items.value.length) calcSettlement()
 })
 
+watch(checkoutSpuIds, () => {
+  loadRecommends()
+})
+
 onMounted(async () => {
   items.value = parseItemsFromQuery()
   if (!items.value.length) {
@@ -316,6 +357,7 @@ onMounted(async () => {
   }
   await loadAddresses()
   await calcSettlement()
+  await loadRecommends()
 })
 </script>
 
@@ -454,5 +496,65 @@ h1::before {
 
 .pay .price {
   font-size: 26px;
+}
+
+.recommend {
+  margin-top: 4px;
+  margin-bottom: 14px;
+  background: var(--mall-surface);
+  border-radius: var(--mall-radius);
+  padding: 18px 20px 20px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.recommend-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.recommend-head h2 {
+  margin: 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--mall-ink);
+}
+
+.recommend-head h2::before {
+  content: '';
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--mall-accent);
+}
+
+.recommend-head a {
+  font-size: 13px;
+  color: var(--mall-muted);
+}
+
+.recommend-head a:hover {
+  color: var(--mall-accent);
+}
+
+.recommend-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 1100px) {
+  .recommend-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .recommend-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 </style>
