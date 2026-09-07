@@ -185,6 +185,24 @@
           </div>
         </aside>
       </div>
+
+      <section v-if="recommends.length" class="recommend">
+        <div class="recommend-head">
+          <h2>相关推荐</h2>
+          <router-link
+            :to="
+              spu.categoryId
+                ? { path: '/category', query: { categoryId: spu.categoryId } }
+                : '/category'
+            "
+          >
+            查看更多
+          </router-link>
+        </div>
+        <div class="recommend-grid">
+          <ProductCard v-for="item in recommends" :key="item.id" :spu="item" />
+        </div>
+      </section>
     </template>
   </div>
 </template>
@@ -204,6 +222,7 @@ import {
   type ProductSpu
 } from '@/api/product'
 import { FavoriteApi } from '@/api/product/favorite'
+import ProductCard from '@/components/ProductCard.vue'
 import { useCartStore } from '@/stores/cart'
 import { useUserStore } from '@/stores/user'
 import { formatPrice } from '@/utils/price'
@@ -218,6 +237,7 @@ const spu = ref<ProductSpu | null>(null)
 const categories = ref<ProductCategory[]>([])
 const comments = ref<ProductComment[]>([])
 const commentTotal = ref(0)
+const recommends = ref<ProductSpu[]>([])
 const count = ref(1)
 const activePic = ref('')
 const activeTab = ref<'detail' | 'comment' | 'aftersale'>('comment')
@@ -326,11 +346,47 @@ async function loadCategories() {
   }
 }
 
+async function loadRecommends(detail: ProductSpu) {
+  try {
+    const collected: ProductSpu[] = []
+    if (detail.categoryId) {
+      const res = await SpuApi.getSpuPage({
+        pageNo: 1,
+        pageSize: 12,
+        categoryId: detail.categoryId,
+        sortField: 'salesCount',
+        sortAsc: false
+      })
+      collected.push(...(res.data?.list || []))
+    }
+    if (collected.length < 8) {
+      const res = await SpuApi.getSpuPage({
+        pageNo: 1,
+        pageSize: 12,
+        sortField: 'salesCount',
+        sortAsc: false
+      })
+      collected.push(...(res.data?.list || []))
+    }
+    const seen = new Set<number>([detail.id])
+    recommends.value = collected
+      .filter((item) => {
+        if (seen.has(item.id)) return false
+        seen.add(item.id)
+        return true
+      })
+      .slice(0, 8)
+  } catch {
+    recommends.value = []
+  }
+}
+
 async function loadDetail() {
   const id = Number(route.params.id)
   if (!id) return
   loading.value = true
   activeTab.value = 'comment'
+  recommends.value = []
   try {
     const detailRes = await SpuApi.getSpuDetail(id)
     spu.value = detailRes.data
@@ -341,6 +397,9 @@ async function loadDetail() {
       if (p.propertyName && p.valueName) {
         selectedProps[p.propertyName] = p.valueName
       }
+    }
+    if (spu.value) {
+      loadRecommends(spu.value)
     }
     try {
       const commentRes = await CommentApi.getCommentPage(id, 1, 8, 0)
@@ -419,6 +478,64 @@ watch(() => route.params.id, loadDetail)
   --gallery-h: min(600px, calc(100vh - 220px));
   /* 右侧购买卡相对视口自适应高度（顶栏/导航预留） */
   --buy-h: calc(100vh - 200px);
+}
+
+.recommend {
+  margin-top: 16px;
+  background: var(--mall-surface);
+  border-radius: 12px;
+  padding: 18px 20px 20px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.recommend-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.recommend-head h2 {
+  margin: 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recommend-head h2::before {
+  content: '';
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--mall-accent);
+}
+
+.recommend-head a {
+  font-size: 13px;
+  color: var(--mall-muted);
+}
+
+.recommend-head a:hover {
+  color: var(--mall-accent);
+}
+
+.recommend-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 1100px) {
+  .recommend-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .recommend-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .breadcrumb {

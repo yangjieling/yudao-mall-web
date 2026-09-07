@@ -110,7 +110,16 @@
     </main>
 
     <footer class="mall-footer">
-      <div class="page-container">OM SHOP · {{ brandUrl }}</div>
+      <div class="page-container footer-inner">
+        <div class="footer-links">
+          <router-link to="/category">全部商品</router-link>
+          <router-link to="/coupon">领券中心</router-link>
+          <router-link to="/activity/seckill">限时秒杀</router-link>
+          <router-link to="/user">个人中心</router-link>
+          <router-link to="/order">我的订单</router-link>
+        </div>
+        <div class="footer-copy">OM SHOP · {{ brandUrl }}</div>
+      </div>
     </footer>
   </div>
 </template>
@@ -471,9 +480,31 @@ async function onLogout() {
 
 .mall-footer {
   border-top: 1px solid var(--mall-line);
-  padding: 20px 0;
+  padding: 24px 0;
   color: var(--mall-muted);
   font-size: 13px;
+  background: #fff;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+}
+
+.footer-links a:hover {
+  color: var(--mall-accent);
+}
+
+.footer-copy {
   text-align: center;
 }
 
