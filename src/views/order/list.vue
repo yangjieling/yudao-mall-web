@@ -34,9 +34,23 @@
       </div>
 
       <div v-for="item in order.items || []" :key="item.id" class="item-row">
-        <img :src="item.picUrl" :alt="item.spuName" />
+        <router-link
+          v-if="item.spuId"
+          :to="`/goods/${item.spuId}`"
+          class="thumb-link"
+        >
+          <img :src="item.picUrl" :alt="item.spuName" />
+        </router-link>
+        <img v-else :src="item.picUrl" :alt="item.spuName" />
         <div class="item-info">
-          <div class="name">{{ item.spuName }}</div>
+          <router-link
+            v-if="item.spuId"
+            :to="`/goods/${item.spuId}`"
+            class="name"
+          >
+            {{ item.spuName }}
+          </router-link>
+          <div v-else class="name">{{ item.spuName }}</div>
           <div class="muted">x{{ item.count }}</div>
         </div>
         <div class="price">{{ formatPrice(item.price) }}</div>
@@ -52,6 +66,14 @@
           <el-button v-if="order.status === 0" @click="cancel(order.id)">取消</el-button>
           <el-button v-if="order.status === 20" type="primary" @click="receive(order.id)">
             确认收货
+          </el-button>
+          <el-button
+            v-if="needComment(order)"
+            type="primary"
+            plain
+            @click="goComment(order)"
+          >
+            评价
           </el-button>
           <el-button @click="$router.push(`/order/${order.id}`)">详情</el-button>
         </div>
@@ -168,8 +190,22 @@ function goPay(order: TradeOrder) {
   if (order.payOrderId) {
     router.push({ path: '/pay', query: { id: String(order.payOrderId) } })
   } else {
-    ElMessage.warning('暂无支付单')
+    ElMessage.warning('暂无支付单，请进入详情查看')
+    router.push(`/order/${order.id}`)
   }
+}
+
+function needComment(order: TradeOrder) {
+  return order.status === 30 && (order.items || []).some((item) => !item.commentStatus)
+}
+
+function goComment(order: TradeOrder) {
+  const item = (order.items || []).find((i) => !i.commentStatus)
+  if (!item) {
+    router.push(`/order/${order.id}`)
+    return
+  }
+  router.push(`/order/comment?orderItemId=${item.id}&orderId=${order.id}`)
 }
 
 async function cancel(id: number) {
@@ -331,9 +367,19 @@ h1::before {
   background: #f3f4f6;
 }
 
+.thumb-link {
+  display: block;
+  line-height: 0;
+}
+
 .name {
   font-size: 14px;
   line-height: 1.4;
+  color: var(--mall-ink);
+}
+
+a.name:hover {
+  color: var(--mall-accent);
 }
 
 .muted {

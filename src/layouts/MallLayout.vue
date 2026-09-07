@@ -7,7 +7,12 @@
             <router-link to="/user">{{ userStore.userInfo?.nickname || '会员' }}</router-link>
             <el-button link type="primary" @click="onLogout">退出</el-button>
           </template>
-          <router-link v-else to="/login">请登录</router-link>
+          <router-link
+            v-else
+            :to="{ path: '/login', query: { redirect: route.fullPath } }"
+          >
+            请登录
+          </router-link>
         </div>
         <div class="top-right">
           <router-link to="/order">我的订单</router-link>
@@ -52,11 +57,11 @@
           <div class="hot-words">
             <a
               v-for="word in hotWords"
-              :key="word"
+              :key="word.id"
               href="javascript:void(0)"
               @click.prevent="onHotWord(word)"
             >
-              {{ word }}
+              {{ word.label }}
             </a>
           </div>
         </div>
@@ -139,7 +144,21 @@ const brandMark = computed(() => {
   if (/^OM\b/i.test(t)) return 'OM'
   return t.slice(0, 1) || 'O'
 })
-const hotWords = ['手机', '零食', '母婴', '家电', '美妆', '运动']
+const hotWordLabelMap: Record<string, string> = {
+  童装童鞋: '童装',
+  家用电器: '家电',
+  电子数码: '数码',
+  美妆个护: '美妆',
+  母婴用品: '母婴'
+}
+const fallbackHotWords = [
+  { id: 0, label: '童装', categoryId: undefined as number | undefined, keyword: '童装' },
+  { id: 1, label: '家电', categoryId: undefined, keyword: '家电' },
+  { id: 2, label: '数码', categoryId: undefined, keyword: '数码' },
+  { id: 3, label: '美妆', categoryId: undefined, keyword: '美妆' },
+  { id: 4, label: '母婴', categoryId: undefined, keyword: '母婴' }
+]
+
 const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
@@ -151,6 +170,17 @@ const categories = ref<ProductCategory[]>([])
 const rootCategories = computed(() =>
   categories.value.filter((c) => !c.parentId || c.parentId === 0)
 )
+
+const hotWords = computed(() => {
+  const roots = rootCategories.value
+  if (!roots.length) return fallbackHotWords
+  return roots.slice(0, 6).map((cat) => ({
+    id: cat.id,
+    label: hotWordLabelMap[cat.name] || (cat.name.length > 4 ? cat.name.slice(0, 2) : cat.name),
+    categoryId: cat.id as number | undefined,
+    keyword: undefined as string | undefined
+  }))
+})
 
 function childrenOf(parentId: number) {
   return categories.value.filter((c) => c.parentId === parentId)
@@ -185,9 +215,14 @@ function onSearch() {
   router.push({ path: '/category', query: { keyword: keyword.value || undefined } })
 }
 
-function onHotWord(word: string) {
-  keyword.value = word
-  router.push({ path: '/category', query: { keyword: word } })
+function onHotWord(word: { label: string; categoryId?: number; keyword?: string }) {
+  if (word.categoryId) {
+    keyword.value = ''
+    router.push({ path: '/category', query: { categoryId: word.categoryId } })
+    return
+  }
+  keyword.value = word.keyword || word.label
+  router.push({ path: '/category', query: { keyword: keyword.value } })
 }
 
 async function onLogout() {

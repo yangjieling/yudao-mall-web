@@ -54,7 +54,10 @@
       <div v-else class="product-grid">
         <ProductCard v-for="item in list" :key="item.id" :spu="item" />
       </div>
-      <el-empty v-if="!loading && list.length === 0" description="该分类暂无商品" />
+      <el-empty v-if="!loading && list.length === 0" :description="emptyDescription">
+        <el-button v-if="keyword" @click="clearSearch">清除搜索</el-button>
+        <el-button type="primary" @click="goAllGoods">全部商品</el-button>
+      </el-empty>
 
       <div v-if="total > pageSize" class="pager">
         <el-pagination
@@ -110,6 +113,22 @@ const currentTitle = computed(() => {
   return cat?.name || '全部商品'
 })
 
+const emptyDescription = computed(() => {
+  if (keyword.value) return `未找到与「${keyword.value}」相关的商品`
+  if (activeCategoryId.value) return '该分类暂无商品'
+  return '暂无商品'
+})
+
+const appTitle = import.meta.env.VITE_APP_TITLE || 'OM Shop'
+
+watch(
+  currentTitle,
+  (title) => {
+    document.title = `${title} - ${appTitle}`
+  },
+  { immediate: true }
+)
+
 function sortParams(): { sortField?: string; sortAsc?: boolean } {
   if (sortKey.value === 'salesCount') return { sortField: 'salesCount', sortAsc: false }
   if (sortKey.value === 'priceAsc') return { sortField: 'price', sortAsc: true }
@@ -158,6 +177,17 @@ function onPageChange(page: number) {
 function onSortChange() {
   pageNo.value = 1
   loadProducts()
+}
+
+function clearSearch() {
+  router.push({
+    path: '/category',
+    query: { categoryId: activeCategoryId.value || undefined }
+  })
+}
+
+function goAllGoods() {
+  router.push({ path: '/category' })
 }
 
 watch(

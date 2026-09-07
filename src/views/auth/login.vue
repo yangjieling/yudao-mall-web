@@ -83,8 +83,14 @@ const smsForm = reactive({ mobile: '', code: '' })
 function afterLogin() {
   ElMessage.success('登录成功')
   cartStore.getList()
-  const redirect = (route.query.redirect as string) || '/'
-  router.replace(redirect)
+  router.replace(safeRedirect(route.query.redirect as string | undefined))
+}
+
+function safeRedirect(raw?: string): string {
+  if (!raw || !raw.startsWith('/') || raw.startsWith('//') || raw.startsWith('/login')) {
+    return '/'
+  }
+  return raw
 }
 
 async function onPasswordLogin() {
