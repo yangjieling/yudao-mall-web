@@ -1,6 +1,6 @@
 # mall-web
 
-商城 PC 网页端（Vue3 + Vite + TypeScript），对接后端网关的 `/app-api`。
+商城 PC 网页端（Vue3 + Vite + TypeScript），对接后端网关的 `/app-api`。站点品牌为 **OM Shop**（Oh My）。
 
 ## 功能范围
 

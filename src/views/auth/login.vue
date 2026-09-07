@@ -47,7 +47,7 @@
         </el-tab-pane>
       </el-tabs>
 
-      <el-button link class="back" @click="$router.push('/')">返回商城</el-button>
+      <el-button link class="back" @click="$router.push('/')">返回 OM Shop</el-button>
     </div>
   </div>
 </template>
@@ -61,7 +61,11 @@ import { useUserStore } from '@/stores/user'
 import { useCartStore } from '@/stores/cart'
 
 const title = import.meta.env.VITE_APP_TITLE
-const brandMark = computed(() => (title || '商').slice(0, 1))
+const brandMark = computed(() => {
+  const t = (title || 'OM').trim()
+  if (/^OM\b/i.test(t)) return 'OM'
+  return t.slice(0, 1) || 'O'
+})
 const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
@@ -161,8 +165,9 @@ async function onSmsLogin() {
   border-radius: 12px;
   background: var(--mall-accent);
   color: #fff;
-  font-size: 22px;
+  font-size: 15px;
   font-weight: 700;
+  letter-spacing: 0.02em;
   margin-bottom: 12px;
 }
 

@@ -97,7 +97,7 @@
     </main>
 
     <footer class="mall-footer">
-      <div class="page-container">{{ title }} · PC 商城</div>
+      <div class="page-container">{{ title }} · Oh My</div>
     </footer>
   </div>
 </template>
@@ -110,7 +110,11 @@ import { useUserStore } from '@/stores/user'
 import { useCartStore } from '@/stores/cart'
 
 const title = import.meta.env.VITE_APP_TITLE
-const brandMark = computed(() => (title || '商').slice(0, 1))
+const brandMark = computed(() => {
+  const t = (title || 'OM').trim()
+  if (/^OM\b/i.test(t)) return 'OM'
+  return t.slice(0, 1) || 'O'
+})
 const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
@@ -223,7 +227,8 @@ async function onLogout() {
   display: grid;
   place-items: center;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 14px;
+  letter-spacing: 0.02em;
 }
 
 .brand-name {
