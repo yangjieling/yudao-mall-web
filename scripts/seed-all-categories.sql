@@ -1181,8 +1181,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '云朵安抚毛绒玩具（演示）', '毛绒玩具', '柔软安抚，陪伴入睡', '<div><h3>云朵安抚毛绒玩具（演示）</h3><ul><li>短绒面料</li><li>填充均匀</li><li>可手洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1530325553241-4f6e7690ac58?auto=format&fit=crop&w=800&q=80" alt="云朵安抚毛绒玩具（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1530325553241-4f6e7690ac58?auto=format&fit=crop&w=800&q=80" alt="云朵安抚毛绒玩具（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  51, NULL, 'https://images.unsplash.com/photo-1530325553241-4f6e7690ac58?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1530325553241-4f6e7690ac58?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1530325553241-4f6e7690ac58?auto=format&fit=crop&w=800&q=80"]',
+  '云朵安抚毛绒玩具（演示）', '毛绒玩具', '柔软安抚，陪伴入睡', '<div><h3>云朵安抚毛绒玩具（演示）</h3><ul><li>短绒面料</li><li>填充均匀</li><li>可手洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80" alt="云朵安抚毛绒玩具（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80" alt="云朵安抚毛绒玩具（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  51, NULL, 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80"]',
   400, 1, b'1', 5900, 7900, 2500, 180,
   '1', 1, 5, b'0',
   0, 330, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1192,21 +1192,21 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 5900, 7900, 2500, CONCAT('SC', @spu_id, '-', 5900), 'https://images.unsplash.com/photo-1530325553241-4f6e7690ac58?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 7, "valueName": "白色"}]', 5900, 7900, 2500, CONCAT('SC', @spu_id, '-', 5900), 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80',
   60, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 6400, 7900, 2500, CONCAT('SC', @spu_id, '-', 6400), 'https://images.unsplash.com/photo-1530325553241-4f6e7690ac58?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 6400, 7900, 2500, CONCAT('SC', @spu_id, '-', 6400), 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80',
   60, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 6900, 7900, 2500, CONCAT('SC', @spu_id, '-', 6900), 'https://images.unsplash.com/photo-1530325553241-4f6e7690ac58?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 6900, 7900, 2500, CONCAT('SC', @spu_id, '-', 6900), 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=800&q=80',
   60, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=5900, stock=180 WHERE id=@spu_id;
@@ -1261,8 +1261,8 @@ INSERT INTO product_spu (
   delivery_types, delivery_template_id, give_integral, sub_commission_type,
   sales_count, virtual_sales_count, browse_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  '儿童餐具五件套（演示）', '儿童餐具', '碗勺叉盘组合', '<div><h3>儿童餐具五件套（演示）</h3><ul><li>食品级材质</li><li>防摔设计</li><li>易清洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1603199506016-b9a694b53600?auto=format&fit=crop&w=800&q=80" alt="儿童餐具五件套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1603199506016-b9a694b53600?auto=format&fit=crop&w=800&q=80" alt="儿童餐具五件套（演示）" style="max-width:100%;height:auto;"/></p></div>',
-  81, NULL, 'https://images.unsplash.com/photo-1603199506016-b9a694b53600?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1603199506016-b9a694b53600?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1603199506016-b9a694b53600?auto=format&fit=crop&w=800&q=80"]',
+  '儿童餐具五件套（演示）', '儿童餐具', '碗勺叉盘组合', '<div><h3>儿童餐具五件套（演示）</h3><ul><li>食品级材质</li><li>防摔设计</li><li>易清洗</li></ul><p>以上为本地联调演示商品，文案与图片仅用于展示。</p><p><img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80" alt="儿童餐具五件套（演示）" style="max-width:100%;height:auto;"/></p><p><img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80" alt="儿童餐具五件套（演示）" style="max-width:100%;height:auto;"/></p></div>',
+  81, NULL, 'https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80', '["https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80"]',
   430, 1, b'1', 5900, 7900, 2500, 130,
   '1', 1, 5, b'0',
   0, 351, 0, 'seed-cat', 'seed-cat', b'0', 1
@@ -1272,21 +1272,21 @@ INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 5900, 7900, 2500, CONCAT('SC', @spu_id, '-', 5900), 'https://images.unsplash.com/photo-1603199506016-b9a694b53600?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 6, "valueName": "蓝色"}]', 5900, 7900, 2500, CONCAT('SC', @spu_id, '-', 5900), 'https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80',
   43, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 6400, 7900, 2500, CONCAT('SC', @spu_id, '-', 6400), 'https://images.unsplash.com/photo-1603199506016-b9a694b53600?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 24, "valueName": "黄色"}]', 6400, 7900, 2500, CONCAT('SC', @spu_id, '-', 6400), 'https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80',
   43, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 INSERT INTO product_sku (
   spu_id, properties, price, market_price, cost_price, bar_code, pic_url, stock, weight, volume,
   first_brokerage_price, second_brokerage_price, sales_count, creator, updater, deleted, tenant_id
 ) VALUES (
-  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 6900, 7900, 2500, CONCAT('SC', @spu_id, '-', 6900), 'https://images.unsplash.com/photo-1603199506016-b9a694b53600?auto=format&fit=crop&w=800&q=80',
+  @spu_id, '[{"propertyId": 1, "propertyName": "颜色", "valueId": 1, "valueName": "红色"}]', 6900, 7900, 2500, CONCAT('SC', @spu_id, '-', 6900), 'https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800&q=80',
   43, 0.5, 0.002, 0, 0, 0, 'seed-cat', 'seed-cat', b'0', 1
 );
 UPDATE product_spu SET price=5900, stock=129 WHERE id=@spu_id;
