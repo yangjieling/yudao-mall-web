@@ -30,11 +30,13 @@ defineProps<{
   border-radius: var(--mall-radius);
   overflow: hidden;
   border: 1px solid transparent;
-  transition: border-color 0.2s, transform 0.2s;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 .product-card:hover {
   border-color: var(--mall-accent-border);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
   transform: translateY(-2px);
 }
 
@@ -48,10 +50,15 @@ defineProps<{
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.product-card:hover .cover img {
+  transform: scale(1.03);
 }
 
 .body {
-  padding: 14px 14px 16px;
+  padding: 12px 12px 14px;
 }
 
 .name {
