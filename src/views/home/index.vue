@@ -21,7 +21,13 @@
       </aside>
 
       <div class="portal-main">
-        <el-carousel v-if="banners.length" height="320px" class="banner">
+        <el-carousel
+          v-if="banners.length"
+          height="320px"
+          class="banner"
+          :interval="4500"
+          arrow="hover"
+        >
           <el-carousel-item v-for="b in banners" :key="b.id">
             <a class="banner-link" href="javascript:void(0)" @click.prevent="onBanner(b)">
               <img :src="b.picUrl" :alt="b.title || 'banner'" />
