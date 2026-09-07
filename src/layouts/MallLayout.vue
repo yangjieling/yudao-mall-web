@@ -437,7 +437,7 @@ async function onLogout() {
 }
 
 .nav-links a:hover,
-.nav-links a.router-link-active {
+.nav-links a.router-link-exact-active {
   color: var(--mall-accent);
 }
 
