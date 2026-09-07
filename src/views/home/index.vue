@@ -264,6 +264,44 @@ onMounted(async () => {
   border-radius: 8px;
   overflow: hidden;
   background: #f8fafc;
+  position: relative;
+}
+
+.banner :deep(.el-carousel__indicators--horizontal) {
+  left: 16px;
+  right: auto;
+  transform: none;
+  bottom: 14px;
+  width: auto;
+}
+
+.banner :deep(.el-carousel__indicator) {
+  padding: 4px 3px;
+}
+
+.banner :deep(.el-carousel__button) {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  opacity: 1;
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.banner :deep(.el-carousel__indicator.is-active .el-carousel__button) {
+  width: 18px;
+  background: #fff;
+}
+
+.banner :deep(.el-carousel__arrow) {
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 50%;
+}
+
+.banner :deep(.el-carousel__arrow:hover) {
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .banner-link,
