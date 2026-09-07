@@ -106,7 +106,7 @@ h1 {
 }
 
 .left {
-  background: linear-gradient(160deg, #d97845, #9a4519);
+  background: linear-gradient(160deg, #f87171, #ef4444);
   color: #fff;
   padding: 20px 12px;
   text-align: center;

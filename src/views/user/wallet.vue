@@ -132,7 +132,7 @@ h2 {
 }
 
 .balance-card {
-  background: linear-gradient(145deg, #fff, #faf6f1);
+  background: linear-gradient(145deg, #fff, var(--mall-accent-soft));
   border: 1px solid var(--mall-line);
   border-radius: var(--mall-radius);
   padding: 24px;

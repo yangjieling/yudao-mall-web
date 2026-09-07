@@ -161,7 +161,7 @@ onMounted(async () => {
 }
 
 .cate-item:hover {
-  background: #fff7f2;
+  background: var(--mall-accent-soft);
 }
 
 .cate-name {
@@ -210,7 +210,7 @@ onMounted(async () => {
   height: 320px;
   display: grid;
   place-items: center;
-  background: linear-gradient(145deg, #fff 0%, #faf6f1 55%, #f3e7dc 100%);
+  background: linear-gradient(145deg, #fff 0%, #fef2f2 55%, #fecaca 100%);
 }
 
 .fallback-copy {
@@ -270,8 +270,8 @@ onMounted(async () => {
 }
 
 .promo {
-  background: #fffaf7;
-  border: 1px solid #f0d4c3;
+  background: var(--mall-accent-soft);
+  border: 1px solid var(--mall-accent-border);
   border-radius: 8px;
   padding: 14px 8px;
   text-align: center;
@@ -281,7 +281,7 @@ onMounted(async () => {
 }
 
 .promo:hover {
-  background: #fff3eb;
+  background: #fee2e2;
 }
 
 .feed-head {

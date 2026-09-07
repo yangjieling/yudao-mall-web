@@ -253,8 +253,8 @@ async function onLogout() {
 
 .cart-btn {
   justify-self: end;
-  border: 1px solid #f0d4c3;
-  background: #fffaf7;
+  border: 1px solid var(--mall-accent-border);
+  background: var(--mall-accent-soft);
   color: var(--mall-accent);
   padding: 10px 18px;
   border-radius: 6px;
