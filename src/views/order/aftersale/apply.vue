@@ -46,6 +46,9 @@
         </el-form-item>
       </el-form>
     </div>
+    <el-empty v-else-if="!loading" description="请从订单详情进入申请售后" :image-size="80">
+      <el-button type="primary" @click="$router.push('/order')">我的订单</el-button>
+    </el-empty>
   </div>
 </template>
 
@@ -80,8 +83,7 @@ async function load() {
   const orderItemId = Number(route.query.orderItemId)
   const orderId = Number(route.query.orderId)
   if (!orderItemId) {
-    ElMessage.error('缺少订单项')
-    router.back()
+    item.value = null
     return
   }
   loading.value = true
@@ -90,24 +92,26 @@ async function load() {
       const res = await OrderApi.getOrderDetail(orderId)
       item.value = res.data?.items?.find((i) => i.id === orderItemId) || null
     }
-    if (!item.value) {
-      ElMessage.error('请从订单详情进入申请售后')
-      router.back()
-      return
-    }
+    if (!item.value) return
     form.refundPrice = item.value.payPrice || item.value.price * item.value.count
+  } catch {
+    item.value = null
   } finally {
     loading.value = false
   }
 }
 
 async function uploadPic(options: UploadRequestOptions) {
-  const res = await FileApi.upload(options.file as File, 'aftersale')
-  picUrls.value.push(res.data)
-  fileList.value.push({
-    name: (options.file as File).name,
-    url: res.data
-  })
+  try {
+    const res = await FileApi.upload(options.file as File, 'aftersale')
+    picUrls.value.push(res.data)
+    fileList.value.push({
+      name: (options.file as File).name,
+      url: res.data
+    })
+  } catch {
+    ElMessage.error('图片上传失败，请重试')
+  }
 }
 
 function onRemove(file: UploadUserFile) {
@@ -132,6 +136,8 @@ async function submit() {
     })
     ElMessage.success('售后申请已提交')
     router.replace(`/order/aftersale/${id.data}`)
+  } catch {
+    // request 拦截器已提示错误
   } finally {
     submitting.value = false
   }

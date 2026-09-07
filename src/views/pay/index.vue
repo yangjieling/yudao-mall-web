@@ -56,6 +56,7 @@ import {
   channelIcon,
   channelLabel,
   filterPcChannels,
+  isPayWaiting,
   isQrPayChannel,
   isRedirectPayContent
 } from '@/utils/pay'
@@ -93,12 +94,17 @@ async function load() {
   loading.value = true
   try {
     const orderRes = await PayOrderApi.getOrder(id, true)
-    payOrder.value = orderRes.data
-    if (orderRes.data?.status === 10) {
+    payOrder.value = orderRes.data || null
+    if (!payOrder.value) {
+      ElMessage.error('未找到支付单')
+      router.replace('/order')
+      return
+    }
+    if (!isPayWaiting(payOrder.value.status)) {
       router.replace({ path: '/pay/result', query: { id: String(id) } })
       return
     }
-    const appId = orderRes.data?.appId
+    const appId = payOrder.value.appId
     if (appId) {
       const channelRes = await PayChannelApi.getEnableChannelCodeList(appId)
       channels.value = filterPcChannels(channelRes.data || [])
@@ -107,6 +113,11 @@ async function load() {
     } else {
       channels.value = []
     }
+  } catch {
+    payOrder.value = null
+    channels.value = []
+    ElMessage.error('无法打开收银台')
+    router.replace('/order')
   } finally {
     loading.value = false
   }
@@ -118,7 +129,7 @@ function startPoll() {
     if (!payOrder.value) return
     try {
       const res = await PayOrderApi.getOrder(payOrder.value.id, true)
-      if (res.data?.status === 10) {
+      if (!isPayWaiting(res.data?.status)) {
         stopPoll()
         router.replace({ path: '/pay/result', query: { id: String(payOrder.value.id) } })
       }
@@ -138,7 +149,7 @@ function stopPoll() {
 async function refreshStatus() {
   if (!payOrder.value) return
   const res = await PayOrderApi.getOrder(payOrder.value.id, true)
-  if (res.data?.status === 10) {
+  if (!isPayWaiting(res.data?.status)) {
     router.replace({ path: '/pay/result', query: { id: String(payOrder.value.id) } })
   } else {
     ElMessage.info('尚未检测到支付成功，请稍后再试')

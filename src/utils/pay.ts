@@ -14,6 +14,30 @@ import iconWxPub from '@/assets/pay/wx_pub.svg'
 /** PC 端可用的支付渠道 */
 export const PC_PAY_CHANNELS = ['wallet', 'mock', 'wx_native', 'alipay_pc', 'alipay_qr'] as const
 
+/** 与后端 PayOrderStatusEnum 对齐 */
+export const PAY_ORDER_STATUS = {
+  WAITING: 0,
+  SUCCESS: 10,
+  REFUND: 20,
+  CLOSED: 30
+} as const
+
+export function isPayWaiting(status?: number) {
+  return status === PAY_ORDER_STATUS.WAITING
+}
+
+export function isPaySuccess(status?: number) {
+  return status === PAY_ORDER_STATUS.SUCCESS
+}
+
+export function isPayRefund(status?: number) {
+  return status === PAY_ORDER_STATUS.REFUND
+}
+
+export function isPayClosed(status?: number) {
+  return status === PAY_ORDER_STATUS.CLOSED
+}
+
 /** 与后端 PayChannelEnum 对齐的展示名 */
 export const PAY_CHANNEL_LABELS: Record<string, string> = {
   wallet: '钱包余额',

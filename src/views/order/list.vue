@@ -99,6 +99,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { DocumentCopy } from '@element-plus/icons-vue'
 import { OrderApi, ORDER_STATUS_MAP, type TradeOrder } from '@/api/trade/order'
+import { PayOrderApi } from '@/api/pay'
+import { isPayClosed, isPayRefund, isPaySuccess, isPayWaiting } from '@/utils/pay'
 import { formatPrice } from '@/utils/price'
 import { formatDateTime } from '@/utils/datetime'
 
@@ -186,12 +188,27 @@ function onPage(page: number) {
   load()
 }
 
-function goPay(order: TradeOrder) {
-  if (order.payOrderId) {
-    router.push({ path: '/pay', query: { id: String(order.payOrderId) } })
-  } else {
+async function goPay(order: TradeOrder) {
+  if (!order.payOrderId) {
     ElMessage.warning('暂无支付单，请进入详情查看')
     router.push(`/order/${order.id}`)
+    return
+  }
+  const payId = order.payOrderId
+  try {
+    const res = await PayOrderApi.getOrder(payId, true)
+    const status = res.data?.status
+    if (isPaySuccess(status) || isPayClosed(status) || isPayRefund(status)) {
+      router.push({ path: '/pay/result', query: { id: String(payId) } })
+      return
+    }
+    if (!isPayWaiting(status)) {
+      ElMessage.warning('当前支付单不可继续支付')
+      return
+    }
+    router.push({ path: '/pay', query: { id: String(payId) } })
+  } catch {
+    ElMessage.warning('无法打开收银台，请稍后重试')
   }
 }
 

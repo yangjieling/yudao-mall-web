@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
         path: 'goods/:id',
         name: 'GoodsDetail',
         component: () => import('@/views/goods/detail.vue'),
-        meta: { title: '商品详情' }
+        meta: { title: '商品详情', dynamicTitle: true }
       },
       {
         path: 'cart',
@@ -192,7 +192,9 @@ router.beforeEach((to, _from, next) => {
   const nearest = [...to.matched].reverse().find((r) => r.meta.title)
   const pageTitle = (nearest?.meta.title as string) || '首页'
   const appTitle = import.meta.env.VITE_APP_TITLE || 'OM Shop'
-  document.title = `${pageTitle} - ${appTitle}`
+  if (!to.matched.some((r) => r.meta.dynamicTitle)) {
+    document.title = `${pageTitle} - ${appTitle}`
+  }
 
   const needAuth = to.matched.some((r) => r.meta.auth)
   if (needAuth && !getAccessToken()) {

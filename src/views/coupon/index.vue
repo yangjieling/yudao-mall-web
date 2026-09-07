@@ -74,12 +74,17 @@ function onPage(p: number) {
 
 async function take(templateId: number) {
   if (!userStore.isLogin) {
+    ElMessage.info('请先登录后再领取')
     router.push({ path: '/login', query: { redirect: '/coupon' } })
     return
   }
-  await CouponApi.takeCoupon(templateId)
-  ElMessage.success('领取成功')
-  load()
+  try {
+    await CouponApi.takeCoupon(templateId)
+    ElMessage.success('领取成功')
+    load()
+  } catch {
+    // request 拦截器已提示错误
+  }
 }
 
 onMounted(load)

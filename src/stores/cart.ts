@@ -34,7 +34,11 @@ export const useCartStore = defineStore('cart', () => {
 
   async function add(skuId: number, count = 1) {
     await CartApi.addCart({ skuId, count })
-    await getList()
+    try {
+      await getList()
+    } catch {
+      // 加购已成功，刷新失败不影响主流程
+    }
   }
 
   async function updateCount(id: number, count: number) {

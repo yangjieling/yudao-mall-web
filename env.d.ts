@@ -17,3 +17,12 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+declare module 'vue-router' {
+  interface RouteMeta {
+    title?: string
+    auth?: boolean
+    /** 页面自行设置 document.title（如商品详情） */
+    dynamicTitle?: boolean
+  }
+}

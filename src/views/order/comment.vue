@@ -1,7 +1,7 @@
 <template>
   <div class="page-container comment-page">
     <h1>发表评价</h1>
-    <div class="panel">
+    <div v-if="orderItemId" class="panel">
       <el-form label-width="90px" class="form">
         <el-form-item label="评分" required>
           <el-rate v-model="form.scores" />
@@ -37,11 +37,14 @@
         </el-form-item>
       </el-form>
     </div>
+    <el-empty v-else description="缺少订单商品，请从订单进入评价" :image-size="80">
+      <el-button type="primary" @click="$router.push('/order')">我的订单</el-button>
+    </el-empty>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, type UploadRequestOptions, type UploadUserFile } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
@@ -54,6 +57,8 @@ const submitting = ref(false)
 const fileList = ref<UploadUserFile[]>([])
 const picUrls = ref<string[]>([])
 
+const orderItemId = computed(() => Number(route.query.orderItemId) || 0)
+
 const form = reactive({
   scores: 5,
   content: '',
@@ -61,9 +66,13 @@ const form = reactive({
 })
 
 async function uploadPic(options: UploadRequestOptions) {
-  const res = await FileApi.upload(options.file as File, 'comment')
-  picUrls.value.push(res.data)
-  fileList.value.push({ name: (options.file as File).name, url: res.data })
+  try {
+    const res = await FileApi.upload(options.file as File, 'comment')
+    picUrls.value.push(res.data)
+    fileList.value.push({ name: (options.file as File).name, url: res.data })
+  } catch {
+    ElMessage.error('图片上传失败，请重试')
+  }
 }
 
 function onRemove(file: UploadUserFile) {
@@ -72,24 +81,33 @@ function onRemove(file: UploadUserFile) {
 }
 
 async function submit() {
-  const orderItemId = Number(route.query.orderItemId)
-  if (!orderItemId || !form.content) {
+  if (!orderItemId.value) {
+    ElMessage.warning('缺少订单商品，请从订单进入评价')
+    return
+  }
+  if (!form.scores) {
+    ElMessage.warning('请选择评分')
+    return
+  }
+  if (!form.content.trim()) {
     ElMessage.warning('请填写评价内容')
     return
   }
   submitting.value = true
   try {
     await OrderApi.createOrderItemComment({
-      orderItemId,
+      orderItemId: orderItemId.value,
       descriptionScores: form.scores,
       benefitScores: form.scores,
-      content: form.content,
+      content: form.content.trim(),
       picUrls: picUrls.value,
       anonymous: form.anonymous
     })
     ElMessage.success('评价成功')
     const orderId = route.query.orderId
     router.replace(orderId ? `/order/${orderId}` : '/order')
+  } catch {
+    // request 拦截器已提示错误
   } finally {
     submitting.value = false
   }
@@ -125,6 +143,6 @@ h1::before {
 }
 
 .form {
-  max-width: 560px;
+  max-width: 640px;
 }
 </style>

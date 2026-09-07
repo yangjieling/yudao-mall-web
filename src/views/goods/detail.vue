@@ -204,6 +204,13 @@
         </div>
       </section>
     </template>
+    <el-empty
+      v-else-if="!loading"
+      description="商品不存在或已下架"
+      :image-size="96"
+    >
+      <el-button type="primary" @click="$router.push('/category')">去逛逛</el-button>
+    </el-empty>
   </div>
 </template>
 
@@ -383,24 +390,26 @@ async function loadRecommends(detail: ProductSpu) {
 
 async function loadDetail() {
   const id = Number(route.params.id)
-  if (!id) return
+  if (!id) {
+    spu.value = null
+    return
+  }
   loading.value = true
   activeTab.value = 'comment'
   recommends.value = []
   try {
     const detailRes = await SpuApi.getSpuDetail(id)
-    spu.value = detailRes.data
+    spu.value = detailRes.data || null
+    if (!spu.value) return
     activePic.value = pics.value[0] || ''
     Object.keys(selectedProps).forEach((k) => delete selectedProps[k])
-    const first = spu.value?.skus?.[0]
+    const first = spu.value.skus?.[0]
     for (const p of first?.properties || []) {
       if (p.propertyName && p.valueName) {
         selectedProps[p.propertyName] = p.valueName
       }
     }
-    if (spu.value) {
-      loadRecommends(spu.value)
-    }
+    loadRecommends(spu.value)
     try {
       const commentRes = await CommentApi.getCommentPage(id, 1, 8, 0)
       comments.value = commentRes.data?.list || []
@@ -419,6 +428,11 @@ async function loadDetail() {
     } else {
       favorited.value = false
     }
+  } catch {
+    spu.value = null
+    comments.value = []
+    commentTotal.value = 0
+    favorited.value = false
   } finally {
     loading.value = false
   }
@@ -439,6 +453,7 @@ async function toggleFavorite() {
 
 function ensureLogin() {
   if (!userStore.isLogin) {
+    ElMessage.info('请先登录后再操作')
     router.push({ path: '/login', query: { redirect: route.fullPath } })
     return false
   }
@@ -446,13 +461,25 @@ function ensureLogin() {
 }
 
 async function addToCart() {
-  if (!ensureLogin() || !selectedSku.value) return
-  await cartStore.add(selectedSku.value.id, count.value)
-  ElMessage.success('已加入购物车')
+  if (!ensureLogin()) return
+  if (!selectedSku.value) {
+    ElMessage.warning('请选择完整规格')
+    return
+  }
+  try {
+    await cartStore.add(selectedSku.value.id, count.value)
+    ElMessage.success('已加入购物车')
+  } catch {
+    // request 拦截器已提示错误
+  }
 }
 
 async function buyNow() {
-  if (!ensureLogin() || !selectedSku.value) return
+  if (!ensureLogin()) return
+  if (!selectedSku.value) {
+    ElMessage.warning('请选择完整规格')
+    return
+  }
   router.push({
     path: '/checkout',
     query: {
@@ -461,6 +488,15 @@ async function buyNow() {
     }
   })
 }
+
+const appTitle = import.meta.env.VITE_APP_TITLE || 'OM Shop'
+watch(
+  () => spu.value?.name,
+  (name) => {
+    document.title = name ? `${name} - ${appTitle}` : `商品详情 - ${appTitle}`
+  },
+  { immediate: true }
+)
 
 onMounted(async () => {
   await Promise.all([loadCategories(), loadDetail()])
@@ -856,13 +892,14 @@ watch(() => route.params.id, loadDetail)
   align-items: center;
   gap: 6px;
   min-height: 32px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--mall-accent-border);
   background: #fff;
-  border-radius: 2px;
+  border-radius: 4px;
   padding: 5px 12px;
   cursor: pointer;
   font-size: 13px;
   color: var(--mall-ink);
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
 
 .sku-value.has-pic {
@@ -872,11 +909,13 @@ watch(() => route.params.id, loadDetail)
 .sku-value:hover {
   border-color: var(--mall-accent);
   color: var(--mall-accent);
+  background: var(--mall-accent-soft);
 }
 
 .sku-value.active {
   border-color: var(--mall-accent);
   color: var(--mall-accent);
+  background: var(--mall-accent-soft);
 }
 
 .sku-value.active::after {

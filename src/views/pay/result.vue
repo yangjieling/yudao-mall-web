@@ -5,7 +5,7 @@
         <div class="icon-wrap">
           <el-icon :size="48">
             <CircleCheckFilled v-if="success" />
-            <CircleCloseFilled v-else-if="failed" />
+            <CircleCloseFilled v-else-if="closed || refunded" />
             <WarningFilled v-else />
           </el-icon>
         </div>
@@ -13,12 +13,12 @@
         <p class="sub">{{ subText }}</p>
         <div class="amount price">{{ formatPrice(payOrder.price) }}</div>
         <div class="actions">
-          <el-button v-if="!success" type="primary" @click="continuePay">继续支付</el-button>
+          <el-button v-if="waiting" type="primary" @click="continuePay">继续支付</el-button>
           <el-button :type="success ? 'primary' : 'default'" @click="$router.push('/order')">
             查看订单
           </el-button>
           <el-button @click="$router.push('/')">返回首页</el-button>
-          <el-button v-if="!success && !failed" @click="refresh">刷新状态</el-button>
+          <el-button v-if="waiting" @click="refresh">刷新状态</el-button>
         </div>
       </template>
       <template v-else-if="!loading">
@@ -41,6 +41,12 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { CircleCheckFilled, CircleCloseFilled, WarningFilled } from '@element-plus/icons-vue'
 import { PayOrderApi, type PayOrderInfo } from '@/api/pay'
+import {
+  isPayClosed,
+  isPayRefund,
+  isPaySuccess,
+  isPayWaiting
+} from '@/utils/pay'
 import { formatPrice } from '@/utils/price'
 
 const route = useRoute()
@@ -49,23 +55,26 @@ const loading = ref(false)
 const payOrder = ref<PayOrderInfo | null>(null)
 let timer: number | undefined
 
-/** 支付成功状态一般为 10，关闭 20 */
-const success = computed(() => payOrder.value?.status === 10)
-const failed = computed(() => payOrder.value?.status === 20)
+const success = computed(() => isPaySuccess(payOrder.value?.status))
+const refunded = computed(() => isPayRefund(payOrder.value?.status))
+const closed = computed(() => isPayClosed(payOrder.value?.status))
+const waiting = computed(() => isPayWaiting(payOrder.value?.status))
 const stateClass = computed(() => {
   if (!payOrder.value) return 'pending'
   if (success.value) return 'ok'
-  if (failed.value) return 'fail'
+  if (closed.value || refunded.value) return 'fail'
   return 'pending'
 })
 const titleText = computed(() => {
   if (success.value) return '支付成功'
-  if (failed.value) return '支付关闭'
+  if (refunded.value) return '已退款'
+  if (closed.value) return '支付关闭'
   return '支付处理中'
 })
 const subText = computed(() => {
   if (success.value) return '感谢您的购买，可在订单中心查看详情'
-  if (failed.value) return '支付已关闭，可返回订单重新发起支付'
+  if (refunded.value) return '该支付单已退款，可在订单中心查看详情'
+  if (closed.value) return '支付已关闭，请返回订单查看或重新下单'
   return '支付结果确认中，请稍候刷新或继续完成付款'
 })
 
@@ -88,7 +97,7 @@ async function refresh() {
   try {
     const res = await PayOrderApi.getOrder(id, true)
     payOrder.value = res.data || null
-    if (res.data?.status === 10 || res.data?.status === 20) {
+    if (!isPayWaiting(res.data?.status)) {
       stopPoll()
     }
   } catch {
@@ -100,7 +109,7 @@ async function refresh() {
 
 function startPoll() {
   timer = window.setInterval(() => {
-    if (!success.value && !failed.value) refresh()
+    if (waiting.value) refresh()
   }, 2500)
 }
 
@@ -113,7 +122,7 @@ function stopPoll() {
 
 onMounted(async () => {
   await refresh()
-  if (payOrder.value && !success.value && !failed.value) startPoll()
+  if (waiting.value) startPoll()
 })
 onUnmounted(stopPoll)
 </script>

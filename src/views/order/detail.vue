@@ -36,9 +36,23 @@
       <div class="panel">
         <h2>商品信息</h2>
         <div v-for="item in order.items || []" :key="item.id" class="item-row">
-          <img :src="item.picUrl" :alt="item.spuName" />
+          <router-link
+            v-if="item.spuId"
+            :to="`/goods/${item.spuId}`"
+            class="thumb-link"
+          >
+            <img :src="item.picUrl" :alt="item.spuName" />
+          </router-link>
+          <img v-else :src="item.picUrl" :alt="item.spuName" />
           <div class="item-body">
-            <div class="name">{{ item.spuName }}</div>
+            <router-link
+              v-if="item.spuId"
+              :to="`/goods/${item.spuId}`"
+              class="name"
+            >
+              {{ item.spuName }}
+            </router-link>
+            <div v-else class="name">{{ item.spuName }}</div>
             <div class="muted">
               <span v-for="(p, i) in item.properties || []" :key="i">
                 {{ p.propertyName }}:{{ p.valueName }}
@@ -100,9 +114,7 @@
       </div>
 
       <div class="actions">
-        <el-button v-if="order.status === 0 && order.payOrderId" type="primary" @click="goPay">
-          去支付
-        </el-button>
+        <el-button v-if="order.status === 0" type="primary" @click="goPay">去支付</el-button>
         <el-button v-if="order.status === 0" @click="cancel">取消订单</el-button>
         <el-button v-if="order.status === 20" type="primary" @click="receive">确认收货</el-button>
         <el-button @click="$router.push('/order')">返回列表</el-button>
@@ -134,6 +146,8 @@ import {
   type TradeOrder,
   type TradeOrderItem
 } from '@/api/trade/order'
+import { PayOrderApi } from '@/api/pay'
+import { isPayClosed, isPayRefund, isPaySuccess, isPayWaiting } from '@/utils/pay'
 import { formatPrice } from '@/utils/price'
 import { formatDateTime } from '@/utils/datetime'
 
@@ -179,9 +193,26 @@ function canAfterSale(item: TradeOrderItem) {
   return [10, 20, 30].includes(order.value.status) && (item.afterSaleStatus === 0 || item.afterSaleStatus == null)
 }
 
-function goPay() {
-  if (order.value?.payOrderId) {
-    router.push({ path: '/pay', query: { id: String(order.value.payOrderId) } })
+async function goPay() {
+  if (!order.value?.payOrderId) {
+    ElMessage.warning('暂无可用支付单，请稍后重试或联系客服')
+    return
+  }
+  const payId = order.value.payOrderId
+  try {
+    const res = await PayOrderApi.getOrder(payId, true)
+    const status = res.data?.status
+    if (isPaySuccess(status) || isPayClosed(status) || isPayRefund(status)) {
+      router.push({ path: '/pay/result', query: { id: String(payId) } })
+      return
+    }
+    if (!isPayWaiting(status)) {
+      ElMessage.warning('当前支付单不可继续支付')
+      return
+    }
+    router.push({ path: '/pay', query: { id: String(payId) } })
+  } catch {
+    ElMessage.warning('无法打开收银台，请稍后重试')
   }
 }
 
@@ -403,9 +434,19 @@ h2::before {
   background: #f3f4f6;
 }
 
+.thumb-link {
+  display: block;
+  line-height: 0;
+}
+
 .name {
   font-size: 14px;
   line-height: 1.45;
+  color: var(--mall-ink);
+}
+
+a.name:hover {
+  color: var(--mall-accent);
 }
 
 .muted {
