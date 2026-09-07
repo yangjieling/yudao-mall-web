@@ -302,9 +302,11 @@ async function onLogout() {
 }
 
 .search-wrap {
-  max-width: 640px;
-  margin: 0 auto;
+  /* 右缘对齐首页轮播（为右侧运营卡 220 + gap 12 留空） */
   width: 100%;
+  max-width: calc(100% - 232px);
+  margin: 0;
+  min-width: 0;
 }
 
 .search :deep(.el-input__wrapper) {
@@ -458,6 +460,10 @@ async function onLogout() {
   .header-inner {
     grid-template-columns: 1fr;
     gap: 12px;
+  }
+
+  .search-wrap {
+    max-width: none;
   }
 
   .cate-panel {
