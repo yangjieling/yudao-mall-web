@@ -9,7 +9,7 @@
           class="cate-item"
           :to="{ path: '/category', query: { categoryId: cat.id } }"
         >
-          <el-icon class="cate-icon" :size="16">
+          <el-icon class="cate-icon" :size="18">
             <component :is="iconForCategory(cat.name)" />
           </el-icon>
           <span class="cate-copy">
@@ -22,7 +22,6 @@
             </span>
           </span>
         </router-link>
-        <router-link to="/category" class="cate-more">全部商品 →</router-link>
       </aside>
 
       <div class="portal-main">
@@ -82,31 +81,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref, type Component } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {
-  Bowl,
-  Box,
-  Cellphone,
-  CoffeeCup,
-  FirstAidKit,
-  Goods,
-  Grape,
-  Headset,
-  House,
-  Iphone,
-  MagicStick,
-  Menu,
-  Monitor,
-  Orange,
-  Present,
-  ShoppingBag,
-  Soccer,
-  Van
-} from '@element-plus/icons-vue'
 import { CategoryApi, SpuApi, type ProductCategory, type ProductSpu } from '@/api/product'
 import { BannerApi, type Banner } from '@/api/promotion/banner'
 import ProductCard from '@/components/ProductCard.vue'
+import { iconForCategory } from '@/utils/categoryIcon'
 
 const router = useRouter()
 
@@ -162,28 +142,6 @@ const rootCategories = computed(() =>
 
 function childrenOf(parentId: number) {
   return categories.value.filter((c) => c.parentId === parentId)
-}
-
-function iconForCategory(name: string): Component {
-  const n = name || ''
-  if (/电脑|办公|配件|数码/.test(n)) return Monitor
-  if (/手机|通信|运营商/.test(n)) return Iphone
-  if (/家电|电器/.test(n)) return House
-  if (/家具|家装|家居|厨/.test(n)) return CoffeeCup
-  if (/女装|男装|内衣|配饰|童装|服/.test(n)) return ShoppingBag
-  if (/鞋|运动|户外/.test(n)) return Soccer
-  if (/美妆|个护|洗护/.test(n)) return MagicStick
-  if (/食品|零食|生鲜|酒|茶/.test(n)) return Grape
-  if (/母婴|玩具|宠物/.test(n)) return Present
-  if (/汽车|箱包|珠宝/.test(n)) return Van
-  if (/健康|医药|保健/.test(n)) return FirstAidKit
-  if (/耳机|音响/.test(n)) return Headset
-  if (/水果|生鲜/.test(n)) return Orange
-  if (/餐|碗/.test(n)) return Bowl
-  if (/手机/.test(n)) return Cellphone
-  if (/日用|百货/.test(n)) return Box
-  if (/商品|好物/.test(n)) return Goods
-  return Menu
 }
 
 function onBanner(b: Banner) {
@@ -257,7 +215,7 @@ onMounted(async () => {
 
 .cate-icon {
   margin-top: 2px;
-  color: #9ca3af;
+  color: #6b7280;
   flex-shrink: 0;
 }
 
@@ -285,15 +243,6 @@ onMounted(async () => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.cate-more {
-  display: block;
-  margin-top: 4px;
-  padding: 10px;
-  font-size: 13px;
-  color: var(--mall-accent);
-  border-top: 1px solid var(--mall-line);
 }
 
 .portal-main {
