@@ -1,11 +1,15 @@
 import request from '@/utils/request'
 import type { PageParam, PageResult } from '@/types/api'
-import type { ProductSpu } from '@/api/product'
 
+/** 与 AppProductBrowseHistoryRespVO 对齐：商品字段为扁平结构 */
 export interface BrowseHistoryItem {
   id: number
   spuId: number
-  spu?: ProductSpu
+  spuName?: string
+  picUrl?: string
+  price?: number
+  salesCount?: number
+  stock?: number
   createTime?: string
 }
 

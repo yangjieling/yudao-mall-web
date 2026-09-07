@@ -5,9 +5,9 @@
     <div class="grid">
       <div v-for="item in list" :key="item.id" class="card">
         <router-link :to="`/goods/${item.spuId}`">
-          <img :src="item.spu?.picUrl" :alt="item.spu?.name" />
-          <div class="name">{{ item.spu?.name }}</div>
-          <div class="price">{{ formatPrice(item.spu?.price) }}</div>
+          <img :src="item.picUrl" :alt="item.spuName" />
+          <div class="name">{{ item.spuName }}</div>
+          <div class="price">{{ formatPrice(item.price) }}</div>
         </router-link>
         <el-button link type="danger" @click="remove(item.spuId)">取消收藏</el-button>
       </div>
