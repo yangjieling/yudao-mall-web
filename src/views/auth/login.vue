@@ -3,7 +3,7 @@
     <div class="login-card">
       <div class="brand">
         <span class="mark">{{ brandMark }}</span>
-        <h1>{{ title }}</h1>
+        <h1>SHOP</h1>
         <p>登录后可购物、下单与查看订单</p>
       </div>
 

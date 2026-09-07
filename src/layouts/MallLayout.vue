@@ -24,9 +24,14 @@
       <div class="page-container header-inner">
         <router-link to="/" class="brand">
           <span class="brand-mark">{{ brandMark }}</span>
-          <div class="brand-text">
-            <span class="brand-name">{{ title }}</span>
-            <span class="brand-sub">Oh My</span>
+          <div class="brand-main">
+            <span class="brand-name">SHOP</span>
+            <span class="brand-sub">{{ brandUrl }}</span>
+          </div>
+          <span class="brand-divider" aria-hidden="true" />
+          <div class="brand-tag">
+            <span>热卖</span>
+            <span>好物</span>
           </div>
         </router-link>
 
@@ -110,7 +115,7 @@
     </main>
 
     <footer class="mall-footer">
-      <div class="page-container">{{ title }} · Oh My</div>
+      <div class="page-container">OM SHOP · {{ brandUrl }}</div>
     </footer>
   </div>
 </template>
@@ -123,6 +128,7 @@ import { useUserStore } from '@/stores/user'
 import { useCartStore } from '@/stores/cart'
 
 const title = import.meta.env.VITE_APP_TITLE
+const brandUrl = 'om.shop.com'
 const brandMark = computed(() => {
   const t = (title || 'OM').trim()
   if (/^OM\b/i.test(t)) return 'OM'
@@ -226,8 +232,8 @@ async function onLogout() {
 
 .header-inner {
   display: grid;
-  grid-template-columns: 200px 1fr 120px;
-  gap: 28px;
+  grid-template-columns: 280px 1fr 120px;
+  gap: 24px;
   align-items: start;
 }
 
@@ -235,40 +241,69 @@ async function onLogout() {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-top: 4px;
+  padding-top: 2px;
+  min-width: 0;
 }
 
 .brand-mark {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 12px;
   background: var(--mall-accent);
   color: #fff;
   display: grid;
   place-items: center;
   font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.02em;
+  font-size: 16px;
+  letter-spacing: 0.04em;
   flex-shrink: 0;
 }
 
-.brand-text {
+.brand-main {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  justify-content: center;
+  line-height: 1.15;
+  min-width: 0;
 }
 
 .brand-name {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 26px;
+  font-weight: 800;
   color: var(--mall-accent);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .brand-sub {
-  margin-top: 2px;
+  margin-top: 3px;
   font-size: 12px;
-  color: var(--mall-muted);
+  color: var(--mall-accent);
+  opacity: 0.75;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.brand-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--mall-accent);
+  opacity: 0.35;
+  flex-shrink: 0;
+  margin: 0 2px;
+}
+
+.brand-tag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--mall-accent);
+  white-space: nowrap;
 }
 
 .search-wrap {

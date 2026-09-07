@@ -41,7 +41,7 @@
         </el-carousel>
         <div v-else class="banner-fallback">
           <div class="fallback-copy">
-            <h1>{{ title }}</h1>
+            <h1>SHOP</h1>
             <p>搜索好物，或从左侧分类开始逛</p>
             <el-button type="primary" @click="$router.push('/category')">浏览全部商品</el-button>
           </div>
@@ -105,7 +105,6 @@ import { CategoryApi, SpuApi, type ProductCategory, type ProductSpu } from '@/ap
 import { BannerApi, type Banner } from '@/api/promotion/banner'
 import ProductCard from '@/components/ProductCard.vue'
 
-const title = import.meta.env.VITE_APP_TITLE
 const router = useRouter()
 
 const loading = ref(false)
