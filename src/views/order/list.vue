@@ -22,8 +22,11 @@
     <div v-for="order in list" :key="order.id" class="order-card">
       <div class="order-head">
         <div class="head-left">
-          <span class="no">订单号 {{ order.no }}</span>
-          <span v-if="order.createTime" class="time">{{ order.createTime }}</span>
+          <button type="button" class="no-chip" title="点击复制" @click="copyOrderNo(order.no)">
+            <span class="no-text">{{ order.no }}</span>
+            <el-icon :size="13"><DocumentCopy /></el-icon>
+          </button>
+          <span v-if="order.createTime" class="time">{{ formatDateTime(order.createTime) }}</span>
         </div>
         <span class="status" :class="statusClass(order.status)">
           {{ ORDER_STATUS_MAP[order.status] || order.status }}
@@ -72,8 +75,10 @@
 import { onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { DocumentCopy } from '@element-plus/icons-vue'
 import { OrderApi, ORDER_STATUS_MAP, type TradeOrder } from '@/api/trade/order'
 import { formatPrice } from '@/utils/price'
+import { formatDateTime } from '@/utils/datetime'
 
 const route = useRoute()
 const router = useRouter()
@@ -92,6 +97,16 @@ const tabs = [
   { name: '30', label: '已完成' },
   { name: '40', label: '已取消' }
 ]
+
+async function copyOrderNo(no?: string) {
+  if (!no) return
+  try {
+    await navigator.clipboard.writeText(no)
+    ElMessage.success('订单号已复制')
+  } catch {
+    ElMessage.error('复制失败')
+  }
+}
 
 function normalizeStatus(raw: unknown): string {
   const val = Array.isArray(raw) ? raw[0] : raw
@@ -248,15 +263,37 @@ h1::before {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
   font-size: 13px;
   color: var(--mall-muted);
 }
 
-.no {
+.no-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
   color: var(--mall-ink);
-  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.no-chip:hover {
+  color: var(--mall-accent);
+}
+
+.no-text {
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.time {
+  font-variant-numeric: tabular-nums;
 }
 
 .status {

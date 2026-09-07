@@ -7,8 +7,17 @@
           <div class="value">{{ ORDER_STATUS_MAP[order.status] || order.status }}</div>
         </div>
         <div class="status-meta">
-          <div>订单号 {{ order.no }}</div>
-          <div v-if="order.createTime">下单时间 {{ order.createTime }}</div>
+          <div class="meta-item">
+            <span class="meta-label">订单号</span>
+            <button type="button" class="no-chip" title="点击复制" @click="copyOrderNo(order.no)">
+              <span class="no-text">{{ order.no }}</span>
+              <el-icon :size="14"><DocumentCopy /></el-icon>
+            </button>
+          </div>
+          <div v-if="order.createTime" class="meta-item">
+            <span class="meta-label">下单时间</span>
+            <span class="meta-value">{{ formatDateTime(order.createTime) }}</span>
+          </div>
         </div>
       </div>
 
@@ -117,6 +126,7 @@
 import { onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { DocumentCopy } from '@element-plus/icons-vue'
 import {
   OrderApi,
   ORDER_STATUS_MAP,
@@ -125,6 +135,7 @@ import {
   type TradeOrderItem
 } from '@/api/trade/order'
 import { formatPrice } from '@/utils/price'
+import { formatDateTime } from '@/utils/datetime'
 
 const route = useRoute()
 const router = useRouter()
@@ -133,6 +144,16 @@ const order = ref<TradeOrder | null>(null)
 const showExpress = ref(false)
 const expressLoading = ref(false)
 const tracks = ref<ExpressTrack[]>([])
+
+async function copyOrderNo(no?: string) {
+  if (!no) return
+  try {
+    await navigator.clipboard.writeText(no)
+    ElMessage.success('订单号已复制')
+  } catch {
+    ElMessage.error('复制失败')
+  }
+}
 
 async function load() {
   const id = Number(route.params.id)
@@ -254,10 +275,57 @@ onMounted(load)
 }
 
 .status-meta {
-  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 260px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.meta-label {
+  flex-shrink: 0;
+  font-size: 12px;
   color: var(--mall-muted);
-  line-height: 1.7;
-  text-align: right;
+  line-height: 1;
+}
+
+.meta-value {
+  font-size: 13px;
+  color: var(--mall-ink);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+.no-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: var(--mall-ink);
+  transition: color 0.15s;
+}
+
+.no-chip:hover {
+  color: var(--mall-accent);
+}
+
+.no-text {
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .panel {
@@ -414,7 +482,12 @@ h2::before {
 
 @media (max-width: 720px) {
   .status-meta {
-    text-align: left;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .meta-item {
+    justify-content: flex-start;
   }
 
   .item-row {
