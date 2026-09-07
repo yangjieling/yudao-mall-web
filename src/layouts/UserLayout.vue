@@ -2,13 +2,14 @@
   <div class="page-container user-layout">
     <aside class="side">
       <div class="side-user">
-        <el-avatar :size="56" :src="userStore.userInfo?.avatar">
+        <el-avatar :size="64" :src="userStore.userInfo?.avatar" class="avatar">
           {{ (userStore.userInfo?.nickname || '会').slice(0, 1) }}
         </el-avatar>
         <div class="nick">{{ userStore.userInfo?.nickname || '会员' }}</div>
-        <div class="mobile">{{ userStore.userInfo?.mobile }}</div>
+        <div class="mobile">{{ userStore.userInfo?.mobile || '未绑定手机' }}</div>
+        <div class="level">{{ userStore.userInfo?.level?.name || '普通会员' }}</div>
       </div>
-      <el-menu :default-active="active" router>
+      <el-menu :default-active="active" router class="side-menu">
         <el-menu-item index="/user">个人中心</el-menu-item>
         <el-menu-item index="/user/profile">账号资料</el-menu-item>
         <el-menu-item index="/user/address">收货地址</el-menu-item>
@@ -45,30 +46,42 @@ const active = computed(() => {
 <style scoped lang="scss">
 .user-layout {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 20px;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 16px;
   align-items: start;
+  padding-bottom: 40px;
 }
 
 .side {
   background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
   border-radius: var(--mall-radius);
-  padding: 16px 0;
+  padding: 0 0 12px;
   position: sticky;
-  top: 96px;
+  top: 52px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
 }
 
 .side-user {
   text-align: center;
-  padding: 8px 16px 20px;
-  border-bottom: 1px solid var(--mall-line);
-  margin-bottom: 8px;
+  padding: 22px 16px 18px;
+  background: linear-gradient(180deg, #fff5f5 0%, #fff 78%);
+  border-bottom: 1px solid #f3f4f6;
+  margin-bottom: 4px;
+}
+
+.avatar {
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--mall-accent-border);
+  background: var(--mall-accent-soft);
+  color: var(--mall-accent);
+  font-weight: 700;
 }
 
 .nick {
-  margin-top: 10px;
-  font-weight: 600;
+  margin-top: 12px;
+  font-weight: 700;
+  font-size: 16px;
 }
 
 .mobile {
@@ -77,11 +90,51 @@ const active = computed(() => {
   margin-top: 4px;
 }
 
-.content {
-  min-height: 480px;
+.level {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--mall-accent-soft);
+  color: var(--mall-accent);
+  font-size: 12px;
+  font-weight: 600;
 }
 
-:deep(.el-menu) {
-  border-right: none;
+.content {
+  min-height: 480px;
+  min-width: 0;
+}
+
+.side-menu {
+  border-right: none !important;
+  background: transparent;
+}
+
+:deep(.el-menu-item) {
+  height: 44px;
+  line-height: 44px;
+  margin: 2px 8px;
+  border-radius: 8px;
+}
+
+:deep(.el-menu-item.is-active) {
+  background: var(--mall-accent-soft) !important;
+  color: var(--mall-accent) !important;
+  font-weight: 600;
+}
+
+:deep(.el-menu-item:hover) {
+  background: #fafafa !important;
+}
+
+@media (max-width: 900px) {
+  .user-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .side {
+    position: static;
+  }
 }
 </style>

@@ -5,20 +5,22 @@
       <el-button type="primary" @click="openDialog()">新增地址</el-button>
     </div>
 
-    <el-empty v-if="!list.length" description="暂无收货地址" />
+    <el-empty v-if="!list.length" description="暂无收货地址" :image-size="80">
+      <el-button type="primary" @click="openDialog()">添加地址</el-button>
+    </el-empty>
 
-    <div v-for="item in list" :key="item.id" class="addr-card">
+    <div v-for="item in list" :key="item.id" class="addr-card" :class="{ default: item.defaultStatus }">
       <div class="main">
-        <div>
+        <div class="top">
           <strong>{{ item.name }}</strong>
           <span class="mobile">{{ item.mobile }}</span>
-          <el-tag v-if="item.defaultStatus" size="small" type="warning" class="tag">默认</el-tag>
+          <span v-if="item.defaultStatus" class="default-tag">默认</span>
         </div>
         <div class="detail">{{ item.areaName }} {{ item.detailAddress }}</div>
       </div>
       <div class="ops">
-        <el-button link type="primary" @click="openDialog(item)">编辑</el-button>
-        <el-button link type="danger" @click="remove(item.id)">删除</el-button>
+        <button type="button" class="link" @click="openDialog(item)">编辑</button>
+        <button type="button" class="link danger" @click="remove(item.id)">删除</button>
       </div>
     </div>
 
@@ -159,40 +161,106 @@ onMounted(load)
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+  gap: 12px;
 }
 
 h1 {
   margin: 0;
   font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+h1::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--mall-accent);
 }
 
 .addr-card {
-  background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
-  border-radius: var(--mall-radius);
-  padding: 16px 20px;
-  margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
   gap: 16px;
+  background: var(--mall-surface);
+  border-radius: var(--mall-radius);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  border: 1px solid transparent;
+}
+
+.addr-card.default {
+  border-color: var(--mall-accent-border);
+  background: linear-gradient(90deg, #fffafa 0%, #fff 60%);
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+}
+
+.top strong {
+  font-size: 15px;
 }
 
 .mobile {
-  margin-left: 12px;
   color: var(--mall-muted);
+  font-size: 14px;
 }
 
-.tag {
-  margin-left: 8px;
+.default-tag {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--mall-accent);
+  color: #fff;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
 }
 
 .detail {
-  margin-top: 6px;
+  margin-top: 8px;
   color: var(--mall-muted);
   font-size: 13px;
+  line-height: 1.5;
 }
 
 .ops {
   flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.link {
+  border: 0;
+  background: transparent;
+  color: var(--mall-accent);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0;
+}
+
+.link:hover {
+  color: var(--mall-accent-dark);
+}
+
+.link.danger {
+  color: var(--mall-muted);
+}
+
+.link.danger:hover {
+  color: var(--mall-accent);
+}
+
+@media (max-width: 640px) {
+  .addr-card {
+    flex-direction: column;
+  }
 }
 </style>
