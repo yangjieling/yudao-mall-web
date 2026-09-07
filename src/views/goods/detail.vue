@@ -416,6 +416,9 @@ watch(() => route.params.id, loadDetail)
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 40px;
+  --gallery-h: min(600px, calc(100vh - 220px));
+  /* 右侧购买卡相对视口自适应高度（顶栏/导航预留） */
+  --buy-h: calc(100vh - 200px);
 }
 
 .breadcrumb {
@@ -461,6 +464,8 @@ watch(() => route.params.id, loadDetail)
 
 .right-col {
   min-width: 0;
+  display: flex;
+  align-self: start;
 }
 
 .gallery-card,
@@ -480,8 +485,12 @@ watch(() => route.params.id, loadDetail)
 .info-card {
   position: sticky;
   top: 52px;
+  flex: 1;
+  width: 100%;
   padding: 14px 16px 18px;
-  max-height: calc(100vh - 64px);
+  /* 不跟图集绑死，按屏幕可视高度自适应撑开 */
+  min-height: var(--buy-h);
+  max-height: var(--buy-h);
   overflow-y: auto;
 }
 
@@ -489,8 +498,8 @@ watch(() => route.params.id, loadDetail)
   display: flex;
   gap: 10px;
   min-width: 0;
-  /* 固定高度：笔记本/外接屏一致，首屏能完整看到 Tab 文字 */
-  height: 360px;
+  /* 略增高：约占一屏更大比例，仍留出下方 Tab */
+  height: var(--gallery-h, 460px);
   align-items: stretch;
 }
 
@@ -1004,6 +1013,7 @@ watch(() => route.params.id, loadDetail)
 
   .info-card {
     position: static;
+    min-height: 0;
     max-height: none;
   }
 
