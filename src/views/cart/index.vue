@@ -84,17 +84,29 @@
         </div>
       </div>
     </section>
+    <section v-if="recommends.length" class="recommend">
+      <div class="recommend-head">
+        <h2>{{ isEmpty ? '猜你喜欢' : '看了又看' }}</h2>
+        <router-link to="/category">更多商品</router-link>
+      </div>
+      <div class="recommend-grid">
+        <ProductCard v-for="item in recommends" :key="item.id" :spu="item" />
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { SpuApi, type ProductSpu } from '@/api/product'
+import ProductCard from '@/components/ProductCard.vue'
 import { useCartStore } from '@/stores/cart'
 import { formatPrice } from '@/utils/price'
 
 const cartStore = useCartStore()
 const router = useRouter()
+const recommends = ref<ProductSpu[]>([])
 
 const allSelected = computed(
   () => cartStore.validList.length > 0 && cartStore.validList.every((i) => i.selected)
@@ -102,9 +114,42 @@ const allSelected = computed(
 const indeterminate = computed(
   () => cartStore.selectedList.length > 0 && cartStore.selectedList.length < cartStore.validList.length
 )
+const isEmpty = computed(
+  () => !cartStore.validList.length && !cartStore.invalidList.length
+)
+const cartSpuIds = computed(() => {
+  const ids = new Set<number>()
+  for (const item of [...cartStore.validList, ...cartStore.invalidList]) {
+    if (item.spu?.id) ids.add(item.spu.id)
+  }
+  return ids
+})
 
-onMounted(() => cartStore.getList())
+async function loadRecommends() {
+  try {
+    const res = await SpuApi.getSpuPage({
+      pageNo: 1,
+      pageSize: 12,
+      sortField: 'salesCount',
+      sortAsc: false
+    })
+    const exclude = cartSpuIds.value
+    recommends.value = (res.data?.list || [])
+      .filter((item) => !exclude.has(item.id))
+      .slice(0, 8)
+  } catch {
+    recommends.value = []
+  }
+}
 
+onMounted(async () => {
+  await cartStore.getList()
+  await loadRecommends()
+})
+
+watch(cartSpuIds, () => {
+  loadRecommends()
+})
 async function toggleAll(val: boolean | string | number) {
   const ids = cartStore.validList.map((i) => i.id)
   await cartStore.updateSelected(ids, !!val)
@@ -261,5 +306,68 @@ h1::before {
   background: #f3f4f6;
   color: var(--mall-muted);
   font-size: 12px;
+}
+
+.recommend {
+  margin-top: 28px;
+  background: var(--mall-surface);
+  border-radius: var(--mall-radius);
+  padding: 18px 20px 20px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.recommend-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.recommend-head h2 {
+  margin: 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--mall-ink);
+}
+
+.recommend-head h2::before {
+  content: '';
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--mall-accent);
+}
+
+.recommend-head a {
+  font-size: 13px;
+  color: var(--mall-muted);
+}
+
+.recommend-head a:hover {
+  color: var(--mall-accent);
+}
+
+.recommend-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 1100px) {
+  .recommend-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .row {
+    grid-template-columns: 60px 1fr 100px 120px 100px 64px;
+  }
+}
+
+@media (max-width: 800px) {
+  .recommend-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 </style>

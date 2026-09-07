@@ -189,8 +189,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _from, next) => {
-  const title = (to.meta.title as string) || import.meta.env.VITE_APP_TITLE
-  document.title = `${title} - ${import.meta.env.VITE_APP_TITLE}`
+  const nearest = [...to.matched].reverse().find((r) => r.meta.title)
+  const pageTitle = (nearest?.meta.title as string) || '首页'
+  const appTitle = import.meta.env.VITE_APP_TITLE || 'OM Shop'
+  document.title = `${pageTitle} - ${appTitle}`
 
   const needAuth = to.matched.some((r) => r.meta.auth)
   if (needAuth && !getAccessToken()) {
