@@ -1,13 +1,20 @@
 <template>
-  <div class="page-container comment-page" v-loading="loading">
+  <div class="page-container comment-page">
     <h1>发表评价</h1>
     <div class="panel">
-      <el-form label-width="90px" style="max-width: 560px">
+      <el-form label-width="90px" class="form">
         <el-form-item label="评分" required>
           <el-rate v-model="form.scores" />
         </el-form-item>
         <el-form-item label="评价内容" required>
-          <el-input v-model="form.content" type="textarea" :rows="4" maxlength="500" show-word-limit />
+          <el-input
+            v-model="form.content"
+            type="textarea"
+            :rows="4"
+            maxlength="500"
+            show-word-limit
+            placeholder="分享你的使用体验吧"
+          />
         </el-form-item>
         <el-form-item label="晒图">
           <el-upload
@@ -43,7 +50,6 @@ import { FileApi } from '@/api/infra/file'
 
 const route = useRoute()
 const router = useRouter()
-const loading = ref(false)
 const submitting = ref(false)
 const fileList = ref<UploadUserFile[]>([])
 const picUrls = ref<string[]>([])
@@ -91,15 +97,34 @@ async function submit() {
 </script>
 
 <style scoped lang="scss">
+.comment-page {
+  padding-bottom: 40px;
+}
+
 h1 {
   margin: 0 0 16px;
   font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+h1::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--mall-accent);
 }
 
 .panel {
   background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
   border-radius: var(--mall-radius);
-  padding: 20px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.form {
+  max-width: 560px;
 }
 </style>
