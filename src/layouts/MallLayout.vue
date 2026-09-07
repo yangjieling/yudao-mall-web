@@ -12,10 +12,11 @@
         <div class="top-right">
           <router-link to="/order">我的订单</router-link>
           <router-link to="/user/favorite">收藏夹</router-link>
-          <router-link to="/coupon">领券中心</router-link>
-          <router-link to="/activity/seckill">秒杀</router-link>
-          <router-link to="/activity/combination">拼团</router-link>
-          <router-link to="/activity/point">积分商城</router-link>
+          <router-link to="/cart" class="top-cart">
+            <el-badge :value="cartStore.totalCount || undefined" :hidden="!cartStore.totalCount">
+              购物车
+            </el-badge>
+          </router-link>
         </div>
       </div>
     </div>
@@ -59,12 +60,6 @@
             </a>
           </div>
         </div>
-
-        <router-link to="/cart" class="cart-btn">
-          <el-badge :value="cartStore.totalCount || undefined" :hidden="!cartStore.totalCount">
-            购物车
-          </el-badge>
-        </router-link>
       </div>
     </header>
 
@@ -232,7 +227,7 @@ async function onLogout() {
 
 .header-inner {
   display: grid;
-  grid-template-columns: 280px 1fr 120px;
+  grid-template-columns: 280px 1fr;
   gap: 24px;
   align-items: start;
 }
@@ -346,20 +341,8 @@ async function onLogout() {
   color: var(--mall-accent);
 }
 
-.cart-btn {
-  justify-self: end;
-  margin-top: 4px;
-  border: 1px solid var(--mall-accent);
-  background: #fff;
-  color: var(--mall-accent);
-  padding: 10px 18px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.cart-btn:hover {
-  background: var(--mall-accent-soft);
+.top-cart :deep(.el-badge__content) {
+  transform: translateY(-2px) translateX(6px);
 }
 
 .nav-bar {
@@ -475,10 +458,6 @@ async function onLogout() {
   .header-inner {
     grid-template-columns: 1fr;
     gap: 12px;
-  }
-
-  .cart-btn {
-    justify-self: start;
   }
 
   .cate-panel {
