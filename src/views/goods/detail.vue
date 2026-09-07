@@ -14,25 +14,27 @@
       </nav>
 
       <div class="buy-panel">
-        <div class="gallery">
-          <div v-if="pics.length" class="thumbs">
-            <button
-              v-for="(pic, idx) in pics"
-              :key="idx"
-              type="button"
-              class="thumb"
-              :class="{ active: activePic === pic }"
-              @click="activePic = pic"
-            >
-              <img :src="pic" alt="" />
-            </button>
-          </div>
-          <div class="main-wrap">
-            <img :src="activePic" :alt="spu.name" class="main-pic" />
+        <div class="gallery-card">
+          <div class="gallery">
+            <div v-if="pics.length" class="thumbs">
+              <button
+                v-for="(pic, idx) in pics"
+                :key="idx"
+                type="button"
+                class="thumb"
+                :class="{ active: activePic === pic }"
+                @click="activePic = pic"
+              >
+                <img :src="pic" alt="" />
+              </button>
+            </div>
+            <div class="main-wrap">
+              <img :src="activePic" :alt="spu.name" class="main-pic" />
+            </div>
           </div>
         </div>
 
-        <div class="info">
+        <div class="info-card">
           <div class="title-row">
             <div class="title-main">
               <span class="tag-own">OM自营</span>
@@ -427,12 +429,29 @@ watch(() => route.params.id, loadDetail)
 }
 
 .buy-panel {
-  display: grid;
-  grid-template-columns: 450px minmax(0, 1fr);
-  gap: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.gallery-card,
+.info-card {
   background: #fff;
-  padding: 16px 16px 20px;
   border: 1px solid var(--mall-line);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.gallery-card {
+  width: 452px;
+  flex-shrink: 0;
+  padding: 12px;
+}
+
+.info-card {
+  width: min(560px, 100%);
+  flex: 0 1 560px;
+  min-width: 0;
+  padding: 14px 16px 16px;
 }
 
 .gallery {
@@ -478,18 +497,13 @@ watch(() => route.params.id, loadDetail)
   flex: 1;
   min-width: 0;
   border: 1px solid var(--mall-line);
-  background: #fff;
+  background: #fafafa;
 }
 
 .main-pic {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-}
-
-.info {
-  min-width: 0;
-  padding-top: 2px;
 }
 
 .title-row {
@@ -624,8 +638,8 @@ watch(() => route.params.id, loadDetail)
 
 .info-row {
   display: flex;
-  gap: 12px;
-  padding: 12px 0;
+  gap: 10px;
+  padding: 10px 0;
   border-bottom: 1px solid #f3f4f6;
 }
 
@@ -940,11 +954,15 @@ watch(() => route.params.id, loadDetail)
   line-height: 2;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1040px) {
   .buy-panel {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 12px;
+    flex-direction: column;
+  }
+
+  .gallery-card,
+  .info-card {
+    width: 100%;
+    flex: none;
   }
 
   .gallery {
