@@ -13,9 +13,8 @@
           <router-link to="/order">我的订单</router-link>
           <router-link to="/user/favorite">收藏夹</router-link>
           <router-link to="/cart" class="top-cart">
-            <el-badge :value="cartStore.totalCount || undefined" :hidden="!cartStore.totalCount">
-              购物车
-            </el-badge>
+            购物车
+            <em v-if="cartStore.totalCount" class="cart-count">{{ cartStore.totalCount }}</em>
           </router-link>
         </div>
       </div>
@@ -343,8 +342,24 @@ async function onLogout() {
   color: var(--mall-accent);
 }
 
-.top-cart :deep(.el-badge__content) {
-  transform: translateY(-2px) translateX(6px);
+.top-cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cart-count {
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--mall-accent);
+  color: #fff;
+  font-size: 11px;
+  font-style: normal;
+  line-height: 16px;
+  text-align: center;
+  font-weight: 600;
 }
 
 .nav-bar {
