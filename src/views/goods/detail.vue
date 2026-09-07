@@ -621,7 +621,6 @@ watch(() => route.params.id, loadDetail)
   align-self: start;
 }
 
-.gallery-card,
 .info-card,
 .detail-tabs {
   background: #fff;
@@ -630,9 +629,9 @@ watch(() => route.params.id, loadDetail)
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
+/* 图库与页面底色融合，不再单独成卡 */
 .gallery-card {
-  padding: 12px;
-  overflow: hidden;
+  padding: 0;
 }
 
 .info-card {
@@ -693,8 +692,8 @@ watch(() => route.params.id, loadDetail)
   min-width: 0;
   height: 100%;
   border: 1px solid var(--mall-line);
-  border-radius: 8px;
-  background: #fafafa;
+  border-radius: 0;
+  background: #fff;
   overflow: hidden;
 }
 
