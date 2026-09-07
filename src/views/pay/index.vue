@@ -29,6 +29,7 @@
         v-if="!qrDataUrl && !waitingRedirect"
         type="primary"
         size="large"
+        class="pay-btn"
         :disabled="!channelCode || !payOrder"
         :loading="submitting"
         @click="submit"
@@ -127,7 +128,6 @@ async function handleDisplayContent(content?: string) {
     return
   }
   if (isQrPayChannel(channelCode.value) || (!content.includes('<form') && !content.startsWith('http'))) {
-    // code_url 等纯文本 → 二维码
     if (!content.includes('<')) {
       qrDataUrl.value = await QRCode.toDataURL(content, { width: 220, margin: 2 })
       startPoll()
@@ -153,7 +153,6 @@ async function handleDisplayContent(content?: string) {
     window.location.href = content
     return
   }
-  // 其他情况：尝试当二维码内容
   try {
     qrDataUrl.value = await QRCode.toDataURL(content, { width: 220, margin: 2 })
     startPoll()
@@ -186,29 +185,46 @@ onUnmounted(stopPoll)
 </script>
 
 <style scoped lang="scss">
+.pay-page {
+  padding-bottom: 40px;
+}
+
 .panel {
   max-width: 520px;
   margin: 0 auto;
   background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
   border-radius: var(--mall-radius);
-  padding: 32px;
+  padding: 32px 28px;
   text-align: center;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 h1 {
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+h1::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--mall-accent);
 }
 
 .amount {
   font-size: 40px;
-  margin: 16px 0;
+  margin: 16px 0 8px;
+  letter-spacing: -0.02em;
 }
 
 .tip {
   color: var(--mall-muted);
-  margin-bottom: 24px;
+  margin: 0 0 24px;
+  font-size: 14px;
 }
 
 .channels {
@@ -223,10 +239,20 @@ h1 {
   width: 100%;
   margin: 0 !important;
   height: 48px !important;
+  border-radius: 8px !important;
+}
+
+.channel.is-checked {
+  border-color: var(--mall-accent) !important;
 }
 
 .qr-box {
   margin: 12px 0 8px;
+}
+
+.qr-box p {
+  color: var(--mall-muted);
+  font-size: 14px;
 }
 
 .qr {
@@ -235,5 +261,11 @@ h1 {
   margin: 0 auto 12px;
   border: 1px solid var(--mall-line);
   border-radius: 8px;
+}
+
+.pay-btn {
+  width: 100%;
+  height: 44px;
+  font-size: 16px;
 }
 </style>

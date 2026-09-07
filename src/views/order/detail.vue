@@ -1,72 +1,92 @@
 <template>
   <div class="page-container order-detail" v-loading="loading">
     <template v-if="order">
-      <div class="panel">
-        <h1>订单详情</h1>
-        <div class="meta">
-          <div>订单号：{{ order.no }}</div>
-          <div>状态：{{ ORDER_STATUS_MAP[order.status] || order.status }}</div>
-          <div v-if="order.createTime">下单时间：{{ order.createTime }}</div>
-          <div v-if="order.payChannelName">支付方式：{{ order.payChannelName }}</div>
-          <div v-if="order.userRemark">备注：{{ order.userRemark }}</div>
+      <div class="status-banner" :class="statusClass(order.status)">
+        <div class="status-text">
+          <div class="label">订单状态</div>
+          <div class="value">{{ ORDER_STATUS_MAP[order.status] || order.status }}</div>
+        </div>
+        <div class="status-meta">
+          <div>订单号 {{ order.no }}</div>
+          <div v-if="order.createTime">下单时间 {{ order.createTime }}</div>
         </div>
       </div>
 
       <div v-if="order.receiverName" class="panel">
         <h2>收货信息</h2>
-        <div class="meta">
-          <div>{{ order.receiverName }} {{ order.receiverMobile }}</div>
-          <div>{{ order.receiverAreaName }} {{ order.receiverDetailAddress }}</div>
-          <div v-if="order.logisticsName || order.logisticsNo">
+        <div class="address">
+          <div class="receiver">{{ order.receiverName }} {{ order.receiverMobile }}</div>
+          <div class="addr">{{ order.receiverAreaName }} {{ order.receiverDetailAddress }}</div>
+          <div v-if="order.logisticsName || order.logisticsNo" class="logistics">
             物流：{{ order.logisticsName || '' }} {{ order.logisticsNo || '' }}
-            <el-button link type="primary" @click="showExpress = true">查看物流</el-button>
+            <button type="button" class="link-btn" @click="showExpress = true">查看物流</button>
           </div>
         </div>
       </div>
 
       <div class="panel">
-        <h2>商品</h2>
+        <h2>商品信息</h2>
         <div v-for="item in order.items || []" :key="item.id" class="item-row">
           <img :src="item.picUrl" :alt="item.spuName" />
-          <div>
-            <div>{{ item.spuName }}</div>
+          <div class="item-body">
+            <div class="name">{{ item.spuName }}</div>
             <div class="muted">
               <span v-for="(p, i) in item.properties || []" :key="i">
                 {{ p.propertyName }}:{{ p.valueName }}
               </span>
-              × {{ item.count }}
+              <span>× {{ item.count }}</span>
             </div>
             <div class="item-actions">
-              <el-button
+              <button
                 v-if="canAfterSale(item)"
-                link
-                type="primary"
+                type="button"
+                class="link-btn"
                 @click="$router.push(`/order/aftersale/apply?orderItemId=${item.id}&orderId=${order.id}`)"
               >
                 申请售后
-              </el-button>
-              <el-button
+              </button>
+              <button
                 v-if="order.status === 30 && !item.commentStatus"
-                link
-                type="primary"
+                type="button"
+                class="link-btn"
                 @click="$router.push(`/order/comment?orderItemId=${item.id}&orderId=${order.id}`)"
               >
                 评价
-              </el-button>
+              </button>
             </div>
           </div>
           <div class="price">{{ formatPrice(item.price) }}</div>
         </div>
+
         <div class="price-lines">
-          <div>商品金额：{{ formatPrice(order.totalPrice) }}</div>
-          <div v-if="order.deliveryPrice">运费：{{ formatPrice(order.deliveryPrice) }}</div>
-          <div v-if="order.couponPrice">优惠券：-{{ formatPrice(order.couponPrice) }}</div>
-          <div v-if="order.discountPrice">优惠：-{{ formatPrice(order.discountPrice) }}</div>
-          <div v-if="order.pointPrice">积分抵扣：-{{ formatPrice(order.pointPrice) }}</div>
-          <div v-if="order.vipPrice">会员优惠：-{{ formatPrice(order.vipPrice) }}</div>
-          <div class="pay-line">
-            实付 <span class="price">{{ formatPrice(order.payPrice) }}</span>
+          <div class="line"><span>商品金额</span><span>{{ formatPrice(order.totalPrice) }}</span></div>
+          <div v-if="order.deliveryPrice" class="line">
+            <span>运费</span><span>{{ formatPrice(order.deliveryPrice) }}</span>
           </div>
+          <div v-if="order.couponPrice" class="line">
+            <span>优惠券</span><span>-{{ formatPrice(order.couponPrice) }}</span>
+          </div>
+          <div v-if="order.discountPrice" class="line">
+            <span>优惠</span><span>-{{ formatPrice(order.discountPrice) }}</span>
+          </div>
+          <div v-if="order.pointPrice" class="line">
+            <span>积分抵扣</span><span>-{{ formatPrice(order.pointPrice) }}</span>
+          </div>
+          <div v-if="order.vipPrice" class="line">
+            <span>会员优惠</span><span>-{{ formatPrice(order.vipPrice) }}</span>
+          </div>
+          <div class="pay-line">
+            <span>实付</span>
+            <span class="price">{{ formatPrice(order.payPrice) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel meta-panel">
+        <h2>订单信息</h2>
+        <div class="meta-grid">
+          <div v-if="order.payChannelName"><em>支付方式</em>{{ order.payChannelName }}</div>
+          <div v-if="order.userRemark"><em>备注</em>{{ order.userRemark }}</div>
         </div>
       </div>
 
@@ -126,9 +146,15 @@ async function load() {
   }
 }
 
+function statusClass(status: number) {
+  if (status === 0) return 'warn'
+  if (status === 40) return 'muted'
+  if (status === 30) return 'ok'
+  return ''
+}
+
 function canAfterSale(item: TradeOrderItem) {
   if (!order.value) return false
-  // 已支付且未完成售后：状态 10/20/30，afterSaleStatus 0 可申请
   return [10, 20, 30].includes(order.value.status) && (item.afterSaleStatus === 0 || item.afterSaleStatus == null)
 }
 
@@ -171,79 +197,232 @@ onMounted(load)
 </script>
 
 <style scoped lang="scss">
-.panel {
-  background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
-  border-radius: var(--mall-radius);
-  padding: 20px;
-  margin-bottom: 16px;
+.order-detail {
+  padding-bottom: 40px;
 }
 
-h1 {
-  margin: 0 0 12px;
-  font-size: 24px;
+.status-banner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  padding: 20px 22px;
+  border-radius: var(--mall-radius);
+  background: linear-gradient(90deg, #fff5f5, #fff);
+  border: 1px solid var(--mall-accent-border);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.status-banner.warn {
+  background: linear-gradient(90deg, #fff7ed, #fff);
+  border-color: #fed7aa;
+}
+
+.status-banner.ok {
+  background: linear-gradient(90deg, #f0fdf4, #fff);
+  border-color: #bbf7d0;
+}
+
+.status-banner.muted {
+  background: #f9fafb;
+  border-color: var(--mall-line);
+}
+
+.status-text .label {
+  font-size: 13px;
+  color: var(--mall-muted);
+  margin-bottom: 4px;
+}
+
+.status-text .value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--mall-accent);
+}
+
+.status-banner.warn .value {
+  color: #ea580c;
+}
+
+.status-banner.ok .value {
+  color: #16a34a;
+}
+
+.status-banner.muted .value {
+  color: var(--mall-muted);
+}
+
+.status-meta {
+  font-size: 13px;
+  color: var(--mall-muted);
+  line-height: 1.7;
+  text-align: right;
+}
+
+.panel {
+  background: var(--mall-surface);
+  border-radius: var(--mall-radius);
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 h2 {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.meta {
+h2::before {
+  content: '';
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--mall-accent);
+}
+
+.receiver {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.addr,
+.logistics {
   color: var(--mall-muted);
-  line-height: 1.8;
   font-size: 14px;
+  line-height: 1.6;
+}
+
+.logistics {
+  margin-top: 8px;
+}
+
+.link-btn {
+  border: 0;
+  background: transparent;
+  color: var(--mall-accent);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0 0 0 8px;
+}
+
+.link-btn:hover {
+  color: var(--mall-accent-dark);
 }
 
 .item-row {
   display: grid;
-  grid-template-columns: 64px 1fr auto;
-  gap: 12px;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--mall-line);
+  grid-template-columns: 72px 1fr auto;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.item-row:last-of-type {
+  border-bottom: 0;
 }
 
 .item-row img {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   object-fit: cover;
   border-radius: 8px;
-  background: #f5f5f4;
+  background: #f3f4f6;
+}
+
+.name {
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 .muted {
   color: var(--mall-muted);
   font-size: 12px;
-  margin-top: 4px;
+  margin-top: 6px;
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
 }
 
 .item-actions {
-  margin-top: 6px;
+  margin-top: 8px;
+  display: flex;
+  gap: 12px;
+}
+
+.item-actions .link-btn {
+  padding: 0;
 }
 
 .price-lines {
   margin-top: 16px;
-  text-align: right;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+  max-width: 320px;
+  margin-left: auto;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
   color: var(--mall-muted);
-  line-height: 1.8;
   font-size: 14px;
+  line-height: 1.9;
 }
 
 .pay-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
   margin-top: 8px;
-  color: var(--mall-ink);
+  padding-top: 8px;
+  border-top: 1px dashed var(--mall-line);
+  font-size: 14px;
 }
 
 .pay-line .price {
   font-size: 22px;
 }
 
+.meta-grid {
+  display: grid;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--mall-ink);
+}
+
+.meta-grid em {
+  font-style: normal;
+  color: var(--mall-muted);
+  margin-right: 12px;
+  display: inline-block;
+  min-width: 64px;
+}
+
 .actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  padding: 4px 0 8px;
+}
+
+@media (max-width: 720px) {
+  .status-meta {
+    text-align: left;
+  }
+
+  .item-row {
+    grid-template-columns: 64px 1fr;
+  }
+
+  .item-row .price {
+    grid-column: 2;
+  }
 }
 </style>
