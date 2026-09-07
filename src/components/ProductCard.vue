@@ -34,13 +34,13 @@ defineProps<{
 }
 
 .product-card:hover {
-  border-color: #f0d9cc;
+  border-color: var(--mall-accent-border);
   transform: translateY(-2px);
 }
 
 .cover {
   aspect-ratio: 1;
-  background: #f5f5f4;
+  background: #f3f4f6;
   overflow: hidden;
 }
 

@@ -24,7 +24,10 @@
       <div class="page-container header-inner">
         <router-link to="/" class="brand">
           <span class="brand-mark">{{ brandMark }}</span>
-          <span class="brand-name">{{ title }}</span>
+          <div class="brand-text">
+            <span class="brand-name">{{ title }}</span>
+            <span class="brand-sub">Oh My</span>
+          </div>
         </router-link>
 
         <div class="search-wrap">
@@ -40,6 +43,16 @@
               <el-button type="primary" @click="onSearch">搜索</el-button>
             </template>
           </el-input>
+          <div class="hot-words">
+            <a
+              v-for="word in hotWords"
+              :key="word"
+              href="javascript:void(0)"
+              @click.prevent="onHotWord(word)"
+            >
+              {{ word }}
+            </a>
+          </div>
         </div>
 
         <router-link to="/cart" class="cart-btn">
@@ -57,7 +70,7 @@
           @mouseenter="showCate = true"
           @mouseleave="showCate = false"
         >
-          <span class="cate-label">全部商品分类</span>
+          <span class="cate-label">全部分类</span>
           <div v-show="showCate" class="cate-panel">
             <div v-for="cat in rootCategories" :key="cat.id" class="cate-row">
               <router-link
@@ -115,6 +128,7 @@ const brandMark = computed(() => {
   if (/^OM\b/i.test(t)) return 'OM'
   return t.slice(0, 1) || 'O'
 })
+const hotWords = ['手机', '零食', '母婴', '家电', '美妆', '运动']
 const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
@@ -160,6 +174,11 @@ function onSearch() {
   router.push({ path: '/category', query: { keyword: keyword.value || undefined } })
 }
 
+function onHotWord(word: string) {
+  keyword.value = word
+  router.push({ path: '/category', query: { keyword: word } })
+}
+
 async function onLogout() {
   await userStore.logout()
   cartStore.validList = []
@@ -175,14 +194,14 @@ async function onLogout() {
 }
 
 .top-bar {
-  background: #f5f5f4;
+  background: #f5f6f8;
   border-bottom: 1px solid var(--mall-line);
   font-size: 12px;
   color: var(--mall-muted);
 }
 
 .top-inner {
-  height: 32px;
+  height: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -192,7 +211,7 @@ async function onLogout() {
 .top-right {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .top-right a:hover,
@@ -202,39 +221,54 @@ async function onLogout() {
 
 .mall-header {
   background: var(--mall-surface);
-  padding: 18px 0 14px;
+  padding: 16px 0 10px;
 }
 
 .header-inner {
   display: grid;
   grid-template-columns: 200px 1fr 120px;
   gap: 28px;
-  align-items: center;
+  align-items: start;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding-top: 4px;
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   background: var(--mall-accent);
   color: #fff;
   display: grid;
   place-items: center;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
 .brand-name {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
+  color: var(--mall-accent);
   letter-spacing: 0.02em;
+}
+
+.brand-sub {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--mall-muted);
 }
 
 .search-wrap {
@@ -243,32 +277,54 @@ async function onLogout() {
   width: 100%;
 }
 
+.search :deep(.el-input__wrapper) {
+  border-radius: 4px 0 0 4px;
+  box-shadow: 0 0 0 2px var(--mall-accent) inset;
+}
+
 .search :deep(.el-input-group__append) {
   background: var(--mall-accent);
   border-color: var(--mall-accent);
   color: #fff;
   box-shadow: none;
+  border-radius: 0 4px 4px 0;
 }
 
 .search :deep(.el-input-group__append .el-button) {
   color: #fff;
   background: transparent;
   border: 0;
+  font-weight: 600;
+  padding: 0 22px;
+}
+
+.hot-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--mall-muted);
+}
+
+.hot-words a:hover {
+  color: var(--mall-accent);
 }
 
 .cart-btn {
   justify-self: end;
-  border: 1px solid var(--mall-accent-border);
-  background: var(--mall-accent-soft);
+  margin-top: 4px;
+  border: 1px solid var(--mall-accent);
+  background: #fff;
   color: var(--mall-accent);
   padding: 10px 18px;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 14px;
   font-weight: 600;
 }
 
 .cart-btn:hover {
-  border-color: var(--mall-accent);
+  background: var(--mall-accent-soft);
 }
 
 .nav-bar {
@@ -276,7 +332,7 @@ async function onLogout() {
   top: 0;
   z-index: 30;
   background: var(--mall-surface);
-  border-bottom: 2px solid var(--mall-accent);
+  border-bottom: 1px solid var(--mall-line);
 }
 
 .nav-inner {
@@ -314,7 +370,7 @@ async function onLogout() {
   background: #fff;
   border: 1px solid var(--mall-line);
   border-top: 0;
-  box-shadow: 0 8px 24px rgba(28, 25, 23, 0.08);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
   padding: 12px 16px;
   z-index: 40;
 }
@@ -369,7 +425,7 @@ async function onLogout() {
 
 .mall-main {
   flex: 1;
-  padding: 20px 0 48px;
+  padding: 16px 0 48px;
 }
 
 .mall-footer {

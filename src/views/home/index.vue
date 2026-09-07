@@ -1,20 +1,25 @@
 <template>
   <div class="page-container home">
-    <!-- 淘宝/京东式首屏：左分类 + 中 Banner + 右快捷 -->
     <section class="portal">
       <aside class="cate-side">
+        <div class="cate-title">分类</div>
         <router-link
           v-for="cat in rootCategories"
           :key="cat.id"
           class="cate-item"
           :to="{ path: '/category', query: { categoryId: cat.id } }"
         >
-          <span class="cate-name">{{ cat.name }}</span>
-          <span class="cate-sub">
-            {{ childrenOf(cat.id)
-              .slice(0, 3)
-              .map((c) => c.name)
-              .join(' / ') }}
+          <el-icon class="cate-icon" :size="16">
+            <component :is="iconForCategory(cat.name)" />
+          </el-icon>
+          <span class="cate-copy">
+            <span class="cate-name">{{ cat.name }}</span>
+            <span class="cate-sub">
+              {{ childrenOf(cat.id)
+                .slice(0, 3)
+                .map((c) => c.name)
+                .join(' / ') }}
+            </span>
           </span>
         </router-link>
         <router-link to="/category" class="cate-more">全部商品 →</router-link>
@@ -23,7 +28,7 @@
       <div class="portal-main">
         <el-carousel
           v-if="banners.length"
-          height="320px"
+          height="340px"
           class="banner"
           :interval="4500"
           arrow="hover"
@@ -44,35 +49,24 @@
       </div>
 
       <aside class="side-panel">
-        <div class="user-box">
-          <template v-if="userStore.isLogin">
-            <div class="hello">Hi，{{ userStore.userInfo?.nickname || '会员' }}</div>
-            <div class="user-links">
-              <router-link to="/order">我的订单</router-link>
-              <router-link to="/user/coupon">优惠券</router-link>
-              <router-link to="/user/favorite">收藏</router-link>
-              <router-link to="/user/history">足迹</router-link>
-            </div>
-          </template>
-          <template v-else>
-            <div class="hello">欢迎来到{{ title }}</div>
-            <el-button type="primary" class="login-btn" @click="$router.push('/login')">
-              登录 / 注册
-            </el-button>
-          </template>
-        </div>
-        <div class="promo-grid">
-          <router-link to="/coupon" class="promo">领券中心</router-link>
-          <router-link to="/activity/seckill" class="promo">限时秒杀</router-link>
-          <router-link to="/activity/combination" class="promo">超值拼团</router-link>
-          <router-link to="/activity/point" class="promo">积分商城</router-link>
-        </div>
+        <router-link
+          v-for="card in promoCards"
+          :key="card.to"
+          :to="card.to"
+          class="promo-card"
+          :style="{ background: card.bg }"
+        >
+          <div class="promo-text">
+            <div class="promo-title">{{ card.title }}</div>
+            <div class="promo-desc">{{ card.desc }}</div>
+          </div>
+        </router-link>
       </aside>
     </section>
 
     <section class="feed">
       <div class="feed-head">
-        <h2>为你推荐</h2>
+        <h2><span class="feed-mark" />为你推荐</h2>
         <router-link to="/category">更多商品</router-link>
       </div>
       <el-skeleton v-if="loading" :rows="5" animated />
@@ -85,21 +79,46 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, type Component } from 'vue'
 import { useRouter } from 'vue-router'
+import {
+  Bowl,
+  Box,
+  Cellphone,
+  CoffeeCup,
+  FirstAidKit,
+  Goods,
+  Grape,
+  Headset,
+  House,
+  Iphone,
+  MagicStick,
+  Menu,
+  Monitor,
+  Orange,
+  Present,
+  ShoppingBag,
+  Soccer,
+  Van
+} from '@element-plus/icons-vue'
 import { CategoryApi, SpuApi, type ProductCategory, type ProductSpu } from '@/api/product'
 import { BannerApi, type Banner } from '@/api/promotion/banner'
 import ProductCard from '@/components/ProductCard.vue'
-import { useUserStore } from '@/stores/user'
 
 const title = import.meta.env.VITE_APP_TITLE
 const router = useRouter()
-const userStore = useUserStore()
 
 const loading = ref(false)
 const list = ref<ProductSpu[]>([])
 const banners = ref<Banner[]>([])
 const categories = ref<ProductCategory[]>([])
+
+const promoCards = [
+  { to: '/coupon', title: '领券中心', desc: '优惠好券天天领', bg: 'linear-gradient(135deg, #ecfdf5, #d1fae5)' },
+  { to: '/activity/seckill', title: '限时秒杀', desc: '爆款低价抢先购', bg: 'linear-gradient(135deg, #f5f3ff, #ede9fe)' },
+  { to: '/activity/combination', title: '超值拼团', desc: '多人成团更划算', bg: 'linear-gradient(135deg, #eff6ff, #dbeafe)' },
+  { to: '/activity/point', title: '积分兑换', desc: '积分抵现更省心', bg: 'linear-gradient(135deg, #fffbeb, #fef3c7)' }
+]
 
 const rootCategories = computed(() =>
   categories.value.filter((c) => !c.parentId || c.parentId === 0).slice(0, 12)
@@ -107,6 +126,28 @@ const rootCategories = computed(() =>
 
 function childrenOf(parentId: number) {
   return categories.value.filter((c) => c.parentId === parentId)
+}
+
+function iconForCategory(name: string): Component {
+  const n = name || ''
+  if (/电脑|办公|配件|数码/.test(n)) return Monitor
+  if (/手机|通信|运营商/.test(n)) return Iphone
+  if (/家电|电器/.test(n)) return House
+  if (/家具|家装|家居|厨/.test(n)) return CoffeeCup
+  if (/女装|男装|内衣|配饰|童装|服/.test(n)) return ShoppingBag
+  if (/鞋|运动|户外/.test(n)) return Soccer
+  if (/美妆|个护|洗护/.test(n)) return MagicStick
+  if (/食品|零食|生鲜|酒|茶/.test(n)) return Grape
+  if (/母婴|玩具|宠物/.test(n)) return Present
+  if (/汽车|箱包|珠宝/.test(n)) return Van
+  if (/健康|医药|保健/.test(n)) return FirstAidKit
+  if (/耳机|音响/.test(n)) return Headset
+  if (/水果|生鲜/.test(n)) return Orange
+  if (/餐|碗/.test(n)) return Bowl
+  if (/手机/.test(n)) return Cellphone
+  if (/日用|百货/.test(n)) return Box
+  if (/商品|好物/.test(n)) return Goods
+  return Menu
 }
 
 function onBanner(b: Banner) {
@@ -139,29 +180,58 @@ onMounted(async () => {
 <style scoped lang="scss">
 .portal {
   display: grid;
-  grid-template-columns: 220px 1fr 220px;
+  grid-template-columns: 220px 1fr 200px;
   gap: 12px;
   margin-bottom: 28px;
-  min-height: 320px;
+  min-height: 340px;
+  background: var(--mall-surface);
+  border-radius: var(--mall-radius);
+  padding: 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .cate-side {
-  background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
-  border-radius: var(--mall-radius);
-  padding: 8px 0;
+  background: #fff;
+  border-radius: 8px;
   overflow: auto;
-  max-height: 320px;
+  max-height: 340px;
+  border-right: 1px solid var(--mall-line);
+  padding-right: 4px;
+}
+
+.cate-title {
+  padding: 6px 10px 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mall-ink);
 }
 
 .cate-item {
-  display: block;
-  padding: 8px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
   line-height: 1.35;
+  border-radius: 6px;
 }
 
 .cate-item:hover {
   background: var(--mall-accent-soft);
+}
+
+.cate-icon {
+  margin-top: 2px;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.cate-item:hover .cate-icon {
+  color: var(--mall-accent);
+}
+
+.cate-copy {
+  min-width: 0;
+  flex: 1;
 }
 
 .cate-name {
@@ -184,30 +254,29 @@ onMounted(async () => {
 .cate-more {
   display: block;
   margin-top: 4px;
-  padding: 10px 14px;
+  padding: 10px;
   font-size: 13px;
   color: var(--mall-accent);
-  border-top: 1px dashed var(--mall-line);
+  border-top: 1px solid var(--mall-line);
 }
 
 .portal-main {
   min-width: 0;
-  border-radius: var(--mall-radius);
+  border-radius: 8px;
   overflow: hidden;
-  background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
+  background: #f8fafc;
 }
 
 .banner-link,
 .banner-link img {
   display: block;
   width: 100%;
-  height: 320px;
+  height: 340px;
   object-fit: cover;
 }
 
 .banner-fallback {
-  height: 320px;
+  height: 340px;
   display: grid;
   place-items: center;
   background: linear-gradient(145deg, #fff 0%, #fef2f2 55%, #fecaca 100%);
@@ -231,74 +300,65 @@ onMounted(async () => {
 .side-panel {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-.user-box {
-  background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
-  border-radius: var(--mall-radius);
-  padding: 16px;
-  flex: 1;
-}
-
-.hello {
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-.user-links {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--mall-muted);
-}
-
-.user-links a:hover {
-  color: var(--mall-accent);
-}
-
-.login-btn {
-  width: 100%;
-}
-
-.promo-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
 
-.promo {
-  background: var(--mall-accent-soft);
-  border: 1px solid var(--mall-accent-border);
+.promo-card {
+  flex: 1;
+  min-height: 72px;
   border-radius: 8px;
-  padding: 14px 8px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--mall-accent);
+  padding: 14px 12px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.15s ease;
 }
 
-.promo:hover {
-  background: #fee2e2;
+.promo-card:hover {
+  transform: translateY(-1px);
+}
+
+.promo-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mall-ink);
+}
+
+.promo-desc {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--mall-muted);
 }
 
 .feed-head {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   margin-bottom: 14px;
 }
 
 .feed-head h2 {
   margin: 0;
   font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feed-mark {
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--mall-accent);
+  display: inline-block;
 }
 
 .feed-head a {
   color: var(--mall-muted);
   font-size: 13px;
+}
+
+.feed-head a:hover {
+  color: var(--mall-accent);
 }
 
 .product-grid {
@@ -309,7 +369,7 @@ onMounted(async () => {
 
 @media (max-width: 1100px) {
   .portal {
-    grid-template-columns: 180px 1fr;
+    grid-template-columns: 200px 1fr;
   }
 
   .side-panel {
@@ -324,10 +384,15 @@ onMounted(async () => {
 @media (max-width: 760px) {
   .portal {
     grid-template-columns: 1fr;
+    padding: 8px;
   }
 
   .cate-side {
-    max-height: 180px;
+    max-height: 200px;
+    border-right: 0;
+    border-bottom: 1px solid var(--mall-line);
+    padding-right: 0;
+    padding-bottom: 8px;
   }
 
   .product-grid {
