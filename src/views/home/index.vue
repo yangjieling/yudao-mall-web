@@ -60,6 +60,9 @@
             <div class="promo-title">{{ card.title }}</div>
             <div class="promo-desc">{{ card.desc }}</div>
           </div>
+          <div class="promo-pic">
+            <img :src="card.picUrl" :alt="card.title" loading="lazy" />
+          </div>
         </router-link>
       </aside>
     </section>
@@ -112,12 +115,46 @@ const list = ref<ProductSpu[]>([])
 const banners = ref<Banner[]>([])
 const categories = ref<ProductCategory[]>([])
 
-const promoCards = [
-  { to: '/coupon', title: '领券中心', desc: '优惠好券天天领', bg: 'linear-gradient(135deg, #ecfdf5, #d1fae5)' },
-  { to: '/activity/seckill', title: '限时秒杀', desc: '爆款低价抢先购', bg: 'linear-gradient(135deg, #f5f3ff, #ede9fe)' },
-  { to: '/activity/combination', title: '超值拼团', desc: '多人成团更划算', bg: 'linear-gradient(135deg, #eff6ff, #dbeafe)' },
-  { to: '/activity/point', title: '积分兑换', desc: '积分抵现更省心', bg: 'linear-gradient(135deg, #fffbeb, #fef3c7)' }
+const promoFallbacks = [
+  'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=240&h=240&fit=crop',
+  'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=240&h=240&fit=crop',
+  'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=240&h=240&fit=crop',
+  'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=240&h=240&fit=crop'
 ]
+
+const promoCards = computed(() => {
+  const pics = list.value.map((item) => item.picUrl).filter(Boolean) as string[]
+  return [
+    {
+      to: '/coupon',
+      title: '领券中心',
+      desc: '优惠好券天天领',
+      bg: 'linear-gradient(135deg, #ecfdf5, #d1fae5)',
+      picUrl: pics[0] || promoFallbacks[0]
+    },
+    {
+      to: '/activity/seckill',
+      title: '限时秒杀',
+      desc: '爆款低价抢先购',
+      bg: 'linear-gradient(135deg, #f5f3ff, #ede9fe)',
+      picUrl: pics[1] || promoFallbacks[1]
+    },
+    {
+      to: '/activity/combination',
+      title: '超值拼团',
+      desc: '多人成团更划算',
+      bg: 'linear-gradient(135deg, #eff6ff, #dbeafe)',
+      picUrl: pics[2] || promoFallbacks[2]
+    },
+    {
+      to: '/activity/point',
+      title: '积分兑换',
+      desc: '积分抵现更省心',
+      bg: 'linear-gradient(135deg, #fffbeb, #fef3c7)',
+      picUrl: pics[3] || promoFallbacks[3]
+    }
+  ]
+})
 
 const rootCategories = computed(() =>
   categories.value.filter((c) => !c.parentId || c.parentId === 0).slice(0, 12)
@@ -179,7 +216,7 @@ onMounted(async () => {
 <style scoped lang="scss">
 .portal {
   display: grid;
-  grid-template-columns: 220px 1fr 200px;
+  grid-template-columns: 220px 1fr 220px;
   gap: 12px;
   margin-bottom: 28px;
   min-height: 340px;
@@ -342,16 +379,24 @@ onMounted(async () => {
 
 .promo-card {
   flex: 1;
-  min-height: 72px;
+  min-height: 76px;
   border-radius: 8px;
-  padding: 14px 12px;
+  padding: 10px 10px 10px 12px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  overflow: hidden;
   transition: transform 0.15s ease;
 }
 
 .promo-card:hover {
   transform: translateY(-1px);
+}
+
+.promo-text {
+  min-width: 0;
+  flex: 1;
 }
 
 .promo-title {
@@ -364,6 +409,25 @@ onMounted(async () => {
   margin-top: 4px;
   font-size: 12px;
   color: var(--mall-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.promo-pic {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.promo-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .feed-head {
