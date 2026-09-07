@@ -13,7 +13,13 @@
           border
           class="channel"
         >
-          {{ channelLabel(code) }}
+          <span class="channel-body">
+            <img class="channel-icon" :src="channelIcon(code)" :alt="channelLabel(code)" />
+            <span class="channel-text">
+              <span class="channel-name">{{ channelLabel(code) }}</span>
+              <span class="channel-desc">{{ channelDesc(code) }}</span>
+            </span>
+          </span>
         </el-radio>
       </el-radio-group>
 
@@ -46,8 +52,25 @@ import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import QRCode from 'qrcode'
 import { PayChannelApi, PayOrderApi, type PayOrderInfo } from '@/api/pay'
-import { channelLabel, filterPcChannels, isQrPayChannel, isRedirectPayContent } from '@/utils/pay'
+import {
+  channelIcon,
+  channelLabel,
+  filterPcChannels,
+  isQrPayChannel,
+  isRedirectPayContent
+} from '@/utils/pay'
 import { formatPrice } from '@/utils/price'
+
+function channelDesc(code: string): string {
+  if (code === 'wallet') return '使用账户余额付款'
+  if (code === 'mock') return '演示环境模拟付款'
+  if (code === 'wx_native') return '打开微信扫一扫完成支付'
+  if (code === 'alipay_pc') return '跳转支付宝电脑网站付款'
+  if (code === 'alipay_qr') return '打开支付宝扫一扫完成支付'
+  if (code.startsWith('wx_')) return '使用微信支付'
+  if (code.startsWith('alipay_')) return '使用支付宝付款'
+  return '安全快捷支付'
+}
 
 const route = useRoute()
 const router = useRouter()
@@ -238,12 +261,68 @@ h1::before {
 .channel {
   width: 100%;
   margin: 0 !important;
-  height: 48px !important;
+  height: auto !important;
+  min-height: 64px;
   border-radius: 8px !important;
+  padding: 12px 14px !important;
+  align-items: center;
 }
 
 .channel.is-checked {
   border-color: var(--mall-accent) !important;
+  background: var(--mall-accent-soft);
+}
+
+.channel :deep(.el-radio__input.is-checked .el-radio__inner) {
+  background-color: var(--mall-accent);
+  border-color: var(--mall-accent);
+}
+
+.channel :deep(.el-radio__input.is-checked + .el-radio__label) {
+  color: var(--mall-ink);
+}
+
+.channel :deep(.el-radio__inner:hover) {
+  border-color: var(--mall-accent);
+}
+
+.channel :deep(.el-radio__label) {
+  width: 100%;
+  padding-left: 10px;
+}
+
+.channel-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.channel-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.channel-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.channel-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--mall-ink);
+  line-height: 1.3;
+}
+
+.channel-desc {
+  font-size: 12px;
+  color: var(--mall-muted);
+  line-height: 1.3;
 }
 
 .qr-box {
