@@ -321,16 +321,27 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 h1 {
-  margin: 0 0 20px;
-  font-size: 24px;
+  margin: 0 0 18px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+h1::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--mall-accent);
 }
 
 .panel {
   background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
   border-radius: var(--mall-radius);
   padding: 20px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .panel-head {
@@ -342,6 +353,21 @@ h1 {
 .panel h2 {
   margin: 0 0 16px;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel h2::before {
+  content: '';
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--mall-accent);
+}
+
+.panel-head h2 {
+  margin: 0;
 }
 
 .address-list,
@@ -359,6 +385,12 @@ h1 {
   padding: 12px 16px !important;
   width: 100%;
   align-items: flex-start;
+}
+
+.address-item.is-checked,
+.coupon-item.is-checked {
+  border-color: var(--mall-accent) !important;
+  background: var(--mall-accent-soft);
 }
 
 .mobile {
@@ -383,8 +415,12 @@ h1 {
   grid-template-columns: 64px 1fr auto;
   gap: 12px;
   align-items: center;
-  padding: 10px 0;
+  padding: 12px 0;
   border-bottom: 1px solid var(--mall-line);
+}
+
+.goods-row:last-child {
+  border-bottom: 0;
 }
 
 .goods-row img {
@@ -392,7 +428,7 @@ h1 {
   height: 64px;
   object-fit: cover;
   border-radius: 8px;
-  background: #f5f5f4;
+  background: #f3f4f6;
 }
 
 .muted {
@@ -403,6 +439,9 @@ h1 {
 
 .summary {
   margin: 16px 0;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #fff5f5, #fef2f2);
   text-align: right;
   line-height: 1.8;
   color: var(--mall-muted);
@@ -414,6 +453,6 @@ h1 {
 }
 
 .pay .price {
-  font-size: 24px;
+  font-size: 26px;
 }
 </style>

@@ -137,15 +137,26 @@ function checkout() {
 
 <style scoped lang="scss">
 h1 {
-  margin: 0 0 20px;
-  font-size: 24px;
+  margin: 0 0 18px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+h1::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--mall-accent);
 }
 
 .cart-table {
   background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
   border-radius: var(--mall-radius);
   overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .row {
@@ -157,7 +168,7 @@ h1 {
 }
 
 .head {
-  background: #fafaf9;
+  background: #f9fafb;
   color: var(--mall-muted);
   font-size: 13px;
 }
@@ -177,11 +188,15 @@ h1 {
   height: 72px;
   object-fit: cover;
   border-radius: 8px;
-  background: #f5f5f4;
+  background: #f3f4f6;
 }
 
 .name {
   font-weight: 500;
+}
+
+.name:hover {
+  color: var(--mall-accent);
 }
 
 .muted-name {
@@ -198,14 +213,16 @@ h1 {
 }
 
 .footer-bar {
-  margin-top: 20px;
+  margin-top: 16px;
   background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
   border-radius: var(--mall-radius);
   padding: 16px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  position: sticky;
+  bottom: 12px;
 }
 
 .total {
@@ -235,6 +252,13 @@ h1 {
 }
 
 .invalid-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 22px;
+  border-radius: 4px;
+  background: #f3f4f6;
   color: var(--mall-muted);
   font-size: 12px;
 }
