@@ -1,20 +1,32 @@
 <template>
   <div class="aftersale-list" v-loading="loading">
     <h1>退款/售后</h1>
-    <el-empty v-if="!list.length" description="暂无售后单" />
-    <div v-for="item in list" :key="item.id" class="card" @click="$router.push(`/order/aftersale/${item.id}`)">
-      <div class="head">
-        <span>售后单 {{ item.no || item.id }}</span>
+
+    <el-empty v-if="!list.length" description="暂无售后单" :image-size="80">
+      <el-button type="primary" @click="$router.push('/order')">查看订单</el-button>
+    </el-empty>
+
+    <div
+      v-for="item in list"
+      :key="item.id"
+      class="card"
+      @click="$router.push(`/order/aftersale/${item.id}`)"
+    >
+      <div class="card-head">
+        <span class="no">售后单 {{ item.no || item.id }}</span>
         <span class="status">{{ AFTER_SALE_STATUS_MAP[item.status] || item.status }}</span>
       </div>
       <div class="row">
         <img :src="item.picUrl" :alt="item.spuName" />
-        <div>
-          <div>{{ item.spuName }}</div>
-          <div class="muted">{{ AFTER_SALE_WAY_MAP[item.way || 0] }} · 退款 {{ formatPrice(item.refundPrice) }}</div>
+        <div class="info">
+          <div class="name">{{ item.spuName }}</div>
+          <div class="muted">
+            {{ AFTER_SALE_WAY_MAP[item.way || 0] }} · 退款 {{ formatPrice(item.refundPrice) }}
+          </div>
         </div>
       </div>
     </div>
+
     <div v-if="total > pageSize" class="pager">
       <el-pagination
         background
@@ -67,23 +79,46 @@ onMounted(load)
 h1 {
   margin: 0 0 16px;
   font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+h1::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--mall-accent);
 }
 
 .card {
   background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
   border-radius: var(--mall-radius);
-  padding: 16px;
+  padding: 16px 18px;
   margin-bottom: 12px;
   cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: box-shadow 0.15s;
 }
 
-.head {
+.card:hover {
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.08);
+}
+
+.card-head {
   display: flex;
   justify-content: space-between;
-  color: var(--mall-muted);
-  font-size: 13px;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 13px;
+}
+
+.no {
+  color: var(--mall-muted);
 }
 
 .status {
@@ -98,17 +133,23 @@ h1 {
 }
 
 .row img {
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   object-fit: cover;
-  border-radius: 6px;
-  background: #f5f5f4;
+  border-radius: 8px;
+  background: #f3f4f6;
+  flex-shrink: 0;
+}
+
+.name {
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 .muted {
   color: var(--mall-muted);
   font-size: 12px;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 .pager {

@@ -1,26 +1,41 @@
 <template>
   <div class="page-container aftersale-detail" v-loading="loading">
     <template v-if="detail">
+      <div class="status-banner">
+        <div class="status-text">
+          <div class="label">售后状态</div>
+          <div class="value">{{ AFTER_SALE_STATUS_MAP[detail.status] || detail.status }}</div>
+        </div>
+        <div class="status-meta">
+          <div>方式 {{ AFTER_SALE_WAY_MAP[detail.way || 0] }}</div>
+          <div>退款 {{ formatPrice(detail.refundPrice) }}</div>
+        </div>
+      </div>
+
       <div class="panel">
-        <h1>售后详情</h1>
-        <div class="meta">
-          <div>状态：{{ AFTER_SALE_STATUS_MAP[detail.status] || detail.status }}</div>
-          <div>方式：{{ AFTER_SALE_WAY_MAP[detail.way || 0] }}</div>
-          <div>退款金额：{{ formatPrice(detail.refundPrice) }}</div>
-          <div>原因：{{ detail.applyReason }}</div>
-          <div v-if="detail.applyDescription">描述：{{ detail.applyDescription }}</div>
-          <div v-if="detail.auditReason">审核说明：{{ detail.auditReason }}</div>
+        <h2>申请信息</h2>
+        <div class="meta-grid">
+          <div><em>原因</em>{{ detail.applyReason }}</div>
+          <div v-if="detail.applyDescription"><em>描述</em>{{ detail.applyDescription }}</div>
+          <div v-if="detail.auditReason"><em>审核说明</em>{{ detail.auditReason }}</div>
         </div>
         <div class="goods">
           <img :src="detail.picUrl" :alt="detail.spuName" />
-          <div>{{ detail.spuName }} × {{ detail.count }}</div>
+          <div>
+            <div class="name">{{ detail.spuName }}</div>
+            <div class="muted">× {{ detail.count }}</div>
+          </div>
         </div>
       </div>
 
       <div class="panel" v-if="logs.length">
         <h2>处理进度</h2>
         <el-timeline>
-          <el-timeline-item v-for="(log, i) in logs" :key="i" :timestamp="log.createTime">
+          <el-timeline-item
+            v-for="(log, i) in logs"
+            :key="i"
+            :timestamp="formatDateTime(log.createTime)"
+          >
             {{ log.content }}
           </el-timeline-item>
         </el-timeline>
@@ -67,6 +82,7 @@ import {
 } from '@/api/trade/afterSale'
 import { DeliveryApi, type ExpressCompany } from '@/api/trade/delivery'
 import { formatPrice } from '@/utils/price'
+import { formatDateTime } from '@/utils/datetime'
 
 const route = useRoute()
 const loading = ref(false)
@@ -132,46 +148,116 @@ onMounted(async () => {
 </script>
 
 <style scoped lang="scss">
-.panel {
-  background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
-  border-radius: var(--mall-radius);
-  padding: 20px;
-  margin-bottom: 16px;
+.aftersale-detail {
+  padding-bottom: 40px;
 }
 
-h1 {
-  margin: 0 0 12px;
+.status-banner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  padding: 20px 22px;
+  border-radius: var(--mall-radius);
+  background: linear-gradient(90deg, #fff5f5, #fff);
+  border: 1px solid var(--mall-accent-border);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.status-text .label {
+  font-size: 13px;
+  color: var(--mall-muted);
+  margin-bottom: 4px;
+}
+
+.status-text .value {
   font-size: 22px;
+  font-weight: 700;
+  color: var(--mall-accent);
+}
+
+.status-meta {
+  font-size: 13px;
+  color: var(--mall-muted);
+  line-height: 1.7;
+  text-align: right;
+}
+
+.panel {
+  background: var(--mall-surface);
+  border-radius: var(--mall-radius);
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 h2 {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.meta {
-  color: var(--mall-muted);
-  line-height: 1.8;
+h2::before {
+  content: '';
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--mall-accent);
+}
+
+.meta-grid {
+  display: grid;
+  gap: 10px;
   margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.meta-grid em {
+  font-style: normal;
+  color: var(--mall-muted);
+  margin-right: 12px;
+  display: inline-block;
+  min-width: 64px;
 }
 
 .goods {
   display: flex;
   gap: 12px;
   align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
 }
 
 .goods img {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   object-fit: cover;
   border-radius: 8px;
-  background: #f5f5f4;
+  background: #f3f4f6;
+}
+
+.name {
+  font-size: 14px;
+}
+
+.muted {
+  margin-top: 4px;
+  color: var(--mall-muted);
+  font-size: 12px;
 }
 
 .actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+}
+
+@media (max-width: 720px) {
+  .status-meta {
+    text-align: left;
+  }
 }
 </style>

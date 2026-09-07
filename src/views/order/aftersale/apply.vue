@@ -5,12 +5,12 @@
       <div class="goods">
         <img :src="item.picUrl" :alt="item.spuName" />
         <div>
-          <div>{{ item.spuName }}</div>
+          <div class="name">{{ item.spuName }}</div>
           <div class="muted">x{{ item.count }} · {{ formatPrice(item.payPrice || item.price) }}</div>
         </div>
       </div>
 
-      <el-form label-width="100px" style="max-width: 560px; margin-top: 20px">
+      <el-form label-width="100px" class="form">
         <el-form-item label="售后方式" required>
           <el-radio-group v-model="form.way">
             <el-radio :value="10">仅退款</el-radio>
@@ -18,7 +18,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="退款金额">
-          <span class="price">{{ formatPrice(form.refundPrice) }}</span>
+          <span class="price refund">{{ formatPrice(form.refundPrice) }}</span>
         </el-form-item>
         <el-form-item label="申请原因" required>
           <el-select v-model="form.applyReason" placeholder="请选择" style="width: 100%">
@@ -86,13 +86,11 @@ async function load() {
   }
   loading.value = true
   try {
-    // 若带了 orderId 直接拉详情；否则尝试用 orderItem 关联（部分接口有 item/get）
     if (orderId) {
       const res = await OrderApi.getOrderDetail(orderId)
       item.value = res.data?.items?.find((i) => i.id === orderItemId) || null
     }
     if (!item.value) {
-      // 回退：从最近订单页不够，提示从订单详情进入
       ElMessage.error('请从订单详情进入申请售后')
       router.back()
       return
@@ -143,22 +141,40 @@ onMounted(load)
 </script>
 
 <style scoped lang="scss">
+.aftersale-apply {
+  padding-bottom: 40px;
+}
+
 h1 {
   margin: 0 0 16px;
   font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+h1::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--mall-accent);
 }
 
 .panel {
   background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
   border-radius: var(--mall-radius);
-  padding: 20px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .goods {
   display: flex;
   gap: 12px;
   align-items: center;
+  padding-bottom: 18px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #f3f4f6;
 }
 
 .goods img {
@@ -166,12 +182,26 @@ h1 {
   height: 72px;
   object-fit: cover;
   border-radius: 8px;
-  background: #f5f5f4;
+  background: #f3f4f6;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .muted {
   color: var(--mall-muted);
   font-size: 13px;
   margin-top: 4px;
+}
+
+.form {
+  max-width: 560px;
+  margin-top: 12px;
+}
+
+.refund {
+  font-size: 20px;
 }
 </style>
