@@ -7,11 +7,11 @@
         <p>登录后可购物、下单与查看订单</p>
       </div>
 
-      <el-tabs v-model="tab">
+      <el-tabs v-model="tab" class="login-tabs">
         <el-tab-pane label="密码登录" name="password">
           <el-form :model="pwdForm" @submit.prevent="onPasswordLogin">
             <el-form-item>
-              <el-input v-model="pwdForm.mobile" placeholder="手机号" maxlength="11" />
+              <el-input v-model="pwdForm.mobile" placeholder="手机号" maxlength="11" size="large" />
             </el-form-item>
             <el-form-item>
               <el-input
@@ -19,9 +19,10 @@
                 type="password"
                 show-password
                 placeholder="密码"
+                size="large"
               />
             </el-form-item>
-            <el-button type="primary" native-type="submit" class="submit" :loading="loading">
+            <el-button type="primary" native-type="submit" class="submit" size="large" :loading="loading">
               登录
             </el-button>
           </el-form>
@@ -30,17 +31,17 @@
         <el-tab-pane label="短信登录" name="sms">
           <el-form :model="smsForm" @submit.prevent="onSmsLogin">
             <el-form-item>
-              <el-input v-model="smsForm.mobile" placeholder="手机号" maxlength="11" />
+              <el-input v-model="smsForm.mobile" placeholder="手机号" maxlength="11" size="large" />
             </el-form-item>
             <el-form-item>
               <div class="sms-row">
-                <el-input v-model="smsForm.code" placeholder="验证码" maxlength="6" />
-                <el-button :disabled="countdown > 0" @click="sendCode">
+                <el-input v-model="smsForm.code" placeholder="验证码" maxlength="6" size="large" />
+                <el-button size="large" :disabled="countdown > 0" @click="sendCode">
                   {{ countdown > 0 ? `${countdown}s` : '获取验证码' }}
                 </el-button>
               </div>
             </el-form-item>
-            <el-button type="primary" native-type="submit" class="submit" :loading="loading">
+            <el-button type="primary" native-type="submit" class="submit" size="large" :loading="loading">
               登录
             </el-button>
           </el-form>
@@ -138,8 +139,8 @@ async function onSmsLogin() {
   display: grid;
   place-items: center;
   background:
-    radial-gradient(circle at 20% 20%, rgba(196, 92, 38, 0.12), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(143, 61, 24, 0.1), transparent 35%),
+    radial-gradient(circle at 18% 18%, rgba(239, 68, 68, 0.14), transparent 42%),
+    radial-gradient(circle at 82% 8%, rgba(248, 113, 113, 0.12), transparent 36%),
     var(--mall-bg);
   padding: 24px;
 }
@@ -147,9 +148,9 @@ async function onSmsLogin() {
 .login-card {
   width: min(100%, 420px);
   background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
   border-radius: 16px;
   padding: 32px 28px 24px;
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
 }
 
 .brand {
@@ -160,12 +161,12 @@ async function onSmsLogin() {
 .mark {
   display: inline-grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 12px;
   background: var(--mall-accent);
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.02em;
   margin-bottom: 12px;
@@ -173,7 +174,9 @@ async function onSmsLogin() {
 
 .brand h1 {
   margin: 0 0 6px;
-  font-size: 24px;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--mall-accent);
 }
 
 .brand p {
@@ -182,8 +185,17 @@ async function onSmsLogin() {
   font-size: 13px;
 }
 
+.login-tabs :deep(.el-tabs__item.is-active) {
+  color: var(--mall-accent);
+}
+
+.login-tabs :deep(.el-tabs__active-bar) {
+  background: var(--mall-accent);
+}
+
 .submit {
   width: 100%;
+  margin-top: 4px;
 }
 
 .sms-row {
@@ -195,5 +207,10 @@ async function onSmsLogin() {
 .back {
   display: block;
   margin: 16px auto 0;
+  color: var(--mall-muted);
+}
+
+.back:hover {
+  color: var(--mall-accent);
 }
 </style>

@@ -1,27 +1,42 @@
 <template>
   <div class="my-coupon" v-loading="loading">
-    <h1>我的优惠券</h1>
-    <el-tabs v-model="status" @tab-change="onTab">
-      <el-tab-pane label="未使用" name="1" />
-      <el-tab-pane label="已使用" name="2" />
-      <el-tab-pane label="已过期" name="3" />
-    </el-tabs>
-    <el-empty v-if="!list.length" description="暂无优惠券">
+    <div class="head">
+      <h1>我的优惠券</h1>
+      <router-link to="/coupon" class="more">领券中心</router-link>
+    </div>
+
+    <div class="status-tabs">
+      <button
+        v-for="tab in tabs"
+        :key="tab.name"
+        type="button"
+        class="status-tab"
+        :class="{ active: status === tab.name }"
+        @click="switchTab(tab.name)"
+      >
+        {{ tab.label }}
+      </button>
+    </div>
+
+    <el-empty v-if="!list.length" description="暂无优惠券" :image-size="80">
       <el-button type="primary" @click="$router.push('/coupon')">去领券</el-button>
     </el-empty>
-    <div v-for="item in list" :key="item.id" class="coupon-row">
-      <div>
+
+    <div v-for="item in list" :key="item.id" class="coupon-card" :class="{ muted: status !== '1' }">
+      <div class="left">
+        <div class="amount" v-if="item.discountType === 1">{{ formatPrice(item.discountPrice) }}</div>
+        <div class="amount" v-else>{{ (item.discountPercent || 0) / 10 }}折</div>
+        <div class="cond">优惠券</div>
+      </div>
+      <div class="right">
         <div class="name">{{ item.name }}</div>
         <div class="meta">
-          {{ item.validStartTime }} ~ {{ item.validEndTime }} ·
-          {{ COUPON_STATUS_MAP[item.status] || item.status }}
+          {{ formatDateTime(item.validStartTime) }} ~ {{ formatDateTime(item.validEndTime) }}
         </div>
-      </div>
-      <div class="price">
-        <template v-if="item.discountType === 1">{{ formatPrice(item.discountPrice) }}</template>
-        <template v-else>{{ (item.discountPercent || 0) / 10 }}折</template>
+        <div class="status-text">{{ COUPON_STATUS_MAP[item.status] || item.status }}</div>
       </div>
     </div>
+
     <div v-if="total > pageSize" class="pager">
       <el-pagination
         background
@@ -39,6 +54,7 @@
 import { onMounted, ref } from 'vue'
 import { CouponApi, COUPON_STATUS_MAP, type Coupon } from '@/api/promotion/coupon'
 import { formatPrice } from '@/utils/price'
+import { formatDateTime } from '@/utils/datetime'
 
 const loading = ref(false)
 const list = ref<Coupon[]>([])
@@ -46,6 +62,12 @@ const total = ref(0)
 const pageNo = ref(1)
 const pageSize = 10
 const status = ref('1')
+
+const tabs = [
+  { name: '1', label: '未使用' },
+  { name: '2', label: '已使用' },
+  { name: '3', label: '已过期' }
+]
 
 async function load() {
   loading.value = true
@@ -62,7 +84,9 @@ async function load() {
   }
 }
 
-function onTab() {
+function switchTab(name: string) {
+  if (status.value === name) return
+  status.value = name
   pageNo.value = 1
   load()
 }
@@ -76,30 +100,122 @@ onMounted(load)
 </script>
 
 <style scoped lang="scss">
-h1 {
-  margin: 0 0 12px;
-  font-size: 22px;
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
 }
 
-.coupon-row {
+h1 {
+  margin: 0;
+  font-size: 22px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 8px;
+}
+
+h1::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--mall-accent);
+}
+
+.more {
+  font-size: 13px;
+  color: var(--mall-muted);
+}
+
+.more:hover {
+  color: var(--mall-accent);
+}
+
+.status-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 14px;
+  padding: 6px;
   background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
   border-radius: var(--mall-radius);
-  padding: 16px 20px;
-  margin-bottom: 10px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.status-tab {
+  border: 0;
+  background: transparent;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--mall-muted);
+  cursor: pointer;
+}
+
+.status-tab.active {
+  background: var(--mall-accent-soft);
+  color: var(--mall-accent);
+  font-weight: 600;
+}
+
+.coupon-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  margin-bottom: 12px;
+  border-radius: var(--mall-radius);
+  overflow: hidden;
+  background: var(--mall-surface);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.coupon-card.muted {
+  opacity: 0.72;
+  filter: grayscale(0.2);
+}
+
+.left {
+  background: linear-gradient(160deg, #f87171, #ef4444);
+  color: #fff;
+  padding: 18px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.amount {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.cond {
+  margin-top: 4px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.right {
+  padding: 16px 18px;
+  min-width: 0;
 }
 
 .name {
   font-weight: 600;
+  font-size: 15px;
 }
 
 .meta {
-  margin-top: 6px;
+  margin-top: 8px;
   color: var(--mall-muted);
   font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.status-text {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--mall-accent);
 }
 
 .pager {

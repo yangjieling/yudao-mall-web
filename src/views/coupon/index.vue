@@ -14,7 +14,7 @@
         <div class="right">
           <div class="name">{{ item.name }}</div>
           <div class="time">
-            {{ item.validStartTime || '' }} ~ {{ item.validEndTime || '' }}
+            {{ formatDateTime(item.validStartTime) }} ~ {{ formatDateTime(item.validEndTime) }}
           </div>
           <el-button type="primary" size="small" :disabled="item.canTake === false" @click="take(item.id)">
             立即领取
@@ -40,6 +40,7 @@ import { onMounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { CouponApi, type CouponTemplate } from '@/api/promotion/coupon'
 import { formatPrice } from '@/utils/price'
+import { formatDateTime } from '@/utils/datetime'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 
@@ -87,12 +88,23 @@ onMounted(load)
 <style scoped lang="scss">
 h1 {
   margin: 0 0 20px;
-  font-size: 24px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+h1::before {
+  content: '';
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--mall-accent);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -100,9 +112,9 @@ h1 {
   display: grid;
   grid-template-columns: 140px 1fr;
   background: var(--mall-surface);
-  border: 1px solid var(--mall-line);
   border-radius: var(--mall-radius);
   overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .left {
@@ -141,11 +153,18 @@ h1 {
   color: var(--mall-muted);
   font-size: 12px;
   flex: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .pager {
   display: flex;
   justify-content: center;
   margin-top: 24px;
+}
+
+@media (max-width: 800px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
