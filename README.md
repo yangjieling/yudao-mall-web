@@ -1,9 +1,9 @@
 # OM Shop
 
 > Oh My · 商城 PC 网页端  
-> Vue 3 · Vite · TypeScript · Element Plus · 芋道 `/app-api`
+> Vue 3 · Vite · TypeScript · Element Plus · `/app-api`
 
-面向 B2C 的桌面端商城前台，软红主题、京东式货架布局，对接芋道云网关 `/app-api`，覆盖浏览、交易、营销、会员与支付全链路。
+面向 B2C 的桌面端商城前台，软红主题、京东式货架布局，对接云端网关 `/app-api`，覆盖浏览、交易、营销、会员与支付全链路。
 
 仓库：[github.com/yangjieling/yudao-mall-web](https://github.com/yangjieling/yudao-mall-web)
 
@@ -66,7 +66,7 @@ scripts/          # 演示数据 seed / 修复 SQL
 ### 前置条件
 
 - Node.js 18+
-- 已启动芋道网关（默认 `48080`）及 `member` / `product` / `trade` / `pay` / `promotion` 等相关服务
+- 已启动后端网关（默认 `48080`）及 `member` / `product` / `trade` / `pay` / `promotion` 等相关服务
 - 本地库建议使用 `ruoyi_vue_pro`（与 `scripts/` 中 seed 默认库名一致）
 
 ### 安装与启动
@@ -161,7 +161,7 @@ python3 scripts/generate_category_seed.py
 
 ```text
 ┌─────────────┐     /app-api      ┌──────────────┐
-│  OM Shop PC │ ───────────────► │  芋道网关      │
+│  OM Shop PC │ ───────────────► │  API 网关      │
 │  (Vue3 SPA) │                  └──────┬───────┘
 └─────────────┘                         │
                     ┌───────────────────┼───────────────────┐
