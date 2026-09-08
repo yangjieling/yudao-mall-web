@@ -29,8 +29,28 @@
                   <img :src="pic" alt="" />
                 </button>
               </div>
-              <div class="main-wrap">
-                <img :src="activePic" :alt="spu.name" class="main-pic" />
+              <div class="main-stage">
+                <div
+                  ref="mainWrapRef"
+                  class="main-wrap"
+                  :class="{ zoomable: canZoom }"
+                  @mouseenter="onZoomEnter"
+                  @mousemove="onZoomMove"
+                  @mouseleave="onZoomLeave"
+                >
+                  <img :src="activePic" :alt="spu.name" class="main-pic" draggable="false" />
+                  <div
+                    v-show="zooming"
+                    class="zoom-lens"
+                    :style="lensStyle"
+                  />
+                </div>
+                <div
+                  v-show="zooming"
+                  class="zoom-viewer"
+                  :style="viewerStyle"
+                  aria-hidden="true"
+                />
               </div>
             </div>
           </div>
@@ -215,7 +235,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { Star, StarFilled } from '@element-plus/icons-vue'
@@ -249,8 +269,73 @@ const count = ref(1)
 const activePic = ref('')
 const activeTab = ref<'detail' | 'comment' | 'aftersale'>('comment')
 const tabsRef = ref<HTMLElement | null>(null)
+const mainWrapRef = ref<HTMLElement | null>(null)
 const favorited = ref(false)
 const selectedProps = reactive<Record<string, string>>({})
+
+/** 桌面端图片放大镜（视频不启用） */
+const zoomDesktop = ref(true)
+const zooming = ref(false)
+const lens = reactive({ x: 0, y: 0, w: 0, h: 0 })
+const ZOOM_RATIO = 2
+
+function isVideoUrl(url: string) {
+  return /\.(mp4|webm|ogg|m3u8)(\?|$)/i.test(url || '')
+}
+
+const canZoom = computed(
+  () => zoomDesktop.value && !!activePic.value && !isVideoUrl(activePic.value)
+)
+
+const lensStyle = computed(() => ({
+  width: `${lens.w}px`,
+  height: `${lens.h}px`,
+  transform: `translate(${lens.x}px, ${lens.y}px)`
+}))
+
+const viewerStyle = computed(() => {
+  const wrap = mainWrapRef.value
+  if (!wrap || !activePic.value || !lens.w) return {}
+  const { clientWidth: cw, clientHeight: ch } = wrap
+  return {
+    backgroundImage: `url(${activePic.value})`,
+    backgroundSize: `${cw * ZOOM_RATIO}px ${ch * ZOOM_RATIO}px`,
+    backgroundPosition: `-${lens.x * ZOOM_RATIO}px -${lens.y * ZOOM_RATIO}px`
+  }
+})
+
+function syncZoomDesktop() {
+  zoomDesktop.value = window.matchMedia('(min-width: 1101px)').matches
+  if (!zoomDesktop.value) zooming.value = false
+}
+
+function onZoomEnter() {
+  if (!canZoom.value || !mainWrapRef.value) return
+  const { clientWidth: cw, clientHeight: ch } = mainWrapRef.value
+  lens.w = cw / ZOOM_RATIO
+  lens.h = ch / ZOOM_RATIO
+  zooming.value = true
+}
+
+function onZoomMove(e: MouseEvent) {
+  if (!canZoom.value || !zooming.value || !mainWrapRef.value) return
+  const rect = mainWrapRef.value.getBoundingClientRect()
+  const { clientWidth: cw, clientHeight: ch } = mainWrapRef.value
+  if (!lens.w || !lens.h) {
+    lens.w = cw / ZOOM_RATIO
+    lens.h = ch / ZOOM_RATIO
+  }
+  let x = e.clientX - rect.left - lens.w / 2
+  let y = e.clientY - rect.top - lens.h / 2
+  x = Math.max(0, Math.min(x, cw - lens.w))
+  y = Math.max(0, Math.min(y, ch - lens.h))
+  lens.x = x
+  lens.y = y
+}
+
+function onZoomLeave() {
+  zooming.value = false
+}
 
 const services = ['正品保障', '七天无理由退货', '极速退款']
 const aftersaleTips = [
@@ -335,6 +420,14 @@ const specRows = computed(() => {
 
 watch(selectedSku, (sku) => {
   if (sku?.picUrl) activePic.value = sku.picUrl
+})
+
+watch(activePic, () => {
+  zooming.value = false
+})
+
+watch(canZoom, (ok) => {
+  if (!ok) zooming.value = false
 })
 
 function selectTab(tab: 'detail' | 'comment' | 'aftersale') {
@@ -499,7 +592,12 @@ watch(
 )
 
 onMounted(async () => {
+  syncZoomDesktop()
+  window.addEventListener('resize', syncZoomDesktop)
   await Promise.all([loadCategories(), loadDetail()])
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', syncZoomDesktop)
 })
 watch(() => route.params.id, loadDetail)
 </script>
@@ -613,6 +711,8 @@ watch(() => route.params.id, loadDetail)
   flex-direction: column;
   gap: 12px;
   min-width: 0;
+  overflow: visible;
+  z-index: 2;
 }
 
 .right-col {
@@ -632,6 +732,7 @@ watch(() => route.params.id, loadDetail)
 /* 图库与页面底色融合，不再单独成卡 */
 .gallery-card {
   padding: 0;
+  overflow: visible;
 }
 
 .info-card {
@@ -653,6 +754,7 @@ watch(() => route.params.id, loadDetail)
   /* 略增高：约占一屏更大比例，仍留出下方 Tab */
   height: var(--gallery-h, 460px);
   align-items: stretch;
+  overflow: visible;
 }
 
 .thumbs {
@@ -687,9 +789,16 @@ watch(() => route.params.id, loadDetail)
   object-fit: cover;
 }
 
-.main-wrap {
+.main-stage {
+  position: relative;
   flex: 1;
   min-width: 0;
+  height: 100%;
+}
+
+.main-wrap {
+  position: relative;
+  width: 100%;
   height: 100%;
   border: 1px solid var(--mall-line);
   border-radius: 0;
@@ -697,10 +806,42 @@ watch(() => route.params.id, loadDetail)
   overflow: hidden;
 }
 
+.main-wrap.zoomable {
+  cursor: move;
+}
+
 .main-pic {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.zoom-lens {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(128, 118, 120, 0.5);
+  border: 1px solid rgba(128, 118, 120, 0.65);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.zoom-viewer {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 30;
+  border: 1px solid var(--mall-line);
+  background-color: #fff;
+  background-repeat: no-repeat;
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.12);
+  pointer-events: none;
 }
 
 .title-row {
@@ -1194,6 +1335,11 @@ watch(() => route.params.id, loadDetail)
     aspect-ratio: 1;
     height: auto;
     object-fit: cover;
+  }
+
+  .zoom-viewer,
+  .zoom-lens {
+    display: none !important;
   }
 
   .tab-bar {
